@@ -9,7 +9,8 @@ module.exports = {
         "@model": "./src/Model",
     },
     mount: {
-    /* ... */
+        public: "/",
+        src: "/build",
     },
     plugins: [
         "@snowpack/plugin-typescript",
@@ -24,9 +25,9 @@ module.exports = {
     /* ... */
     },
     optimize: {
-        // bundle: true,
-        // minify: true,
-        // target: "es2020",
-        // treeshake: true,
+        bundle: true,
+        minify: true,
+        target: "es2020",
+        treeshake: true,
     }
 };
