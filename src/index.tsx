@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "@app/App";
 
 ReactDOM.render(
-    <div>Worklog</div>,
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
     document.getElementById("root")
 );
