@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "snowpack dev",
+    "build": "snowpack build",
     "test": "jest --coverage",
     "lint": "eslint src/**/*.ts{,x} -f table",
     "lint-fix": "eslint src/**/*.ts{,x} --fix"
