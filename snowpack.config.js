@@ -6,6 +6,7 @@ module.exports = {
     alias: {
         "@api": "./src/API",
         "@app": "./src/App",
+        "@model": "./src/Model",
     },
     mount: {
     /* ... */

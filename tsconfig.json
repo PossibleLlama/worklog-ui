@@ -17,6 +17,7 @@
         "paths": {
             "@api/*": ["./src/API/*"],
             "@app/*": ["./src/App/*"],
+            "@model/*": ["./src/Model/*"],
         }
     },
     "include": [
