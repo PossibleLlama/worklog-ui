@@ -17,8 +17,10 @@
         "baseUrl": "./",
         "paths": {
             "@api/*": ["./src/API/*"],
-            "@app/*": ["./src/App/*"],
+            "@component/*": ["./src/Components/*"],
+            "@container/*": ["./src/Containers/*"],
             "@model/*": ["./src/Model/*"],
+            "@view/*": ["./src/Views/*"],
         },
         "types": [
             "chai",
@@ -28,5 +30,5 @@
     "include": [
         "src",
         "types",
-    ]
+    ],
 }
