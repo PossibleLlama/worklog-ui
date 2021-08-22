@@ -14,12 +14,13 @@ module.exports = {
     },
     plugins: [
         "@snowpack/plugin-typescript",
+        "@snowpack/plugin-postcss",
     ],
     packageOptions: {
     /* ... */
     },
     devOptions: {
-    /* ... */
+        tailwindConfig: "./tailwind.config.js",
     },
     buildOptions: {
     /* ... */
