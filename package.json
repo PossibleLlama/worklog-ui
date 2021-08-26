@@ -44,13 +44,20 @@
     "@typescript-eslint/parser": "^4.29.2",
     "@web/test-runner": "^0.13.16",
     "@web/test-runner-playwright": "^0.8.7",
+    "@zendeskgarden/react-buttons": "^8.39.0",
+    "@zendeskgarden/react-grid": "^8.39.0",
+    "@zendeskgarden/react-notifications": "^8.39.0",
+    "@zendeskgarden/react-tags": "^8.39.0",
+    "@zendeskgarden/react-theming": "^8.39.0",
     "chai": "^4.3.4",
     "eslint": "^7.32.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^4.11.0",
+    "react-component-octicons": "^1.8.0",
     "snowpack": "^3.8.6",
+    "styled-components": "^5.3.1",
     "typescript": "^4.3.5"
   }
 }
