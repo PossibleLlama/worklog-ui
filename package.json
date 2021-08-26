@@ -1,0 +1,62 @@
+{
+  "name": "worklog-ui",
+  "version": "0.0.1",
+  "description": "UI for discovering trends on what you have been doing. Part of the worklog project.",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "web-test-runner \"src/**/*.test.tsx\" --node-resolve --playwright --browsers chromium firefox webkit",
+    "test:watch": "web-test-runner \"src/**/*.test.tsx\" --node-resolve --playwright --browsers chromium firefox webkit --watch",
+    "test:coverage": "web-test-runner \"src/**/*.test.tsx\" --node-resolve --playwright --browsers chromium firefox webkit --coverage",
+    "test:type": "tsc",
+    "test:lint": "eslint src/**/*.ts{,x} -f table",
+    "lint-fix": "eslint src/**/*.ts{,x} --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PossibleLlama/worklog-ui.git"
+  },
+  "keywords": [
+    "productivity"
+  ],
+  "author": "Chris Collier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PossibleLlama/worklog-ui/issues"
+  },
+  "homepage": "https://github.com/PossibleLlama/worklog-ui#readme",
+  "dependencies": {
+    "date-fns": "^2.23.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@snowpack/plugin-typescript": "^1.2.1",
+    "@snowpack/web-test-runner-plugin": "^0.2.2",
+    "@testing-library/react": "^12.0.0",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.6.1",
+    "@types/react": "^17.0.18",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "@web/test-runner": "^0.13.16",
+    "@web/test-runner-playwright": "^0.8.7",
+    "@zendeskgarden/react-buttons": "^8.39.0",
+    "@zendeskgarden/react-grid": "^8.39.0",
+    "@zendeskgarden/react-notifications": "^8.39.0",
+    "@zendeskgarden/react-tags": "^8.39.0",
+    "@zendeskgarden/react-theming": "^8.39.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^4.11.0",
+    "react-component-octicons": "^1.8.0",
+    "snowpack": "^3.8.6",
+    "styled-components": "^5.3.1",
+    "typescript": "^4.3.5"
+  }
+}

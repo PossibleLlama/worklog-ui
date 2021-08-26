@@ -1,0 +1,79 @@
+name: "On commit"
+
+on: push
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Node 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Get dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: build
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Node 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Get dependencies
+      run: npm install
+
+    - name: Check formatting
+      run: npm run test:lint
+
+    - name: Check types
+      run: npm run test:type
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Node 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Get dependencies
+      run: npm install && sudo npx playwright install-deps
+
+    - name: Increase watchers
+      run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+    - name: Test
+      run: npm run test:coverage
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage
+        path: coverage

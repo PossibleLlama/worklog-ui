@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "target": "ES2020",
+        "module": "ES2020",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "strict": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "outDir": "build",
+        "baseUrl": "./",
+        "paths": {
+            "@api/*": ["./src/API/*"],
+            "@component/*": ["./src/Components/*"],
+            "@container/*": ["./src/Containers/*"],
+            "@model/*": ["./src/Model/*"],
+            "@view/*": ["./src/Views/*"],
+        },
+        "types": [
+            "chai",
+            "mocha",
+        ],
+    },
+    "include": [
+        "src",
+        "types",
+    ],
+}

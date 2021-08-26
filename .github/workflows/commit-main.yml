@@ -1,0 +1,28 @@
+name: "On commit to main"
+
+on:
+  workflow_run:
+    workflows: ["On commit"]
+    branches: [main]
+    types: [completed]
+
+jobs:
+  changelog:
+    name: Generate changelog
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+
+    - name: Generate changelog
+      uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        output: release-changelog.txt
+
+    - name: Archive changelog artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-changelog
+        path: release-changelog.txt
