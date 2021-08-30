@@ -7,7 +7,7 @@ import { worklogTheme } from "./Theme/theme";
 
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider theme={{ ...worklogTheme }}>
+        <ThemeProvider theme={{ ...worklogTheme("Light") }}>
             <App />
         </ThemeProvider>
     </React.StrictMode>,
