@@ -15,7 +15,7 @@ type Props = {
     work: Work,
 };
 
-export const Details: React.FC<Props> = (props: Props) => {
+const Details: React.FC<Props> = (props: Props) => {
     return (
         <Well isRecessed isFloating>
             <Grid>

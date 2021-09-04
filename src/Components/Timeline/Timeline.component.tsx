@@ -10,7 +10,7 @@ type Props = {
     worklist: Work[],
 };
 
-export const Timeline: React.FC<Props> = (props: Props) => {
+const Timeline: React.FC<Props> = (props: Props) => {
     const theme = useContext(ThemeContext);
 
     return (
