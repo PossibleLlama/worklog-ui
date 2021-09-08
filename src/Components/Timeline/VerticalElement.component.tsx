@@ -6,50 +6,6 @@ import Preview from "@component/Preview/Preview.component";
 
 import { Work } from "@model/work";
 
-type Props = {
-    worklist: Work[],
-};
-
-const Timeline: React.FC<Props> = (props: Props) => {
-    const theme = useContext(ThemeContext);
-
-    return (
-        <Container>
-            <TimelineLine
-                BackgroundColor={theme.primaryHue}
-                BorderColor={theme.primaryHue} />
-            {props.worklist.map((wl) => {
-                return (
-                    <VerticalTimelineElement
-                        key={wl.ID}
-                        Work={wl} />
-                );
-            })}
-        </Container>
-    );
-};
-
-const Container: React.FC = styled.div`
-    margin: 40px 0px;
-
-    display: flex;
-    flex-direction: column;
-    position: relative;
-`;
-
-type ThemingProps = {
-    BackgroundColor: string;
-    BorderColor: string;
-};
-
-const TimelineLine = styled.div.attrs((props: ThemingProps) => props)`
-    position: absolute;
-    left: calc(50% - 2px);
-    width: 4px;
-    height: 100%;
-    background-color: ${props => props.BackgroundColor};
-`;
-
 type VerticalTimelineElementProps = {
     Work: Work,
 };
@@ -87,6 +43,11 @@ const PreviewWrapper: React.FC = styled.div`
     margin: 0 16px;
 `;
 
+type ThemingProps = {
+    BackgroundColor: string;
+    BorderColor: string;
+};
+
 const Point = styled.circle.attrs((props: ThemingProps) => props)`
     margin: 0 -21px;
     background-color: ${props => props.BackgroundColor};
@@ -98,5 +59,4 @@ const Point = styled.circle.attrs((props: ThemingProps) => props)`
     height: 16px;
 `;
 
-
-export default Timeline;
+export default VerticalTimelineElement;

@@ -1,12 +1,18 @@
 import React from "react";
 import App from "./App";
 
+import { ThemeProvider } from "@zendeskgarden/react-theming";
+
 import { expect } from "chai";
 import { render, screen } from "@testing-library/react";
 
 describe("App", () => {
     beforeEach(() => {
-        render(<App />);
+        render(
+            <ThemeProvider>
+                <App />
+            </ThemeProvider>
+        );
     });
 
     it("Has name", () => {

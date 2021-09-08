@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 
 import { Title, Paragraph } from "@zendeskgarden/react-notifications";
-
-import Timeline from "@component/Timeline/Timeline.component";
+import Worklist from "@page/Worklist.page";
 
 import getWorklogByRange from "@api/getWorklogByRange/getWorklogByRange";
 import styled, { ThemeContext } from "styled-components";
@@ -15,7 +14,7 @@ const App: React.FC = () => {
             <Title>Worklog</Title>
             <Paragraph>A productivity app.</Paragraph>
 
-            <Timeline worklist={getWorklogByRange(new Date())}/>
+            <Worklist Worklist={getWorklogByRange(new Date())}/>
         </Wrapper>
     );
 };
