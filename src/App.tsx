@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Title, Paragraph } from "@zendeskgarden/react-notifications";
-import Worklist from "@page/Worklist.page";
+import Worklist from "@page/Worklist/Worklist.page";
+import Header from "@view/Header/Header.view";
 
 import getWorklogByRange from "@api/getWorklogByRange/getWorklogByRange";
 import styled, { ThemeContext } from "styled-components";
@@ -11,10 +12,20 @@ const App: React.FC = () => {
 
     return (
         <Wrapper BackgroundColor={theme.background}>
-            <Title>Worklog</Title>
-            <Paragraph>A productivity app.</Paragraph>
-
-            <Worklist Worklist={getWorklogByRange(new Date())}/>
+            <Router>
+                <Header />
+                <Switch>
+                    <Route exact path="/" >
+                        <Worklist Worklist={getWorklogByRange(new Date())}/>
+                    </Route>
+                    <Route path="/timeline" >
+                        <Worklist Worklist={getWorklogByRange(new Date())}/>
+                    </Route>
+                    <Route path="/discover" >
+                        <h1>Coming soon</h1>
+                    </Route>
+                </Switch>
+            </Router>
         </Wrapper>
     );
 };
