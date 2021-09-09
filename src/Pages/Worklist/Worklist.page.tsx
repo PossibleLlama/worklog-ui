@@ -1,6 +1,6 @@
 import React from "react";
 
-import Timeline from "@view/Timeline.view";
+import Timeline from "@view/TImeline/Timeline.view";
 
 import { Work } from "@model/work";
 
