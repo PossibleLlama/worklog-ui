@@ -1,14 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import styled, { ThemeContext } from "styled-components";
 
 import Worklist from "@page/Worklist/Worklist.page";
 import Header from "@view/Header/Header.view";
 
 import getWorklogByRange from "@api/getWorklogByRange/getWorklogByRange";
-import styled, { ThemeContext } from "styled-components";
+
+import { Filter } from "@model/filter";
+import { Work } from "@model/work";
 
 const App: React.FC = () => {
     const theme = useContext(ThemeContext);
+
+    const [filter, setFilter] = useState<Filter>({
+        startDate: new Date(),
+    });
+
+    const [work, setWork] = useState<Work[]>([]);
+
+    useEffect(() => {
+        getWorklogByRange(filter)
+            .then((data) => {
+                setWork(data);
+            });
+    }, [filter]);
 
     return (
         <Wrapper BackgroundColor={theme.background}>
@@ -16,10 +33,10 @@ const App: React.FC = () => {
                 <Header />
                 <Switch>
                     <Route exact path="/" >
-                        <Worklist Worklist={getWorklogByRange(new Date())}/>
+                        <Worklist Worklist={work}/>
                     </Route>
                     <Route path="/timeline" >
-                        <Worklist Worklist={getWorklogByRange(new Date())}/>
+                        <Worklist Worklist={work}/>
                     </Route>
                     <Route path="/discover" >
                         <h1>Coming soon</h1>
