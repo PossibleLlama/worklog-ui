@@ -27,10 +27,14 @@ const App: React.FC = () => {
             });
     }, [filter]);
 
+    const updateFilters = (filter: Filter): void => {
+        setFilter(filter);
+    };
+
     return (
         <Wrapper BackgroundColor={theme.background}>
             <Router>
-                <Header />
+                <Header updateFilters={updateFilters} currentFilters={filter} />
                 <Switch>
                     <Route exact path="/" >
                         <Worklist Worklist={work}/>
