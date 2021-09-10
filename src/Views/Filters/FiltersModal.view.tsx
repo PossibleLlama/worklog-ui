@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Button } from "@zendeskgarden/react-buttons";
 import { DatepickerRange } from "@zendeskgarden/react-datepickers";
-import { Field, Label, Input } from "@zendeskgarden/react-forms";
+import { Field, Label, Input, Message, Hint } from "@zendeskgarden/react-forms";
 import { Modal as ZenModal, Header, Body, Footer, FooterItem, Close } from "@zendeskgarden/react-modals";
 
 import { Filter } from "@model/filter";
@@ -14,6 +14,7 @@ type Props = {
 
 const Modal: React.FC<Props> = (props: Props) => {
     const [filter, setFilter] = useState<Filter>(props.initalFilters);
+    const [formErrors, setFormErrors] = useState<string[]>([]);
 
     return (
         <ZenModal onClose={() => props.onClose(props.initalFilters)}>
@@ -23,14 +24,14 @@ const Modal: React.FC<Props> = (props: Props) => {
                     <DatepickerRange
                         startValue={filter.startDate}
                         endValue={filter.endDate ? filter.endDate : new Date()}
-                        onChange={(changes: {
+                        onChange={(event: {
                                 startValue?: Date;
                                 endValue?: Date;
                         }) => {
                             setFilter({
                                 ...filter,
-                                startDate: changes.startValue? changes.startValue : filter.startDate,
-                                endDate: changes.endValue? changes.endValue: filter.endDate,
+                                startDate: event.startValue? event.startValue : filter.startDate,
+                                endDate: event.endValue? event.endValue: filter.endDate,
                             });
                         }}
                         isCompact
@@ -51,17 +52,27 @@ const Modal: React.FC<Props> = (props: Props) => {
                     </DatepickerRange>
                     <Field>
                         <Label>Title</Label>
-                        <Input placeholder={filter.title ? filter.title : "Title"} />
+                        <Input placeholder="Title" value={filter.title}
+                        />
                     </Field>
                     <Field>
                         <Label>Description</Label>
-                        <Input placeholder={filter.description ? filter.description : "Description"} />
+                        <Input placeholder="Description" value={filter.description} />
                     </Field>
                     <Field>
                         <Label>Tags</Label>
-                        <Input placeholder={filter.tags ? filter.tags.join(", ") : "Tags"} />
+                        <Hint>Comma seperated list of values</Hint>
+                        <Input placeholder="Tags" value={filter.tags?.join(", ")}/>
                     </Field>
                 </form>
+                {formErrors.map((error) => {
+                    return (
+                        <React.Fragment key={error} >
+                            <Message validation="error">{error}</Message>
+                            <br/>
+                        </React.Fragment>
+                    );
+                })}
             </Body>
             <Footer>
                 <FooterItem>
