@@ -2,8 +2,10 @@ import React, { useState } from "react";
 
 import { Button } from "@zendeskgarden/react-buttons";
 import { DatepickerRange } from "@zendeskgarden/react-datepickers";
-import { Field, Label, Input, Message, Hint } from "@zendeskgarden/react-forms";
+import { Field, Label, Input, Hint, Textarea } from "@zendeskgarden/react-forms";
 import { Modal as ZenModal, Header, Body, Footer, FooterItem, Close } from "@zendeskgarden/react-modals";
+
+import { isBefore } from "date-fns";
 
 import { Filter } from "@model/filter";
 
@@ -13,8 +15,11 @@ type Props = {
 };
 
 const Modal: React.FC<Props> = (props: Props) => {
-    const [filter, setFilter] = useState<Filter>(props.initalFilters);
-    const [formErrors, setFormErrors] = useState<string[]>([]);
+    const [startDate, setStartDate] = useState<Date>(props.initalFilters.startDate);
+    const [endDate, setEndDate] = useState<Date>(props.initalFilters.endDate ? props.initalFilters.endDate : new Date());
+    const [title, setTitle] = useState<string>(props.initalFilters.title ? props.initalFilters.title : "");
+    const [description, setDescription] = useState<string>(props.initalFilters.description ? props.initalFilters.description : "");
+    const [tags, setTags] = useState<string>(props.initalFilters.tags ? props.initalFilters.tags.join(", ") : "");
 
     return (
         <ZenModal onClose={() => props.onClose(props.initalFilters)}>
@@ -22,57 +27,66 @@ const Modal: React.FC<Props> = (props: Props) => {
             <Body>
                 <form>
                     <DatepickerRange
-                        startValue={filter.startDate}
-                        endValue={filter.endDate ? filter.endDate : new Date()}
+                        startValue={startDate}
+                        endValue={endDate ? endDate : new Date()}
+                        maxValue={new Date()}
                         onChange={(event: {
                                 startValue?: Date;
                                 endValue?: Date;
                         }) => {
-                            setFilter({
-                                ...filter,
-                                startDate: event.startValue? event.startValue : filter.startDate,
-                                endDate: event.endValue? event.endValue: filter.endDate,
-                            });
+                            if (event.startValue) {
+                                isBefore(event.startValue, endDate) ? setStartDate(event.startValue) : setEndDate(event.startValue);
+                            }
+                            if (event.endValue) {
+                                isBefore(event.endValue, startDate) ? setStartDate(event.endValue) : setEndDate(event.endValue);
+                            }
                         }}
                         isCompact
                     >
                         <Field>
                             <Label>Start date</Label>
                             <DatepickerRange.Start>
-                                <Input isCompact />
+                                <Input />
                             </DatepickerRange.Start>
                         </Field>
                         <Field>
                             <Label>End date</Label>
                             <DatepickerRange.End>
-                                <Input isCompact />
+                                <Input />
                             </DatepickerRange.End>
                         </Field>
                         <DatepickerRange.Calendar />
                     </DatepickerRange>
                     <Field>
                         <Label>Title</Label>
-                        <Input placeholder="Title" value={filter.title}
+                        <Input placeholder="Title" value={title}
+                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                setTitle(event.currentTarget.value);
+                            }}
                         />
                     </Field>
                     <Field>
                         <Label>Description</Label>
-                        <Input placeholder="Description" value={filter.description} />
+                        <Textarea
+                            minRows={2}
+                            maxRows={12}
+                            placeholder="Description"
+                            value={description}
+                            onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
+                                setDescription(event.currentTarget.value);
+                            }}
+                        />
                     </Field>
                     <Field>
                         <Label>Tags</Label>
                         <Hint>Comma seperated list of values</Hint>
-                        <Input placeholder="Tags" value={filter.tags?.join(", ")}/>
+                        <Input placeholder="Tags" value={tags}
+                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                setTags(event.currentTarget.value);
+                            }}
+                        />
                     </Field>
                 </form>
-                {formErrors.map((error) => {
-                    return (
-                        <React.Fragment key={error} >
-                            <Message validation="error">{error}</Message>
-                            <br/>
-                        </React.Fragment>
-                    );
-                })}
             </Body>
             <Footer>
                 <FooterItem>
@@ -81,7 +95,13 @@ const Modal: React.FC<Props> = (props: Props) => {
                     </Button>
                 </FooterItem>
                 <FooterItem>
-                    <Button isPrimary onClick={() => props.onClose(filter)}>
+                    <Button isPrimary onClick={() => props.onClose({
+                        startDate,
+                        endDate,
+                        title: title.trim(),
+                        description: description.trim(),
+                        tags: tags.split(",").map(e => e.trim()),
+                    })}>
                         Confirm
                     </Button>
                 </FooterItem>
