@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Button } from "@zendeskgarden/react-buttons";
+import { Alert, Close, useToast } from "@zendeskgarden/react-notifications";
 import { Paragraph, SM, LG } from "@zendeskgarden/react-typography";
 
 import Modal from "@view/Filters/FiltersModal.view";
 
-import { Filter } from "@model/filter";
+import { Filter, isEqual } from "@model/filter";
 
 type Props = {
     updateFilters: (filters: Filter) => void,
@@ -17,6 +18,8 @@ type Props = {
 
 const Header: React.FC<Props> = (props: Props) => {
     const [openModal, setOpenModal] = useState<boolean>(false);
+    
+    const { addToast } = useToast();
 
     const openFilterModal = (): void => {
         setOpenModal(true);
@@ -24,8 +27,14 @@ const Header: React.FC<Props> = (props: Props) => {
 
     const closeFilterModal = (filter: Filter): void => {
         setOpenModal(false);
-        if (props.currentFilters !== filter) {
+        if (isEqual(props.currentFilters, filter)) {
             props.updateFilters(filter);
+            addToast(({ close }) => (
+                <Alert type="success">
+                    Successfully updated filter
+                    <Close onClick={close} aria-label="Close" />
+                </Alert>
+            ));
         }
     };
 
