@@ -8,16 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Node 14.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Set up Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: npm
+
     - name: Get dependencies
-      run: npm install
+      run: npm install --no-optional
 
     - name: Build
       run: npm run build
@@ -33,16 +34,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Node 14.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Set up Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: npm
+
     - name: Get dependencies
-      run: npm install
+      run: npm install --no-optional
 
     - name: Check formatting
       run: npm run test:lint
@@ -55,16 +57,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Node 14.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Set up Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: npm
+
     - name: Get dependencies
-      run: npm install && sudo npx playwright install-deps
+      run: npm install --no-optional && sudo npx playwright install-deps
 
     - name: Increase watchers
       run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
