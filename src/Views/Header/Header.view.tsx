@@ -27,7 +27,7 @@ const Header: React.FC<Props> = (props: Props) => {
 
     const closeFilterModal = (filter: Filter): void => {
         setOpenModal(false);
-        if (isEqual(props.currentFilters, filter)) {
+        if (!isEqual(props.currentFilters, filter)) {
             props.updateFilters(filter);
             addToast(({ close }) => (
                 <Alert type="success">
