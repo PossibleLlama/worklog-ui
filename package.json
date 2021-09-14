@@ -5,9 +5,9 @@
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.tsx\" --node-resolve --playwright --browsers chromium firefox webkit",
-    "test:watch": "web-test-runner \"src/**/*.test.tsx\" --node-resolve --playwright --browsers chromium firefox webkit --watch",
-    "test:coverage": "web-test-runner \"src/**/*.test.tsx\" --node-resolve --playwright --browsers chromium firefox webkit --coverage",
+    "test": "web-test-runner \"src/**/*.test.ts{,x}\" --node-resolve --playwright --browsers chromium firefox webkit",
+    "test:watch": "web-test-runner \"src/**/*.test.ts{,x}\" --node-resolve --playwright --browsers chromium firefox webkit --watch",
+    "test:coverage": "web-test-runner \"src/**/*.test.ts{,x}\" --node-resolve --playwright --browsers chromium firefox webkit --coverage",
     "test:type": "tsc",
     "test:lint": "eslint src/**/*.ts{,x} -f table",
     "lint-fix": "eslint src/**/*.ts{,x} --fix"

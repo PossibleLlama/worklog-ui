@@ -5,12 +5,15 @@ import { ThemeProvider } from "@zendeskgarden/react-theming";
 
 import { expect } from "chai";
 import { render, screen } from "@testing-library/react";
+import { ToastProvider } from "@zendeskgarden/react-notifications";
 
 describe("App", () => {
     beforeEach(() => {
         render(
             <ThemeProvider>
-                <App />
+                <ToastProvider>
+                    <App />
+                </ToastProvider>
             </ThemeProvider>
         );
     });
