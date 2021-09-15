@@ -5,6 +5,8 @@ import { DatepickerRange } from "@zendeskgarden/react-datepickers";
 import { Field, Label, Input, Hint, Textarea } from "@zendeskgarden/react-forms";
 import { Modal as ZenModal, Header, Body, Footer, FooterItem, Close } from "@zendeskgarden/react-modals";
 
+import styled from "styled-components";
+
 import { isBefore } from "date-fns";
 
 import { Filter } from "@model/filter";
@@ -22,7 +24,7 @@ const Modal: React.FC<Props> = (props: Props) => {
     const [tags, setTags] = useState<string>(props.initalFilters.tags ? props.initalFilters.tags.join(", ") : "");
 
     return (
-        <ZenModal onClose={() => props.onClose(props.initalFilters)}>
+        <ZenModal isLarge onClose={() => props.onClose(props.initalFilters)}>
             <Header>Set filters</Header>
             <Body>
                 <form>
@@ -41,51 +43,60 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 isBefore(event.endValue, startDate) ? setStartDate(event.endValue) : setEndDate(event.endValue);
                             }
                         }}
-                        isCompact
                     >
-                        <Field>
-                            <Label>Start date</Label>
-                            <DatepickerRange.Start>
-                                <Input />
-                            </DatepickerRange.Start>
-                        </Field>
-                        <Field>
-                            <Label>End date</Label>
-                            <DatepickerRange.End>
-                                <Input />
-                            </DatepickerRange.End>
-                        </Field>
+                        <FormField>
+                            <Field>
+                                <Label>Start date</Label>
+                                <DatepickerRange.Start>
+                                    <Input />
+                                </DatepickerRange.Start>
+                            </Field>
+                        </FormField>
+                        <FormField>
+                            <Field>
+                                <Label>End date</Label>
+                                <DatepickerRange.End>
+                                    <Input />
+                                </DatepickerRange.End>
+                            </Field>
+                        </FormField>
                         <DatepickerRange.Calendar />
                     </DatepickerRange>
-                    <Field>
-                        <Label>Title</Label>
-                        <Input placeholder="Title" value={title}
-                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                setTitle(event.currentTarget.value);
-                            }}
-                        />
-                    </Field>
-                    <Field>
-                        <Label>Description</Label>
-                        <Textarea
-                            minRows={2}
-                            maxRows={12}
-                            placeholder="Description"
-                            value={description}
-                            onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
-                                setDescription(event.currentTarget.value);
-                            }}
-                        />
-                    </Field>
-                    <Field>
-                        <Label>Tags</Label>
-                        <Hint>Comma seperated list of values</Hint>
-                        <Input placeholder="Tags" value={tags}
-                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                setTags(event.currentTarget.value);
-                            }}
-                        />
-                    </Field>
+                    <FormField>
+                        <Field>
+                            <Label>Title</Label>
+                            <Input placeholder="Title" value={title}
+                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                    setTitle(event.currentTarget.value);
+                                }}
+                            />
+                        </Field>
+                    </FormField>
+                    <FormField>
+                        <Field>
+                            <Label>Description</Label>
+                            <Textarea
+                                minRows={2}
+                                maxRows={12}
+                                placeholder="Description"
+                                value={description}
+                                onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
+                                    setDescription(event.currentTarget.value);
+                                }}
+                            />
+                        </Field>
+                    </FormField>
+                    <FormField>
+                        <Field>
+                            <Label>Tags</Label>
+                            <Hint>Comma seperated list of values</Hint>
+                            <Input placeholder="Tags" value={tags}
+                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                    setTags(event.currentTarget.value);
+                                }}
+                            />
+                        </Field>
+                    </FormField>
                 </form>
             </Body>
             <Footer>
@@ -110,5 +121,9 @@ const Modal: React.FC<Props> = (props: Props) => {
         </ZenModal>
     );
 };
+
+const FormField: React.FC = styled.div`
+    padding: 8px 0;
+`;
 
 export default Modal;
