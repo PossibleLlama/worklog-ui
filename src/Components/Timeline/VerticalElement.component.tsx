@@ -8,6 +8,7 @@ import { Work } from "@model/work";
 
 type VerticalTimelineElementProps = {
     Work: Work,
+    onLoadDetailed: (detail: Work) => void,
 };
 
 const VerticalTimelineElement: React.FC<VerticalTimelineElementProps> = (props: VerticalTimelineElementProps) => {
@@ -16,7 +17,7 @@ const VerticalTimelineElement: React.FC<VerticalTimelineElementProps> = (props: 
     return (
         <Content>
             <PreviewWrapper>
-                <Preview work={props.Work} />
+                <Preview work={props.Work} onLoadDetailed={props.onLoadDetailed} />
             </PreviewWrapper>
             <Point
                 BackgroundColor={theme.primaryHue}

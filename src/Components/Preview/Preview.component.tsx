@@ -12,6 +12,7 @@ import { Work } from "@model/work";
 
 type Props = {
     work: Work,
+    onLoadDetailed: (detail: Work) => void,
 };
 
 const Preview: React.FC<Props> = (props: Props) => {
@@ -29,7 +30,7 @@ const Preview: React.FC<Props> = (props: Props) => {
                         </Paragraph>
                     </Col>
                     <Col sm={2}>
-                        <Button>
+                        <Button onClick={() => props.onLoadDetailed(props.work)}>
                             <Octicon name="eye" />
                         </Button>
                     </Col>
