@@ -1,6 +1,6 @@
 import { Work } from "@model/work";
 
-const emails: Work = {
+const emailsD1: Work = {
     ID: "abcd",
     Revision: 1,
     Title: "Emails",
@@ -12,7 +12,7 @@ const emails: Work = {
     CreatedAt: new Date(2021, 1, 1, 8, 35),
 };
 
-const standup: Work = {
+const standupD1: Work = {
     ID: "abce",
     Revision: 2,
     Title: "Standup",
@@ -96,5 +96,44 @@ const review: Work = {
 };
 
 export const exampleDay1: Work[] = [
-    emails, standup, partA, feedback, meeting, partB, social, review,
+    emailsD1, standupD1, partA, feedback, meeting, partB, social, review,
+];
+
+const emailsD2: Work = {
+    ID: "bcda",
+    Revision: 1,
+    Title: "Emails",
+    Description: "Checking emails and slack messages.",
+    Author: "Alex",
+    Duration: 10,
+    Tags: ["morning"],
+    When: new Date(2021, 1, 2, 8, 31),
+    CreatedAt: new Date(2021, 1, 2, 8, 31),
+};
+
+const foo: Work = {
+    ID: "bcdb",
+    Revision: 1,
+    Title: "Finishing off AB-456 part B by doing this bit of work.",
+    Author: "Alex",
+    Duration: 60,
+    Tags: ["team a", "AB-456"],
+    When: new Date(2021, 1, 2, 9, 28),
+    CreatedAt: new Date(2021, 1, 2, 9, 28),
+};
+
+const standupD2: Work = {
+    ID: "bcdc",
+    Revision: 1,
+    Title: "Standup",
+    Description: "Discussed tickets AB-456 and CD-987.",
+    Author: "Alex",
+    Duration: 15,
+    Tags: ["team a", "standup", "meetings", "agile", "AB-456", "CD-987"].sort(),
+    When: new Date(2021, 1, 2, 9, 45),
+    CreatedAt: new Date(2021, 1, 2, 9, 45),
+};
+
+export const exampleDay2: Work[] = [
+    emailsD2, foo, standupD2,
 ];
