@@ -10,6 +10,7 @@ import { Work } from "@model/work";
 
 type Props = {
     Worklist: Work[],
+    onLoadDetailed: (detail: Work) => void,
 };
 
 const Timeline: React.FC<Props> = (props: Props) => {
@@ -22,7 +23,8 @@ const Timeline: React.FC<Props> = (props: Props) => {
                 return (
                     <VerticalTimelineElement
                         key={wl.ID}
-                        Work={wl} />
+                        Work={wl}
+                        onLoadDetailed={props.onLoadDetailed} />
                 );
             })}
         </Container>

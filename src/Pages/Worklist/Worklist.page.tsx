@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import Timeline from "@view/Timeline/Timeline.view";
 
 import Details from "@component/Details/Details.component";
 
