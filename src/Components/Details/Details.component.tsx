@@ -13,6 +13,7 @@ import { Work } from "@model/work";
 
 type Props = {
     work: Work,
+    onClose: () => void;
 };
 
 const Details: React.FC<Props> = (props: Props) => {
@@ -20,15 +21,20 @@ const Details: React.FC<Props> = (props: Props) => {
         <Well isRecessed isFloating>
             <Grid>
                 <Row>
-                    <Col sm={8}>
+                    <Col sm={7}>
                         <Title>{props.work.Title}</Title>
                     </Col>
                     <Col sm={4}>
                         <Paragraph>{isSameWeek(new Date(), props.work.When) ?
                             formatRelative(props.work.When, new Date()) :
-                            format(props.work.When, "d MMMM yyyy HHmm")}
+                            format(props.work.When, "d MMMM yyyy HH:mm")}
                         {props.work.Duration && ` for ${props.work.Duration} minutes.`}
                         </Paragraph>
+                    </Col>
+                    <Col sm={1}>
+                        <Button onClick={props.onClose}>
+                            <Octicon name="x" />
+                        </Button>
                     </Col>
                 </Row>
                 {props.work.Description &&
@@ -37,7 +43,7 @@ const Details: React.FC<Props> = (props: Props) => {
                 </Row>
                 }
                 <Row>
-                    <Col sm={10}>
+                    <Col sm={11}>
                         {props.work.Tags && props.work.Tags.map((el, index) => {
                             return (<Tag isPill key={index}>
                                 {el}
@@ -47,7 +53,7 @@ const Details: React.FC<Props> = (props: Props) => {
                             </Tag>);
                         })}
                     </Col>
-                    <Col sm={2}>
+                    <Col sm={1}>
                         <Button>
                             <Octicon name="pencil" />
                         </Button>

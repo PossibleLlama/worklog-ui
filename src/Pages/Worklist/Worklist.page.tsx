@@ -12,15 +12,19 @@ type Props = {
 
 const Worklist: React.FC<Props> = (props: Props) => {
     const [detailedWork, setDetailedWork] = useState<Work | undefined>();
+
     const loadDetailed = (detail: Work): void => {
         setDetailedWork(detail);
+    };
+    const removeDetailed = (): void => {
+        setDetailedWork(undefined);
     };
 
     return (
         <React.Fragment>
             <Timeline Worklist={props.Worklist} onLoadDetailed={loadDetailed}/>
             {detailedWork &&
-                <Details work={detailedWork}/>
+                        <Details work={detailedWork} onClose={removeDetailed}/>
             }
         </React.Fragment>
     );
