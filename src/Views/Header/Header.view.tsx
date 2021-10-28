@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
+import Octicon from "react-component-octicons";
+
 import { Button } from "@zendeskgarden/react-buttons";
 import { Alert, Close, useToast } from "@zendeskgarden/react-notifications";
 import { Paragraph, SM, LG } from "@zendeskgarden/react-typography";
@@ -51,7 +53,7 @@ const Header: React.FC<Props> = (props: Props) => {
 
             <FilterButton>
                 <Button isBasic onClick={openFilterModal}>
-                    Filter
+                    <Octicon name="search" />
                 </Button>
             </FilterButton>
 
