@@ -65,7 +65,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^4.12.2",
     "react-component-octicons": "^1.8.0",
-    "snowpack": "^3.8.8",
+    "snowpack": "https://gitpkg.now.sh/gpascale/snowpack/snowpack?cjs-require-fix-pkg",
     "styled-components": "^5.3.1",
     "typescript": "^4.4.3"
   }
