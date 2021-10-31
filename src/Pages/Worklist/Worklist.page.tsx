@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Timeline from "@view/Timeline/Timeline.view";
 
-import Modal from "@view/Timeline/DetailsModal.view";
+import Detail from "@view/Timeline/Details.view";
 
 import { Work } from "@model/work";
 
@@ -22,10 +22,12 @@ const Worklist: React.FC<Props> = (props: Props) => {
 
     return (
         <React.Fragment>
-            <Timeline Worklist={props.Worklist} onLoadDetailed={loadDetailed}/>
+            {!detailedWork &&
+                <Timeline Worklist={props.Worklist} onLoadDetailed={loadDetailed}/>
+            }
 
             {detailedWork &&
-                <Modal detail={detailedWork} onClose={removeDetailed}/>
+                <Detail detail={detailedWork} onClose={removeDetailed}/>
             }
         </React.Fragment>
     );
