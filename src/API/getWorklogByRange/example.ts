@@ -1,5 +1,9 @@
 import { Work } from "@model/work";
 
+import { subDays } from "date-fns";
+
+const t = new Date();
+
 const emailsD1: Work = {
     ID: "abcd",
     Revision: 1,
@@ -7,9 +11,9 @@ const emailsD1: Work = {
     Description: "Started my day by checking my emails and other messages.",
     Author: "Alex",
     Duration: 10,
-    Tags: ["morning"],
-    When: new Date(2021, 1, 1, 8, 35),
-    CreatedAt: new Date(2021, 1, 1, 8, 35),
+    Tags: ["morning"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 8, 35), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 8, 35), 2),
 };
 
 const standupD1: Work = {
@@ -20,8 +24,8 @@ const standupD1: Work = {
     Author: "Alex",
     Duration: 15,
     Tags: ["team a", "standup", "meetings", "agile", "AB-123", "AB-456"].sort(),
-    When: new Date(2021, 1, 1, 9, 45),
-    CreatedAt: new Date(2021, 1, 1, 9, 43),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 45), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 43), 2),
 };
 
 const partA: Work = {
@@ -32,8 +36,8 @@ const partA: Work = {
     Author: "Alex",
     Duration: 60,
     Tags: ["team a", "AB-456", "review"].sort(),
-    When: new Date(2021, 1, 1, 10, 3),
-    CreatedAt: new Date(2021, 1, 1, 10, 3),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 10, 3), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 10, 3), 2),
 };
 
 const feedback: Work = {
@@ -44,8 +48,8 @@ const feedback: Work = {
     Author: "Alex",
     Duration: 30,
     Tags: ["team a", "AB-456", "review", "feedback"].sort(),
-    When: new Date(2021, 1, 1, 10, 55),
-    CreatedAt: new Date(2021, 1, 1, 10, 55),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 10, 55), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 10, 55), 2),
 };
 
 const meeting: Work = {
@@ -56,8 +60,8 @@ const meeting: Work = {
     Author: "Alex",
     Duration: 60,
     Tags: ["meetings", "topic b"].sort(),
-    When: new Date(2021, 1, 1, 12, 0),
-    CreatedAt: new Date(2021, 1, 1, 12, 4),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 12, 0), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 12, 4), 2),
 };
 
 const partB: Work = {
@@ -68,8 +72,8 @@ const partB: Work = {
     Author: "Alex",
     Duration: 75,
     Tags: ["team a", "AB-456"].sort(),
-    When: new Date(2021, 1, 1, 14, 41),
-    CreatedAt: new Date(2021, 1, 1, 14, 41),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 14, 41), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 14, 41), 2),
 };
 
 const social: Work = {
@@ -79,8 +83,8 @@ const social: Work = {
     Author: "Alex",
     Duration: 30,
     Tags: ["team a", "social"].sort(),
-    When: new Date(2021, 1, 1, 15, 30),
-    CreatedAt: new Date(2021, 1, 1, 15, 31),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 15, 30), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 15, 31), 2),
 };
 
 const review: Work = {
@@ -91,8 +95,8 @@ const review: Work = {
     Author: "Alex",
     Duration: 20,
     Tags: ["team b", "CD-987", "review"].sort(),
-    When: new Date(2021, 1, 1, 16, 8),
-    CreatedAt: new Date(2021, 1, 1, 16, 8),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 16, 8), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 16, 8), 2),
 };
 
 export const exampleDay1: Work[] = [
@@ -106,20 +110,21 @@ const emailsD2: Work = {
     Description: "Checking emails and slack messages.",
     Author: "Alex",
     Duration: 10,
-    Tags: ["morning"],
-    When: new Date(2021, 1, 2, 8, 31),
-    CreatedAt: new Date(2021, 1, 2, 8, 31),
+    Tags: ["morning"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 8, 31), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 8, 31), 1),
 };
 
-const foo: Work = {
+const finishD2: Work = {
     ID: "bcdb",
     Revision: 1,
-    Title: "Finishing off AB-456 part B by doing this bit of work.",
+    Title: "AB-456 - Part B - Finishing off ",
+    Description: "Finishing off AB-456 part B by doing this bit of work. I did a lot of work here, it encompased a lot of things including a, b, c and d. It took longer than expected because of this feature.",
     Author: "Alex",
     Duration: 60,
-    Tags: ["team a", "AB-456"],
-    When: new Date(2021, 1, 2, 9, 28),
-    CreatedAt: new Date(2021, 1, 2, 9, 28),
+    Tags: ["team a", "AB-456"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 28), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 28), 1),
 };
 
 const standupD2: Work = {
@@ -130,10 +135,81 @@ const standupD2: Work = {
     Author: "Alex",
     Duration: 15,
     Tags: ["team a", "standup", "meetings", "agile", "AB-456", "CD-987"].sort(),
-    When: new Date(2021, 1, 2, 9, 45),
-    CreatedAt: new Date(2021, 1, 2, 9, 45),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 45), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 45), 1),
+};
+
+const startD2: Work = {
+    ID: "bcde",
+    Revision: 1,
+    Title: "AB-457 - Started",
+    Description: "Investigating the new tool for it's suitability in the project. Read some documentation and tried it out successfully.",
+    Author: "Alex",
+    Duration: 120,
+    Tags: ["team a", "AB-457"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 11, 55), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 11, 55), 1),
+};
+
+const reviewMeetingD2: Work = {
+    ID: "bcdf",
+    Revision: 3,
+    Title: "Revewing team progress",
+    Author: "Alex",
+    Duration: 60,
+    Tags: ["team a", "meetings"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 13, 0), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 13, 7), 1),
+};
+
+const supportD2: Work = {
+    ID: "bcea",
+    Revision: 1,
+    Title: "Laptop issues",
+    Description: "After lunch, the laptop won't connect to the VPN. Contacted the support team to see if there are any known issues, or what to do about the problem.",
+    Author: "Alex",
+    Duration: 10,
+    Tags: ["support"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 14, 12), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 14, 12), 1),
+};
+
+const fixedD2: Work = {
+    ID: "bceb",
+    Revision: 2,
+    Title: "Laptop issues - Fixed",
+    Description: "Support team came back with it being routing maintanence. Problem solved.",
+    Author: "Alex",
+    Duration: 20,
+    Tags: ["support"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 14, 38), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 14, 50), 1),
+};
+
+const documentationP1D2: Work = {
+    ID: "bcec",
+    Revision: 1,
+    Title: "AB-457 - Documentation",
+    Description: "Writting up what have been discovered around this ticket. Documenting what's gone well, what needs to be ironed out etc.",
+    Author: "Alex",
+    Duration: 60,
+    Tags: ["documentation", "AB-457", "team-a"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 15, 47), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 15, 47), 1),
+};
+
+const documentationP2D2: Work = {
+    ID: "bced",
+    Revision: 1,
+    Title: "AB-457 - Documentation",
+    Description: "Finished off writing up what was discovered.",
+    Author: "Alex",
+    Duration: 30,
+    Tags: ["team a", "AB-457", "documentation"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 16, 28), 1),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 16, 28), 1),
 };
 
 export const exampleDay2: Work[] = [
-    emailsD2, foo, standupD2,
+    emailsD2, finishD2, standupD2, startD2, reviewMeetingD2, supportD2, fixedD2, documentationP1D2, documentationP2D2
 ];
