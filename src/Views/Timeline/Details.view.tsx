@@ -20,10 +20,8 @@ const Detail: React.FC<Props> = (props: Props) => {
 };
 
 const Wrapper: React.FC = styled.div`
-    width: 100%;
-    display: flex;
-
-    justify-content: center;
+    width: 80%;
+    margin: auto;
 `;
 
 export default Detail;
