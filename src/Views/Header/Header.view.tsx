@@ -7,7 +7,7 @@ import Octicon from "react-component-octicons";
 
 import { Button } from "@zendeskgarden/react-buttons";
 import { Alert, Close, useToast } from "@zendeskgarden/react-notifications";
-import { Paragraph, SM, LG } from "@zendeskgarden/react-typography";
+import { SM, LG } from "@zendeskgarden/react-typography";
 
 import Modal from "@view/Filters/FiltersModal.view";
 
@@ -45,10 +45,8 @@ const Header: React.FC<Props> = (props: Props) => {
             <Name>
                 <Link to="/">
                     <LG>Worklog</LG>
-                </Link>
-                <Paragraph size="small">
                     <SM>A productivity app.</SM>
-                </Paragraph>
+                </Link>
             </Name>
 
             <FilterButton>
