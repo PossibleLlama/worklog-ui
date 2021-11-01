@@ -52,6 +52,7 @@ const Header: React.FC<Props> = (props: Props) => {
             <FilterButton>
                 <Button isBasic onClick={openFilterModal}>
                     <Octicon name="search" />
+                    &nbsp;Filter
                 </Button>
             </FilterButton>
 

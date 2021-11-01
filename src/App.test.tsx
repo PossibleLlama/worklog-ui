@@ -18,7 +18,11 @@ describe("App", () => {
         );
     });
 
-    it("Has name", () => {
+    it("Has header", () => {
         expect(document.body.contains(screen.getByText(/Worklog/)));
+        expect(document.body.contains(screen.getByText(/A productivity app./)));
+        expect(document.body.contains(screen.getByRole("button", { name: "Filter" })));
+        expect(document.body.contains(screen.getByRole("button", { name: "Timeline" })));
+        expect(document.body.contains(screen.getByRole("button", { name: "Discover" })));
     });
 });
