@@ -39,7 +39,9 @@ const Details: React.FC<Props> = (props: Props) => {
                 </Row>
                 {props.work.Description &&
                 <Row>
-                    <Paragraph>{props.work.Description}</Paragraph>
+                    <Col sm={11}>
+                        <Paragraph>{props.work.Description}</Paragraph>
+                    </Col>
                 </Row>
                 }
                 <Row>
