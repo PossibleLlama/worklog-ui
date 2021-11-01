@@ -21,10 +21,16 @@ const App: React.FC = () => {
     const [work, setWork] = useState<Work[]>([]);
 
     useEffect(() => {
+        let mounted = true;
         getWorklogByRange(filter)
             .then((data) => {
-                setWork(data);
+                if (mounted) {
+                    setWork(data);
+                }
             });
+        return function cleanup() {
+            mounted = false;
+        }
     }, [filter]);
 
     const updateFilters = (filter: Filter): void => {
