@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import styled, { ThemeContext } from "styled-components";
 
+import { subDays } from "date-fns";
+
 import Worklist from "@page/Worklist/Worklist.page";
 import Header from "@view/Header/Header.view";
 
@@ -14,8 +16,9 @@ import { Work } from "@model/work";
 const App: React.FC = () => {
     const theme = useContext(ThemeContext);
 
+    // Start with filter showing last 7 days
     const [filter, setFilter] = useState<Filter>({
-        startDate: new Date(),
+        startDate: subDays(new Date(), 7),
     });
 
     const [work, setWork] = useState<Work[]>([]);
@@ -30,7 +33,7 @@ const App: React.FC = () => {
             });
         return function cleanup() {
             mounted = false;
-        }
+        };
     }, [filter]);
 
     const updateFilters = (filter: Filter): void => {
