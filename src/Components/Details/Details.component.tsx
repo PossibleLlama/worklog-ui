@@ -32,7 +32,7 @@ const Details: React.FC<Props> = (props: Props) => {
                         </Paragraph>
                     </Col>
                     <Col sm={1}>
-                        <Button onClick={props.onClose}>
+                        <Button onClick={props.onClose} aria-label="close">
                             <Octicon name="x" />
                         </Button>
                     </Col>
@@ -56,7 +56,7 @@ const Details: React.FC<Props> = (props: Props) => {
                         })}
                     </Col>
                     <Col sm={1}>
-                        <Button>
+                        <Button aria-label="edit">
                             <Octicon name="pencil" />
                         </Button>
                     </Col>

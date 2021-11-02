@@ -2,10 +2,10 @@ import React from "react";
 import App from "./App";
 
 import { ThemeProvider } from "@zendeskgarden/react-theming";
+import { ToastProvider } from "@zendeskgarden/react-notifications";
 
 import { expect } from "chai";
 import { render, screen } from "@testing-library/react";
-import { ToastProvider } from "@zendeskgarden/react-notifications";
 
 describe("App", () => {
     beforeEach(() => {
@@ -19,10 +19,10 @@ describe("App", () => {
     });
 
     it("Has header", () => {
-        expect(document.body.contains(screen.getByText(/Worklog/)));
-        expect(document.body.contains(screen.getByText(/A productivity app./)));
-        expect(document.body.contains(screen.getByRole("button", { name: "Filter" })));
-        expect(document.body.contains(screen.getByRole("button", { name: "Timeline" })));
-        expect(document.body.contains(screen.getByRole("button", { name: "Discover" })));
+        expect(screen.getByText(/Worklog/));
+        expect(screen.getByText(/A productivity app./));
+        expect(screen.getByRole("button", { name: "Filter" }));
+        expect(screen.getByRole("button", { name: "Timeline" }));
+        expect(screen.getByRole("button", { name: "Discover" }));
     });
 });
