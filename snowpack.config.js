@@ -5,10 +5,10 @@
 module.exports = {
     alias: {
         "@api": "./src/API",
-        "@component": "./src/Components/",
-        "@container": "./src/Containers/",
         "@model": "./src/Model",
+        "@component": "./src/Components/",
         "@view": "./src/Views/",
+        "@page": "./src/Pages/",
     },
     mount: {
         public: "/",

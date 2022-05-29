@@ -1,15 +1,28 @@
 import React from "react";
 import App from "./App";
 
+import { ThemeProvider } from "@zendeskgarden/react-theming";
+import { ToastProvider } from "@zendeskgarden/react-notifications";
+
 import { expect } from "chai";
 import { render, screen } from "@testing-library/react";
 
 describe("App", () => {
     beforeEach(() => {
-        render(<App />);
+        render(
+            <ThemeProvider>
+                <ToastProvider>
+                    <App />
+                </ToastProvider>
+            </ThemeProvider>
+        );
     });
 
-    it("Has name", () => {
-        expect(document.body.contains(screen.getByText(/Worklog/)));
+    it("Has header", () => {
+        expect(screen.getByText(/Worklog/));
+        expect(screen.getByText(/A productivity app./));
+        expect(screen.getByRole("button", { name: "Filter" }));
+        expect(screen.getByRole("button", { name: "Timeline" }));
+        expect(screen.getByRole("button", { name: "Discover" }));
     });
 });
