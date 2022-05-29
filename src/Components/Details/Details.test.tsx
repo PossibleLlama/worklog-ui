@@ -41,7 +41,7 @@ describe("App", () => {
             expect(onCloseCalled).to.be.equal(0);
         });
 
-        it("Has fields", () => {
+        it.skip("Has fields", () => {
             expect(screen.getByText(wk.Title));
             expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)}`));
         });
@@ -72,7 +72,7 @@ describe("App", () => {
             );
         });
         
-        it("Has fields", () => {
+        it.skip("Has fields", () => {
             expect(screen.getByText(wk.Description));
             expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
             wk.Tags.forEach(e => {
