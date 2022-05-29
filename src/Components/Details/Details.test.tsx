@@ -1,4 +1,5 @@
 import React from "react";
+import { subYears, subMonths, subWeeks, subDays, subHours, subMinutes, subSeconds } from "date-fns";
 
 import Comp from "./Details.component";
 
@@ -11,7 +12,7 @@ describe("App", () => {
         onCloseCalled++;
     };
 
-    // const t = new Date();
+    const t = new Date();
 
     beforeEach(() => {
         onCloseCalled = 0;
@@ -42,7 +43,7 @@ describe("App", () => {
 
         it("Has fields", () => {
             expect(screen.getByText(wk.Title));
-            expect(screen.getByText(formatAbsoluteDateToString(wk.When)));
+            expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)}`));
         });
 
         it("Does not have fields", () => {
@@ -83,8 +84,254 @@ describe("App", () => {
             expect(screen.queryByText(wk.Author, { exact: false })).to.be.null;
         });
     });
+
+    describe.skip("Minimal fields - Relative date", () => {
+        describe("Year ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subYears(t, 1),
+                CreatedAt: subYears(t, 1),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe("Month ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subMonths(t, 1),
+                CreatedAt: subMonths(t, 1),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe("Week ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subWeeks(t, 1),
+                CreatedAt: subWeeks(t, 1),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe("Day ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subDays(t, 1),
+                CreatedAt: subDays(t, 1),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`Yesterday at ${formatTimeToString(wk.When)} for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe.skip("Multiple hours ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subHours(t, 3),
+                CreatedAt: subHours(t, 3),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`Several hours ago for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe.skip("Single hour ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subHours(t, 1),
+                CreatedAt: subHours(t, 1),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`An hour ago for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe.skip("Multiple minutes ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subMinutes(t, 3),
+                CreatedAt: subMinutes(t, 3),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`Several minutes ago for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe.skip("Single minute ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subMinutes(t, 1),
+                CreatedAt: subMinutes(t, 1),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`A minute ago for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe.skip("Multiple seconds ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subSeconds(t, 3),
+                CreatedAt: subSeconds(t, 3),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`Several seconds ago for ${wk.Duration} minutes.`));
+            });
+        });
+
+        describe.skip("Single seconds ago", () => {
+            const wk = {
+                ID: "id",
+                Revision: 1,
+                Title: "title",
+                Description: "description",
+                Author: "author",
+                Duration: 15,
+                Tags: ["tag1", "tag2"],
+                When: subSeconds(t, 1),
+                CreatedAt: subSeconds(t, 1),
+            };
+        
+            beforeEach(() => {
+                render(
+                    <Comp onClose={onCloseFn} work={wk}/>
+                );
+            });
+            
+            it("Relative time", () => {
+                expect(screen.getByText(`A second ago for ${wk.Duration} minutes.`));
+            });
+        });
+    });
 });
 
 const formatAbsoluteDateToString = (d: Date): string => {
-    return `${d.getDay()} ${d.toLocaleString("default", { month: "long" })} ${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+    return `${d.getDate()} ${d.toLocaleString("default", { month: "long" })} ${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+};
+
+const formatTimeToString = (d: Date): string => {
+    return `${d.getHours()}:${d.getMinutes()}`;
 };

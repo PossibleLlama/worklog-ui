@@ -1,6 +1,12 @@
 import React from "react";
 
-import { format, formatRelative, isSameWeek } from "date-fns";
+import {
+    format,
+    isSameWeek,
+    isSameDay,
+    isSameHour,
+    isSameMinute,
+} from "date-fns";
 
 import { Button } from "@zendeskgarden/react-buttons";
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
@@ -25,10 +31,8 @@ const Details: React.FC<Props> = (props: Props) => {
                         <Title>{props.work.Title}</Title>
                     </Col>
                     <Col sm={4}>
-                        <Paragraph>{isSameWeek(new Date(), props.work.When) ?
-                            formatRelative(props.work.When, new Date()) :
-                            format(props.work.When, "d MMMM yyyy HH:mm")}
-                        {props.work.Duration && ` for ${props.work.Duration} minutes.`}
+                        <Paragraph>
+                            {formatDateTime(props.work.When, props.work.Duration)}
                         </Paragraph>
                     </Col>
                     <Col sm={1}>
@@ -65,5 +69,26 @@ const Details: React.FC<Props> = (props: Props) => {
         </Well>
     );
 };
+
+const formatDateTime = (d: Date, dur?: number): string => {
+    return dur?
+        `${formatRelativeDate(d)}` :
+        `${formatRelativeDate(d)} for ${dur} minutes.`;
+}
+
+const formatRelativeDate = (d: Date): string => {
+    const now = new Date();
+    if (isSameMinute(d, now)) {
+        return "A few seconds ago";
+    } else if (isSameHour(d, now)) {
+        return `This hour at ${d.getHours()}:${d.getMinutes()}`;
+    } else if (isSameDay(d, now)) {
+        return `Today at ${d.getHours()}:${d.getMinutes()}`;
+    } else if (isSameWeek(d, now)) {
+        return `${format(d, 'EEEE')} at ${d.getHours()}:${d.getMinutes()}`;
+    } else {
+        return format(d, "d MMMM yyyy HH:mm")
+    }
+}
 
 export default Details;
