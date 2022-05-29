@@ -74,7 +74,7 @@ const formatDateTime = (d: Date, dur?: number): string => {
     return dur?
         `${formatRelativeDate(d)}` :
         `${formatRelativeDate(d)} for ${dur} minutes.`;
-}
+};
 
 const formatRelativeDate = (d: Date): string => {
     const now = new Date();
@@ -85,10 +85,10 @@ const formatRelativeDate = (d: Date): string => {
     } else if (isSameDay(d, now)) {
         return `Today at ${d.getHours()}:${d.getMinutes()}`;
     } else if (isSameWeek(d, now)) {
-        return `${format(d, 'EEEE')} at ${d.getHours()}:${d.getMinutes()}`;
+        return `${format(d, "EEEE")} at ${d.getHours()}:${d.getMinutes()}`;
     } else {
-        return format(d, "d MMMM yyyy HH:mm")
+        return format(d, "d MMMM yyyy HH:mm");
     }
-}
+};
 
 export default Details;
