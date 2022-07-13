@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/PossibleLlama/worklog-ui#readme",
   "dependencies": {
-    "@zendeskgarden/react-datepickers": "^8.52.0",
+    "@zendeskgarden/react-datepickers": "^8.53.0",
     "@zendeskgarden/react-forms": "^8.52.0",
     "@zendeskgarden/react-modals": "^8.53.0",
     "axios": "^0.27.2",
