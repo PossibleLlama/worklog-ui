@@ -12,8 +12,7 @@ import { Button } from "@zendeskgarden/react-buttons";
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { Tag } from "@zendeskgarden/react-tags";
-
-import Octicon from "react-component-octicons";
+import { PencilIcon, StopIcon, UserRemoveIcon, XCircleIcon, XIcon } from "@heroicons/react/solid";
 
 import { Work } from "@model/work";
 
@@ -37,7 +36,10 @@ const Details: React.FC<Props> = (props: Props) => {
                     </Col>
                     <Col sm={1}>
                         <Button onClick={props.onClose} aria-label="close">
-                            <Octicon name="x" />
+                            <StopIcon className="h-5 w-5 text-gray-600" />
+                            <UserRemoveIcon className="h-5 w-5 text-gray-600" />
+                            <XCircleIcon className="h-5 w-5 text-gray-600" />
+                            <XIcon className="h-5 w-5 text-gray-600" />
                         </Button>
                     </Col>
                 </Row>
@@ -61,7 +63,7 @@ const Details: React.FC<Props> = (props: Props) => {
                     </Col>
                     <Col sm={1}>
                         <Button aria-label="edit">
-                            <Octicon name="pencil" />
+                            <PencilIcon className="h-5 w-5 text-gray-600" />
                         </Button>
                     </Col>
                 </Row>

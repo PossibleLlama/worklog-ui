@@ -1,9 +1,11 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from "react";
 import { subYears, subMonths, subWeeks, subDays, subHours, subMinutes, subSeconds } from "date-fns";
 
 import Comp from "./Details.component";
 
-import { expect } from "chai";
 import { render, screen } from "@testing-library/react";
 
 describe("App", () => {
@@ -36,7 +38,7 @@ describe("App", () => {
 
             expect(screen.getAllByRole("button", { name: /close/i }));
             expect(screen.getByRole("button", { name: /edit/i }));
-            expect(onCloseCalled).to.be.equal(0);
+            expect(onCloseCalled).toEqual(0);
         });
 
         it.skip("Has fields", () => {
@@ -53,9 +55,9 @@ describe("App", () => {
                 <Comp onClose={onCloseFn} work={wk}/>
             );
 
-            expect(screen.queryByText(wk.ID, { exact: false })).to.be.null;
-            expect(screen.queryByText(wk.Revision, { exact: false })).to.be.null;
-            expect(screen.queryByText(formatAbsoluteDateToString(wk.CreatedAt))).to.be.null;
+            expect(screen.queryByText(wk.ID, { exact: false })).toBeNull();
+            expect(screen.queryByText(wk.Revision, { exact: false })).toBeNull();
+            expect(screen.queryByText(formatAbsoluteDateToString(wk.CreatedAt))).toBeNull();
         });
     });
     
@@ -89,7 +91,7 @@ describe("App", () => {
                 <Comp onClose={onCloseFn} work={wk}/>
             );
 
-            expect(screen.queryByText(wk.Author, { exact: false })).to.be.null;
+            expect(screen.queryByText(wk.Author, { exact: false })).toBeNull();
         });
     });
 
