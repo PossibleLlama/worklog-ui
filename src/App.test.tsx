@@ -8,7 +8,7 @@ import { expect } from "chai";
 import { render, screen } from "@testing-library/react";
 
 describe("App", () => {
-    beforeEach(() => {
+    it("Has header", () => {
         render(
             <ThemeProvider>
                 <ToastProvider>
@@ -16,9 +16,7 @@ describe("App", () => {
                 </ToastProvider>
             </ThemeProvider>
         );
-    });
 
-    it("Has header", () => {
         expect(screen.getByText(/Worklog/));
         expect(screen.getByText(/A productivity app./));
         expect(screen.getByRole("button", { name: "Filter" }));

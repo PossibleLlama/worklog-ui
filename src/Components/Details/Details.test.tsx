@@ -28,25 +28,31 @@ describe("App", () => {
             When: new Date(2000, 4, 4, 18, 20, 35, 177),
             CreatedAt: new Date(2001, 3, 4, 11, 42, 38, 274),
         };
-    
-        beforeEach(() => {
+
+        it("Has buttons", () => {
             render(
                 <Comp onClose={onCloseFn} work={wk}/>
             );
-        });
 
-        it("Has buttons", () => {
             expect(screen.getAllByRole("button", { name: /close/i }));
             expect(screen.getByRole("button", { name: /edit/i }));
             expect(onCloseCalled).to.be.equal(0);
         });
 
         it.skip("Has fields", () => {
+            render(
+                <Comp onClose={onCloseFn} work={wk}/>
+            );
+
             expect(screen.getByText(wk.Title));
             expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)}`));
         });
 
         it("Does not have fields", () => {
+            render(
+                <Comp onClose={onCloseFn} work={wk}/>
+            );
+
             expect(screen.queryByText(wk.ID, { exact: false })).to.be.null;
             expect(screen.queryByText(wk.Revision, { exact: false })).to.be.null;
             expect(screen.queryByText(formatAbsoluteDateToString(wk.CreatedAt))).to.be.null;
@@ -65,14 +71,12 @@ describe("App", () => {
             When: new Date(2000, 4, 4, 18, 20, 35, 177),
             CreatedAt: new Date(2001, 3, 4, 11, 42, 38, 274),
         };
-    
-        beforeEach(() => {
+
+        it.skip("Has fields", () => {
             render(
                 <Comp onClose={onCloseFn} work={wk}/>
             );
-        });
-        
-        it.skip("Has fields", () => {
+
             expect(screen.getByText(wk.Description));
             expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
             wk.Tags.forEach(e => {
@@ -81,6 +85,10 @@ describe("App", () => {
         });
 
         it("Does not have fields", () => {
+            render(
+                <Comp onClose={onCloseFn} work={wk}/>
+            );
+
             expect(screen.queryByText(wk.Author, { exact: false })).to.be.null;
         });
     });
@@ -98,14 +106,12 @@ describe("App", () => {
                 When: subYears(t, 1),
                 CreatedAt: subYears(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
             });
         });
@@ -122,14 +128,12 @@ describe("App", () => {
                 When: subMonths(t, 1),
                 CreatedAt: subMonths(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
             });
         });
@@ -146,14 +150,12 @@ describe("App", () => {
                 When: subWeeks(t, 1),
                 CreatedAt: subWeeks(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
             });
         });
@@ -170,14 +172,12 @@ describe("App", () => {
                 When: subDays(t, 1),
                 CreatedAt: subDays(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`Yesterday at ${formatTimeToString(wk.When)} for ${wk.Duration} minutes.`));
             });
         });
@@ -194,14 +194,12 @@ describe("App", () => {
                 When: subHours(t, 3),
                 CreatedAt: subHours(t, 3),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`Several hours ago for ${wk.Duration} minutes.`));
             });
         });
@@ -218,14 +216,12 @@ describe("App", () => {
                 When: subHours(t, 1),
                 CreatedAt: subHours(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`An hour ago for ${wk.Duration} minutes.`));
             });
         });
@@ -242,14 +238,12 @@ describe("App", () => {
                 When: subMinutes(t, 3),
                 CreatedAt: subMinutes(t, 3),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`Several minutes ago for ${wk.Duration} minutes.`));
             });
         });
@@ -266,14 +260,12 @@ describe("App", () => {
                 When: subMinutes(t, 1),
                 CreatedAt: subMinutes(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+    
                 expect(screen.getByText(`A minute ago for ${wk.Duration} minutes.`));
             });
         });
@@ -290,14 +282,12 @@ describe("App", () => {
                 When: subSeconds(t, 3),
                 CreatedAt: subSeconds(t, 3),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+
                 expect(screen.getByText(`Several seconds ago for ${wk.Duration} minutes.`));
             });
         });
@@ -314,14 +304,12 @@ describe("App", () => {
                 When: subSeconds(t, 1),
                 CreatedAt: subSeconds(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
+    
                 expect(screen.getByText(`A second ago for ${wk.Duration} minutes.`));
             });
         });
