@@ -38,7 +38,7 @@ const Header: React.FC<Props> = (props: Props) => {
     };
 
     return (
-        <div className="fixed w-screen top-0 flex flex-row border-b-2 border-stone-200 bg-stone-100">
+        <div className="fixed w-screen top-0 mb-4 flex flex-row border-b-2 border-stone-200 bg-stone-100">
             <div className="basis-1/3">
                 <div className="px-2">
                     {/* <Link to="/"> */}

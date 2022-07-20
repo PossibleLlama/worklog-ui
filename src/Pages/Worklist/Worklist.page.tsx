@@ -21,7 +21,7 @@ const Worklist: React.FC<Props> = (props: Props) => {
     };
 
     return (
-        <React.Fragment>
+        <div className="flex justify-center mt-16">
             {!detailedWork &&
                 <Timeline Worklist={props.Worklist} onLoadDetailed={loadDetailed}/>
             }
@@ -29,7 +29,7 @@ const Worklist: React.FC<Props> = (props: Props) => {
             {detailedWork &&
                 <Detail detail={detailedWork} onClose={removeDetailed}/>
             }
-        </React.Fragment>
+        </div>
     );
 };
 

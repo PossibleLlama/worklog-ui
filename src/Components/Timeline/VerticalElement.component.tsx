@@ -12,7 +12,7 @@ type VerticalTimelineElementProps = {
 const VerticalTimelineElement: React.FC<VerticalTimelineElementProps> = (props: VerticalTimelineElementProps) => {
 
     return (
-        <div className="">
+        <div className="m-4">
             <Preview work={props.Work} onLoadDetailed={props.onLoadDetailed} />
         </div>
     );

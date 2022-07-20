@@ -12,7 +12,7 @@ import { Button } from "@zendeskgarden/react-buttons";
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { Tag } from "@zendeskgarden/react-tags";
-import { PencilIcon, StopIcon, UserRemoveIcon, XCircleIcon, XIcon } from "@heroicons/react/solid";
+import { PencilIcon, XIcon } from "@heroicons/react/solid";
 
 import { Work } from "@model/work";
 
@@ -36,9 +36,6 @@ const Details: React.FC<Props> = (props: Props) => {
                     </Col>
                     <Col sm={1}>
                         <Button onClick={props.onClose} aria-label="close">
-                            <StopIcon className="h-5 w-5 text-gray-600" />
-                            <UserRemoveIcon className="h-5 w-5 text-gray-600" />
-                            <XCircleIcon className="h-5 w-5 text-gray-600" />
                             <XIcon className="h-5 w-5 text-gray-600" />
                         </Button>
                     </Col>
@@ -53,7 +50,7 @@ const Details: React.FC<Props> = (props: Props) => {
                 <Row>
                     <Col sm={11}>
                         {props.work.Tags && props.work.Tags.map((el, index) => {
-                            return (<Tag isPill key={index}>
+                            return (<Tag isPill key={index} className="m-1">
                                 {el}
                                 <Tag.Close onClick={() => {
                                     alert("TODO, remove tag");
