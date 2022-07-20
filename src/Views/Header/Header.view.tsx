@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
-import styled from "styled-components";
-
-import Octicon from "react-component-octicons";
+import { BookmarkIcon, FilterIcon, GlobeAltIcon } from "@heroicons/react/solid";
 
 import { Button } from "@zendeskgarden/react-buttons";
 import { Alert, Close, useToast } from "@zendeskgarden/react-notifications";
-import { SM, LG } from "@zendeskgarden/react-typography";
 
 import Modal from "@view/Filters/FiltersModal.view";
 
@@ -41,88 +38,44 @@ const Header: React.FC<Props> = (props: Props) => {
     };
 
     return (
-        <Wrapper>
-            <Name>
-                <Link to="/">
-                    <LG>Worklog</LG>
-                    <SM>A productivity app.</SM>
-                </Link>
-            </Name>
+        <div className="fixed w-screen top-0 flex flex-row border-b-2 border-stone-200 bg-stone-100">
+            <div className="basis-1/3">
+                <div className="px-2">
+                    {/* <Link to="/"> */}
+                    <h1 className="text-lg text-gray-800">Worklog</h1>
+                    <p className="text-sm text-gray-500">A productivity app</p>
+                    {/* </Link> */}
+                </div>
+            </div>
 
-            <FilterButton>
+            <div className="basis-1/3">
                 <Button isBasic onClick={openFilterModal}>
-                    <Octicon name="search" />
-                    &nbsp;Filter
+                    <FilterIcon className="h-5 w-5 text-gray-600" />
+                    &nbsp;<h2 className="text-gray-600">Filter</h2>
                 </Button>
-            </FilterButton>
+            </div>
 
-            <NavButtons>
+            <div className="basis-1/3">
                 <Button isBasic>
-                    <Link to="/timeline">
-                        Timeline
-                    </Link>
+                    {/* <Link to="/timeline"> */}
+                    <BookmarkIcon className="h-5 w-5 text-gray-600"/>
+                    &nbsp;<h2 className="text-gray-600">Timeline</h2>
+                    {/* </Link> */}
                 </Button>
                 <Button isBasic>
-                    <Link to="/discover">
-                        Discover
-                    </Link>
+                    {/* <Link to="/discover"> */}
+                    <GlobeAltIcon className="h-5 w-5 text-gray-600"/>
+                    &nbsp;<h2 className="text-gray-600">Discover</h2>
+                    {/* </Link> */}
                 </Button>
-            </NavButtons>
+            </div>
             {openModal &&
                 <Modal
                     onClose={closeFilterModal}
                     initalFilters={props.currentFilters}
                 />}
-        </Wrapper>
+        </div>
     );
 };
-
-const Wrapper: React.FC = styled.div`
-    width: 100%;
-    display: flex;
-
-    justify-content: space-between;
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    };
-`;
-
-const Name: React.FC = styled.div`
-    height: 100%;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-
-    justify-content: flex-start;
-
-    a {
-        padding: 8px 16px;
-    };
-
-    p {
-        margin-top: auto;
-        padding: 0px 16px;
-    };
-`;
-
-const FilterButton: React.FC = styled.div`
-    height: 100%;
-    width: 30%;
-    display: flex;
-`;
-
-const NavButtons: React.FC = styled.div`
-    height: 100%;
-    width: 40%;
-    display: flex;
-
-    justify-content: flex-end;
-
-    a {
-        padding: 8px 16px;
-    };
-`;
 
 export default Header;
