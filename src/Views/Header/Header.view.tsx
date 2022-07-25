@@ -39,16 +39,19 @@ const Header: React.FC<Props> = (props: Props) => {
 
     return (
         <div className="fixed top-0 left-0 w-screen h-16 z-10 bg-stone-100 shadow-lg flex px-2 justify-between items-center">
-            <Link to="/">
-                <h1 className="text-lg text-gray-800">Worklog</h1>
-                <p className="text-sm text-gray-500">A productivity app</p>
+            <Link to="/" className="sidebar-item ml-4 px-4 rounded-3xl hover:rounded-xl group">
+                <h1 className="text-lg font-bold">Worklog</h1>
+                <p className="text-sm">A productivity app</p>
+                <span className="sidebar-tooltip group-hover:scale-100 top-14">
+                    Home
+                </span>
             </Link>
             <button onClick={openFilterModal}>
                 <SidebarIcon tooltipText="Filter">
                     <FilterIcon className="h-5/6" />
                 </SidebarIcon>
             </button>
-            <nav className="flex">
+            <nav className="flex mr-4">
                 <Link to="/timeline" className="px-1">
                     <button>
                         <SidebarIcon tooltipText="Timeline">
