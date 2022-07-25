@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { BookmarkIcon, FilterIcon, GlobeAltIcon } from "@heroicons/react/solid";
 
@@ -40,12 +40,12 @@ const Header: React.FC<Props> = (props: Props) => {
     return (
         <div className="fixed w-screen top-0 mb-4 flex flex-row border-b-2 border-stone-200 bg-stone-100">
             <div className="basis-1/3">
-                <div className="px-2">
-                    {/* <Link to="/"> */}
-                    <h1 className="text-lg text-gray-800">Worklog</h1>
-                    <p className="text-sm text-gray-500">A productivity app</p>
-                    {/* </Link> */}
-                </div>
+                <nav className="px-2">
+                    <Link to="/">
+                        <h1 className="text-lg text-gray-800">Worklog</h1>
+                        <p className="text-sm text-gray-500">A productivity app</p>
+                    </Link>
+                </nav>
             </div>
 
             <div className="basis-1/3">
@@ -55,19 +55,23 @@ const Header: React.FC<Props> = (props: Props) => {
                 </Button>
             </div>
 
-            <div className="basis-1/3">
-                <Button isBasic>
-                    {/* <Link to="/timeline"> */}
-                    <BookmarkIcon className="h-5 w-5 text-gray-600"/>
-                    &nbsp;<h2 className="text-gray-600">Timeline</h2>
-                    {/* </Link> */}
-                </Button>
-                <Button isBasic>
-                    {/* <Link to="/discover"> */}
-                    <GlobeAltIcon className="h-5 w-5 text-gray-600"/>
-                    &nbsp;<h2 className="text-gray-600">Discover</h2>
-                    {/* </Link> */}
-                </Button>
+            <div className="basis-1/3 flex">
+                <nav className="w-16 mx-2">
+                    <button className="">
+                        <Link to="/timeline">
+                            <BookmarkIcon className="h-5 w-5 text-gray-600"/>
+                            &nbsp;<h2 className="text-gray-600">Timeline</h2>
+                        </Link>
+                    </button>
+                </nav>
+                <nav className="w-16 mx-2">
+                    <button className="">
+                        <Link to="/discover">
+                            <GlobeAltIcon className="h-5 w-5 text-gray-600"/>
+                            &nbsp;<h2 className="text-gray-600">Discover</h2>
+                        </Link>
+                    </button>
+                </nav>
             </div>
             {openModal &&
                 <Modal
