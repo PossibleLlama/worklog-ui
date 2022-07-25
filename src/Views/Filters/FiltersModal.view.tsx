@@ -5,8 +5,6 @@ import { DatepickerRange } from "@zendeskgarden/react-datepickers";
 import { Field, Label, Input, Hint, Textarea } from "@zendeskgarden/react-forms";
 import { Modal as ZenModal, Header, Body, Footer, FooterItem, Close } from "@zendeskgarden/react-modals";
 
-import styled from "styled-components";
-
 import { isBefore } from "date-fns";
 
 import { Filter } from "@model/filter";
@@ -44,25 +42,25 @@ const Modal: React.FC<Props> = (props: Props) => {
                             }
                         }}
                     >
-                        <FormField>
+                        <div className="pt-8">
                             <Field>
                                 <Label>Start date</Label>
                                 <DatepickerRange.Start>
                                     <Input />
                                 </DatepickerRange.Start>
                             </Field>
-                        </FormField>
-                        <FormField>
+                        </div>
+                        <div className="pt-8">
                             <Field>
                                 <Label>End date</Label>
                                 <DatepickerRange.End>
                                     <Input />
                                 </DatepickerRange.End>
                             </Field>
-                        </FormField>
+                        </div>
                         <DatepickerRange.Calendar />
                     </DatepickerRange>
-                    <FormField>
+                    <div className="pt-8">
                         <Field>
                             <Label>Title</Label>
                             <Input placeholder="Title" value={title}
@@ -71,8 +69,8 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 }}
                             />
                         </Field>
-                    </FormField>
-                    <FormField>
+                    </div>
+                    <div className="pt-8">
                         <Field>
                             <Label>Description</Label>
                             <Textarea
@@ -85,8 +83,8 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 }}
                             />
                         </Field>
-                    </FormField>
-                    <FormField>
+                    </div>
+                    <div className="pt-8">
                         <Field>
                             <Label>Tags</Label>
                             <Hint>Comma seperated list of values</Hint>
@@ -96,7 +94,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 }}
                             />
                         </Field>
-                    </FormField>
+                    </div>
                 </form>
             </Body>
             <Footer>
@@ -121,9 +119,5 @@ const Modal: React.FC<Props> = (props: Props) => {
         </ZenModal>
     );
 };
-
-const FormField: React.FC = styled.div`
-    padding: 8px 0;
-`;
 
 export default Modal;

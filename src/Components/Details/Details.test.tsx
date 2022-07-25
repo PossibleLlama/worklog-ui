@@ -1,9 +1,11 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from "react";
-import { subYears, subMonths, subWeeks, subDays, subHours, subMinutes, subSeconds } from "date-fns";
+import { subYears, subMonths, subWeeks, subDays, subHours, subMinutes, subSeconds, format } from "date-fns";
 
-import Comp from "./Details.component";
+import Comp, { formatDateTime, formatRelativeDate } from "./Details.component";
 
-import { expect } from "chai";
 import { render, screen } from "@testing-library/react";
 
 describe("App", () => {
@@ -28,28 +30,34 @@ describe("App", () => {
             When: new Date(2000, 4, 4, 18, 20, 35, 177),
             CreatedAt: new Date(2001, 3, 4, 11, 42, 38, 274),
         };
-    
-        beforeEach(() => {
+
+        it("Has buttons", () => {
             render(
                 <Comp onClose={onCloseFn} work={wk}/>
             );
-        });
 
-        it("Has buttons", () => {
             expect(screen.getAllByRole("button", { name: /close/i }));
             expect(screen.getByRole("button", { name: /edit/i }));
-            expect(onCloseCalled).to.be.equal(0);
+            expect(onCloseCalled).toEqual(0);
         });
 
-        it.skip("Has fields", () => {
+        it("Has fields", () => {
+            render(
+                <Comp onClose={onCloseFn} work={wk}/>
+            );
+
             expect(screen.getByText(wk.Title));
-            expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)}`));
+            expect(screen.getByText(`${formatDateTime(wk.When)}`));
         });
 
         it("Does not have fields", () => {
-            expect(screen.queryByText(wk.ID, { exact: false })).to.be.null;
-            expect(screen.queryByText(wk.Revision, { exact: false })).to.be.null;
-            expect(screen.queryByText(formatAbsoluteDateToString(wk.CreatedAt))).to.be.null;
+            render(
+                <Comp onClose={onCloseFn} work={wk}/>
+            );
+
+            expect(screen.queryByText(wk.ID, { exact: false })).toBeNull();
+            expect(screen.queryByText(wk.Revision, { exact: false })).toBeNull();
+            expect(screen.queryByText(formatRelativeDate(wk.CreatedAt))).toBeNull();
         });
     });
     
@@ -65,27 +73,29 @@ describe("App", () => {
             When: new Date(2000, 4, 4, 18, 20, 35, 177),
             CreatedAt: new Date(2001, 3, 4, 11, 42, 38, 274),
         };
-    
-        beforeEach(() => {
+
+        it("Has fields", () => {
             render(
                 <Comp onClose={onCloseFn} work={wk}/>
             );
-        });
-        
-        it.skip("Has fields", () => {
+
             expect(screen.getByText(wk.Description));
-            expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
+            expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             wk.Tags.forEach(e => {
                 expect(screen.getByText(e, { exact: false }));
             });
         });
 
         it("Does not have fields", () => {
-            expect(screen.queryByText(wk.Author, { exact: false })).to.be.null;
+            render(
+                <Comp onClose={onCloseFn} work={wk}/>
+            );
+
+            expect(screen.queryByText(wk.Author, { exact: false })).toBeNull();
         });
     });
 
-    describe.skip("Minimal fields - Relative date", () => {
+    describe("Minimal fields - Relative date", () => {
         describe("Year ago", () => {
             const wk = {
                 ID: "id",
@@ -98,15 +108,13 @@ describe("App", () => {
                 When: subYears(t, 1),
                 CreatedAt: subYears(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
@@ -122,15 +130,13 @@ describe("App", () => {
                 When: subMonths(t, 1),
                 CreatedAt: subMonths(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
@@ -146,15 +152,13 @@ describe("App", () => {
                 When: subWeeks(t, 1),
                 CreatedAt: subWeeks(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`${formatAbsoluteDateToString(wk.When)} for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
@@ -170,19 +174,17 @@ describe("App", () => {
                 When: subDays(t, 1),
                 CreatedAt: subDays(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`Yesterday at ${formatTimeToString(wk.When)} for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
-        describe.skip("Multiple hours ago", () => {
+        describe("Multiple hours ago", () => {
             const wk = {
                 ID: "id",
                 Revision: 1,
@@ -194,19 +196,17 @@ describe("App", () => {
                 When: subHours(t, 3),
                 CreatedAt: subHours(t, 3),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`Several hours ago for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
-        describe.skip("Single hour ago", () => {
+        describe("Single hour ago", () => {
             const wk = {
                 ID: "id",
                 Revision: 1,
@@ -218,19 +218,17 @@ describe("App", () => {
                 When: subHours(t, 1),
                 CreatedAt: subHours(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`An hour ago for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
-        describe.skip("Multiple minutes ago", () => {
+        describe("Multiple minutes ago", () => {
             const wk = {
                 ID: "id",
                 Revision: 1,
@@ -242,19 +240,17 @@ describe("App", () => {
                 When: subMinutes(t, 3),
                 CreatedAt: subMinutes(t, 3),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`Several minutes ago for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
-        describe.skip("Single minute ago", () => {
+        describe("Single minute ago", () => {
             const wk = {
                 ID: "id",
                 Revision: 1,
@@ -266,19 +262,17 @@ describe("App", () => {
                 When: subMinutes(t, 1),
                 CreatedAt: subMinutes(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`A minute ago for ${wk.Duration} minutes.`));
+    
+                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
 
-        describe.skip("Multiple seconds ago", () => {
+        describe("Multiple seconds ago", () => {
             const wk = {
                 ID: "id",
                 Revision: 1,
@@ -290,19 +284,17 @@ describe("App", () => {
                 When: subSeconds(t, 3),
                 CreatedAt: subSeconds(t, 3),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`Several seconds ago for ${wk.Duration} minutes.`));
+
+                expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`));
             });
         });
 
-        describe.skip("Single seconds ago", () => {
+        describe("Single seconds ago", () => {
             const wk = {
                 ID: "id",
                 Revision: 1,
@@ -314,24 +306,101 @@ describe("App", () => {
                 When: subSeconds(t, 1),
                 CreatedAt: subSeconds(t, 1),
             };
-        
-            beforeEach(() => {
+
+            it("Relative time", () => {
                 render(
                     <Comp onClose={onCloseFn} work={wk}/>
                 );
-            });
-            
-            it("Relative time", () => {
-                expect(screen.getByText(`A second ago for ${wk.Duration} minutes.`));
+    
+                expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`));
             });
         });
     });
 });
 
-const formatAbsoluteDateToString = (d: Date): string => {
-    return `${d.getDate()} ${d.toLocaleString("default", { month: "long" })} ${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
-};
+describe("Format date time", () => {
+    const now = new Date();
 
-const formatTimeToString = (d: Date): string => {
-    return `${d.getHours()}:${d.getMinutes()}`;
-};
+    it("Further ago than a week without duration", () => {
+        const t = new Date(now);
+        t.setDate(t.getDate() - 10);
+        expect(formatDateTime(t)).toContain(format(t, "do MMMM yyyy"));
+        expect(formatDateTime(t)).toContain(format(t, "HH:mm"));
+        expect(formatDateTime(t)).toEqual(format(t, "do MMMM yyyy HH:mm."));
+    });
+
+    describe("Including duration", () => {
+        it("Further ago than a week with a positive duration", () => {
+            const t = new Date(now);
+            const dur = 60;
+            t.setDate(t.getDate() - 10);
+            expect(formatDateTime(t, dur)).toContain(format(t, "do MMMM yyyy"));
+            expect(formatDateTime(t, dur)).toContain(format(t, "HH:mm"));
+            expect(formatDateTime(t, dur)).toContain(`for ${dur} minutes.`);
+            expect(formatDateTime(t, dur)).toEqual(`${format(t, "do MMMM yyyy HH:mm")} for ${dur} minutes.`);
+        });
+
+        it("Further ago than a week with a zero duration", () => {
+            const t = new Date(now);
+            const dur = 0;
+            t.setDate(t.getDate() - 10);
+            expect(formatDateTime(t, dur)).toContain(format(t, "do MMMM yyyy"));
+            expect(formatDateTime(t, dur)).toContain(format(t, "HH:mm"));
+            expect(formatDateTime(t, dur)).toEqual(`${format(t, "do MMMM yyyy HH:mm")}.`);
+        });
+
+        it("Further ago than a week with a negative duration", () => {
+            const t = new Date(now);
+            const dur = -10;
+            t.setDate(t.getDate() - 10);
+            expect(formatDateTime(t, dur)).toContain(format(t, "do MMMM yyyy"));
+            expect(formatDateTime(t, dur)).toContain(format(t, "HH:mm"));
+            expect(formatDateTime(t, dur)).toEqual(`${format(t, "do MMMM yyyy HH:mm")}.`);
+        });
+    });
+    
+});
+
+describe("Format relative date", () => {
+    const now = new Date();
+
+    it("Same minute", () => {
+        const t = new Date(now);
+        t.setSeconds(t.getSeconds() - 1);
+        expect(formatRelativeDate(t)).toEqual("A few seconds ago");
+    });
+
+    it("Same hour", () => {
+        const t = new Date(now);
+        t.setMinutes(t.getMinutes() - 1);
+        expect(formatRelativeDate(t)).toContain("This hour at");
+        expect(formatRelativeDate(t)).toContain(format(t, "HH:mm"));
+    });
+
+    it("Same day", () => {
+        const t = new Date(now);
+        t.setHours(t.getHours() - 1);
+        expect(formatRelativeDate(t)).toContain("Today at");
+        expect(formatRelativeDate(t)).toContain(format(t, "HH:mm"));
+    });
+
+    it("Same week", () => {
+        const t = new Date(now);
+        t.setDate(t.getDate() - 1);
+        expect(formatRelativeDate(t)).toContain(format(t, "EEEE"));
+        expect(formatRelativeDate(t)).toContain(format(t, "'at' HH:mm"));
+    });
+
+    it("Further ago than a week", () => {
+        const t = new Date(now);
+        t.setDate(t.getDate() - 10);
+        expect(formatRelativeDate(t)).toContain(format(t, "do MMMM yyyy"));
+        expect(formatRelativeDate(t)).toContain(format(t, "HH:mm"));
+    });
+
+    it("With leading zeros", () => {
+        const t = new Date("01 Jan 2000 00:00:00 GMT");
+        expect(formatRelativeDate(t)).toContain(format(t, "do MMMM yyyy"));
+        expect(formatRelativeDate(t)).toContain(format(t, "HH:mm"));
+    });
+});

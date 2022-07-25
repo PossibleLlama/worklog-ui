@@ -23,8 +23,7 @@
             "@page/*": ["./src/Pages/*"],
         },
         "types": [
-            "chai",
-            "mocha",
+            "jest",
         ],
     },
     "include": [

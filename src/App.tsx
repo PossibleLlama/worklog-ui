@@ -1,21 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import styled, { ThemeContext } from "styled-components";
+import React, { Fragment, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import { subDays } from "date-fns";
 
 import Worklist from "@page/Worklist/Worklist.page";
 import Header from "@view/Header/Header.view";
 
-import getWorklogByRange from "@api/getWorklogByRange/getWorklogByRange";
-
 import { Filter } from "@model/filter";
 import { Work } from "@model/work";
 
-const App: React.FC = () => {
-    const theme = useContext(ThemeContext);
+type Props = {
+    getWorklogs: (f: Filter) => Promise<Work[]>;
+};
 
+const App: React.FC<Props> = (props: Props) => {
     // Start with filter showing last 7 days
     const [filter, setFilter] = useState<Filter>({
         startDate: subDays(new Date(), 7),
@@ -25,15 +23,17 @@ const App: React.FC = () => {
 
     useEffect(() => {
         let mounted = true;
-        getWorklogByRange(filter)
+        props.getWorklogs(filter)
             .then((data) => {
                 if (mounted) {
                     setWork(data);
                 }
             });
-        return function cleanup() {
+        return () => {
             mounted = false;
         };
+    // Props is used to enable testing with the passed function, and should not change dynamically
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
 
     const updateFilters = (filter: Filter): void => {
@@ -41,33 +41,15 @@ const App: React.FC = () => {
     };
 
     return (
-        <Wrapper BackgroundColor={theme.background}>
-            <Router>
-                <Header updateFilters={updateFilters} currentFilters={filter} />
-                <Switch>
-                    <Route exact path="/" >
-                        <Worklist Worklist={work}/>
-                    </Route>
-                    <Route path="/timeline" >
-                        <Worklist Worklist={work}/>
-                    </Route>
-                    <Route path="/discover" >
-                        <h1>Coming soon</h1>
-                    </Route>
-                </Switch>
-            </Router>
-        </Wrapper>
+        <Fragment>
+            <Header updateFilters={updateFilters} currentFilters={filter} />
+            <Routes>
+                <Route path="/" element={<Worklist Worklist={work}/>} />
+                <Route path="/timeline" element={<Worklist Worklist={work}/>} />
+                <Route path="/discover" element={<h1>Coming soon</h1>} />
+            </Routes>
+        </Fragment>
     );
 };
-
-type ThemingProps = {
-    BackgroundColor: string;
-};
-
-const Wrapper = styled.div.attrs((props: ThemingProps) => props)`
-    height: 100%;
-    width: 100%;
-    background-color: ${props => props.BackgroundColor};
-`;
 
 export default App;

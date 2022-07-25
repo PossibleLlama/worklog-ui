@@ -5,8 +5,7 @@ import { format, formatRelative, isSameWeek } from "date-fns";
 import { Button } from "@zendeskgarden/react-buttons";
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
-
-import Octicon from "react-component-octicons";
+import { EyeIcon } from "@heroicons/react/solid";
 
 import { Work } from "@model/work";
 
@@ -31,7 +30,7 @@ const Preview: React.FC<Props> = (props: Props) => {
                     </Col>
                     <Col sm={2}>
                         <Button onClick={() => props.onLoadDetailed(props.work)}>
-                            <Octicon name="eye" />
+                            <EyeIcon className="h-5 w-5 text-gray-600" />
                         </Button>
                     </Col>
                 </Row>

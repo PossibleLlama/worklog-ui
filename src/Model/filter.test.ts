@@ -1,5 +1,3 @@
-import { expect } from "chai";
-
 import { isEqual } from "./filter";
 
 describe("Filter equals", () => {
@@ -8,7 +6,7 @@ describe("Filter equals", () => {
         const f1 = { startDate };
 
         it("Same filter", () => {
-            expect(isEqual(f1, f1)).true;
+            expect(isEqual(f1, f1)).toEqual(true);
         });
 
         describe("With other fields", () => {
@@ -17,7 +15,7 @@ describe("Filter equals", () => {
                     startDate,
                     endDate: new Date(2021, 2, 2, 13, 47),
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
     
             it("Has title", () => {
@@ -25,7 +23,7 @@ describe("Filter equals", () => {
                     startDate,
                     title: "foo",
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
     
             it("Has description", () => {
@@ -33,7 +31,7 @@ describe("Filter equals", () => {
                     startDate,
                     description: "foo",
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
     
             it("Has tags", () => {
@@ -41,7 +39,7 @@ describe("Filter equals", () => {
                     startDate,
                     tags: ["foo"],
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
         });
 
@@ -50,35 +48,35 @@ describe("Filter equals", () => {
                 const f2 = {
                     startDate: new Date(2020, 1, 1, 8, 35),
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
 
             it("Month", () => {
                 const f2 = {
                     startDate: new Date(2021, 2, 1, 8, 35),
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
 
             it("Day", () => {
                 const f2 = {
                     startDate: new Date(2021, 1, 2, 8, 35),
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
 
             it("Hour", () => {
                 const f2 = {
                     startDate: new Date(2021, 1, 1, 5, 35),
                 };
-                expect(isEqual(f1, f2)).true;
+                expect(isEqual(f1, f2)).toEqual(true);
             });
 
             it("Minute", () => {
                 const f2 = {
                     startDate: new Date(2021, 1, 1, 8, 22),
                 };
-                expect(isEqual(f1, f2)).true;
+                expect(isEqual(f1, f2)).toEqual(true);
             });
         });
     });
@@ -90,7 +88,7 @@ describe("Filter equals", () => {
         };
 
         it("Same filter", () => {
-            expect(isEqual(f1, f1)).true;
+            expect(isEqual(f1, f1)).toEqual(true);
         });
 
         describe("Different end date", () => {
@@ -99,7 +97,7 @@ describe("Filter equals", () => {
                     startDate,
                     endDate: new Date(2022, 2, 2, 13, 47),
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
 
             it("Month", () => {
@@ -107,7 +105,7 @@ describe("Filter equals", () => {
                     startDate,
                     endDate: new Date(2021, 3, 2, 13, 47),
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
 
             it("Day", () => {
@@ -115,7 +113,7 @@ describe("Filter equals", () => {
                     startDate,
                     endDate: new Date(2021, 2, 21, 13, 47),
                 };
-                expect(isEqual(f1, f2)).false;
+                expect(isEqual(f1, f2)).toEqual(false);
             });
 
             it("Hour", () => {
@@ -123,7 +121,7 @@ describe("Filter equals", () => {
                     startDate,
                     endDate: new Date(2021, 2, 2, 23, 47),
                 };
-                expect(isEqual(f1, f2)).true;
+                expect(isEqual(f1, f2)).toEqual(true);
             });
 
             it("Day", () => {
@@ -131,7 +129,7 @@ describe("Filter equals", () => {
                     startDate,
                     endDate: new Date(2021, 2, 2, 13, 18),
                 };
-                expect(isEqual(f1, f2)).true;
+                expect(isEqual(f1, f2)).toEqual(true);
             });
         });
     });
@@ -143,7 +141,7 @@ describe("Filter equals", () => {
         };
 
         it("Same filter", () => {
-            expect(isEqual(f1, f1)).true;
+            expect(isEqual(f1, f1)).toEqual(true);
         });
 
         it("Different title", () => {
@@ -151,7 +149,7 @@ describe("Filter equals", () => {
                 startDate,
                 title: "bar",
             };
-            expect(isEqual(f1, f2)).false;
+            expect(isEqual(f1, f2)).toEqual(false);
         });
 
         it("With other field", () => {
@@ -160,7 +158,7 @@ describe("Filter equals", () => {
                 title: "foo",
                 description: "bar",
             };
-            expect(isEqual(f1, f2)).false;
+            expect(isEqual(f1, f2)).toEqual(false);
         });
     });
 
@@ -171,7 +169,7 @@ describe("Filter equals", () => {
         };
 
         it("Same filter", () => {
-            expect(isEqual(f1, f1)).true;
+            expect(isEqual(f1, f1)).toEqual(true);
         });
 
         it("Different description", () => {
@@ -179,7 +177,7 @@ describe("Filter equals", () => {
                 startDate,
                 description: "bar",
             };
-            expect(isEqual(f1, f2)).false;
+            expect(isEqual(f1, f2)).toEqual(false);
         });
 
         it("With other field", () => {
@@ -188,7 +186,7 @@ describe("Filter equals", () => {
                 title: "bar",
                 description: "foo",
             };
-            expect(isEqual(f1, f2)).false;
+            expect(isEqual(f1, f2)).toEqual(false);
         });
     });
 
@@ -199,7 +197,7 @@ describe("Filter equals", () => {
         };
 
         it("Same filter", () => {
-            expect(isEqual(f1, f1)).true;
+            expect(isEqual(f1, f1)).toEqual(true);
         });
 
         it("Different tag", () => {
@@ -207,7 +205,7 @@ describe("Filter equals", () => {
                 startDate,
                 tags: ["foo", "buzz"],
             };
-            expect(isEqual(f1, f2)).false;
+            expect(isEqual(f1, f2)).toEqual(false);
         });
 
         it("Different order of tags", () => {
@@ -215,7 +213,7 @@ describe("Filter equals", () => {
                 startDate,
                 tags: ["bar", "foo"],
             };
-            expect(isEqual(f1, f2)).true;
+            expect(isEqual(f1, f2)).toEqual(true);
         });
 
         it("Different number of tags", () => {
@@ -223,7 +221,7 @@ describe("Filter equals", () => {
                 startDate,
                 tags: ["foo"],
             };
-            expect(isEqual(f1, f2)).false;
+            expect(isEqual(f1, f2)).toEqual(false);
         });
 
         it("With other field", () => {
@@ -232,7 +230,7 @@ describe("Filter equals", () => {
                 title: "bar",
                 tags: ["foo", "bar"],
             };
-            expect(isEqual(f1, f2)).false;
+            expect(isEqual(f1, f2)).toEqual(false);
         });
     });
 });

@@ -12,8 +12,7 @@ import { Button } from "@zendeskgarden/react-buttons";
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { Tag } from "@zendeskgarden/react-tags";
-
-import Octicon from "react-component-octicons";
+import { PencilIcon, XIcon } from "@heroicons/react/solid";
 
 import { Work } from "@model/work";
 
@@ -37,7 +36,7 @@ const Details: React.FC<Props> = (props: Props) => {
                     </Col>
                     <Col sm={1}>
                         <Button onClick={props.onClose} aria-label="close">
-                            <Octicon name="x" />
+                            <XIcon className="h-5 w-5 text-gray-600" />
                         </Button>
                     </Col>
                 </Row>
@@ -51,7 +50,7 @@ const Details: React.FC<Props> = (props: Props) => {
                 <Row>
                     <Col sm={11}>
                         {props.work.Tags && props.work.Tags.map((el, index) => {
-                            return (<Tag isPill key={index}>
+                            return (<Tag isPill key={index} className="m-1">
                                 {el}
                                 <Tag.Close onClick={() => {
                                     alert("TODO, remove tag");
@@ -61,7 +60,7 @@ const Details: React.FC<Props> = (props: Props) => {
                     </Col>
                     <Col sm={1}>
                         <Button aria-label="edit">
-                            <Octicon name="pencil" />
+                            <PencilIcon className="h-5 w-5 text-gray-600" />
                         </Button>
                     </Col>
                 </Row>
@@ -70,24 +69,24 @@ const Details: React.FC<Props> = (props: Props) => {
     );
 };
 
-const formatDateTime = (d: Date, dur?: number): string => {
-    return dur?
-        `${formatRelativeDate(d)}` :
-        `${formatRelativeDate(d)} for ${dur} minutes.`;
+export const formatDateTime = (d: Date, dur?: number): string => {
+    return dur && dur > 0?
+        `${formatRelativeDate(d)} for ${dur} minutes.` :
+        `${formatRelativeDate(d)}.`;
 };
 
-const formatRelativeDate = (d: Date): string => {
+export const formatRelativeDate = (d: Date): string => {
     const now = new Date();
     if (isSameMinute(d, now)) {
         return "A few seconds ago";
     } else if (isSameHour(d, now)) {
-        return `This hour at ${d.getHours()}:${d.getMinutes()}`;
+        return `This hour at ${format(d, "HH:mm")}`;
     } else if (isSameDay(d, now)) {
-        return `Today at ${d.getHours()}:${d.getMinutes()}`;
+        return `Today at ${format(d, "HH:mm")}`;
     } else if (isSameWeek(d, now)) {
-        return `${format(d, "EEEE")} at ${d.getHours()}:${d.getMinutes()}`;
+        return `${format(d, "EEEE")} at ${format(d, "HH:mm")}`;
     } else {
-        return format(d, "d MMMM yyyy HH:mm");
+        return format(d, "do MMMM yyyy HH:mm");
     }
 };
 

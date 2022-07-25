@@ -1,9 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import { ThemeContext } from "styled-components";
-
-import Container from "@component/Timeline/Container.component";
-import TimelineLine from "@component/Timeline/TimelineLine.component";
 import VerticalTimelineElement from "@component/Timeline/VerticalElement.component";
 
 import { Work } from "@model/work";
@@ -14,11 +10,8 @@ type Props = {
 };
 
 const Timeline: React.FC<Props> = (props: Props) => {
-    const theme = useContext(ThemeContext);
-
     return (
-        <Container>
-            <TimelineLine BackgroundColor={theme.primaryHue} />
+        <div className="">
             {props.Worklist.map((wl) => {
                 return (
                     <VerticalTimelineElement
@@ -27,7 +20,7 @@ const Timeline: React.FC<Props> = (props: Props) => {
                         onLoadDetailed={props.onLoadDetailed} />
                 );
             })}
-        </Container>
+        </div>
     );
 };
 
