@@ -32,8 +32,8 @@ const App: React.FC<Props> = (props: Props) => {
         return () => {
             mounted = false;
         };
-    // Props is used to enable testing with the passed function, and should not change dynamically
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // Props is used to enable testing with the passed function, and should not change dynamically
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
 
     const updateFilters = (filter: Filter): void => {
@@ -44,8 +44,8 @@ const App: React.FC<Props> = (props: Props) => {
         <Fragment>
             <Header updateFilters={updateFilters} currentFilters={filter} />
             <Routes>
-                <Route path="/" element={<Worklist Worklist={work}/>} />
-                <Route path="/timeline" element={<Worklist Worklist={work}/>} />
+                <Route path="/" element={<Worklist Worklist={work} />} />
+                <Route path="/timeline" element={<Worklist Worklist={work} />} />
                 <Route path="/discover" element={<h1>Coming soon</h1>} />
             </Routes>
         </Fragment>

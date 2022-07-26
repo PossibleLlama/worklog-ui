@@ -12,7 +12,7 @@ type Props = {
 const Detail: React.FC<Props> = (props: Props) => {
     return (
         <div className="">
-            <Details work={props.detail} onClose={props.onClose}/>
+            <Details work={props.detail} onClose={props.onClose} />
         </div>
     );
 };

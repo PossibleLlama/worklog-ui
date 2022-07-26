@@ -41,11 +41,11 @@ const Details: React.FC<Props> = (props: Props) => {
                     </Col>
                 </Row>
                 {props.work.Description &&
-                <Row>
-                    <Col sm={11}>
-                        <Paragraph>{props.work.Description}</Paragraph>
-                    </Col>
-                </Row>
+                    <Row>
+                        <Col sm={11}>
+                            <Paragraph>{props.work.Description}</Paragraph>
+                        </Col>
+                    </Row>
                 }
                 <Row>
                     <Col sm={11}>
@@ -70,7 +70,7 @@ const Details: React.FC<Props> = (props: Props) => {
 };
 
 export const formatDateTime = (d: Date, dur?: number): string => {
-    return dur && dur > 0?
+    return dur && dur > 0 ?
         `${formatRelativeDate(d)} for ${dur} minutes.` :
         `${formatRelativeDate(d)}.`;
 };

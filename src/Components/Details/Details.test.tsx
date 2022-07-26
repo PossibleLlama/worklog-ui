@@ -33,7 +33,7 @@ describe("App", () => {
 
         it("Has buttons", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk}/>
+                <Comp onClose={onCloseFn} work={wk} />
             );
 
             expect(screen.getAllByRole("button", { name: /close/i }));
@@ -43,7 +43,7 @@ describe("App", () => {
 
         it("Has fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk}/>
+                <Comp onClose={onCloseFn} work={wk} />
             );
 
             expect(screen.getByText(wk.Title));
@@ -52,7 +52,7 @@ describe("App", () => {
 
         it("Does not have fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk}/>
+                <Comp onClose={onCloseFn} work={wk} />
             );
 
             expect(screen.queryByText(wk.ID, { exact: false })).toBeNull();
@@ -60,7 +60,7 @@ describe("App", () => {
             expect(screen.queryByText(formatRelativeDate(wk.CreatedAt))).toBeNull();
         });
     });
-    
+
     describe("All fields - Absolute date", () => {
         const wk = {
             ID: "id",
@@ -76,7 +76,7 @@ describe("App", () => {
 
         it("Has fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk}/>
+                <Comp onClose={onCloseFn} work={wk} />
             );
 
             expect(screen.getByText(wk.Description));
@@ -88,7 +88,7 @@ describe("App", () => {
 
         it("Does not have fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk}/>
+                <Comp onClose={onCloseFn} work={wk} />
             );
 
             expect(screen.queryByText(wk.Author, { exact: false })).toBeNull();
@@ -111,7 +111,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
@@ -133,7 +133,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
@@ -155,7 +155,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
@@ -177,7 +177,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
@@ -199,7 +199,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
@@ -221,7 +221,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
@@ -243,7 +243,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
@@ -265,9 +265,9 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
-    
+
                 expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
             });
         });
@@ -287,7 +287,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
 
                 expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`));
@@ -309,9 +309,9 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk}/>
+                    <Comp onClose={onCloseFn} work={wk} />
                 );
-    
+
                 expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`));
             });
         });
@@ -358,7 +358,7 @@ describe("Format date time", () => {
             expect(formatDateTime(t, dur)).toEqual(`${format(t, "do MMMM yyyy HH:mm")}.`);
         });
     });
-    
+
 });
 
 describe("Format relative date", () => {
