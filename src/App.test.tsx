@@ -28,7 +28,6 @@ describe("App", () => {
         await waitFor(() => expect(mockGetWorklogs).toHaveBeenCalledTimes(1));
 
         expect(screen.getByText(/Worklog/));
-        expect(screen.getByText(/A productivity app/));
         expect(screen.getByRole("button", { name: "Filter" }));
         expect(screen.getByRole("button", { name: "Timeline" }));
         expect(screen.getByRole("button", { name: "Discover" }));
