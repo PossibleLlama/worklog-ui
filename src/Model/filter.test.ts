@@ -17,7 +17,7 @@ describe("Filter equals", () => {
                 };
                 expect(isEqual(f1, f2)).toEqual(false);
             });
-    
+
             it("Has title", () => {
                 const f2 = {
                     startDate,
@@ -25,7 +25,7 @@ describe("Filter equals", () => {
                 };
                 expect(isEqual(f1, f2)).toEqual(false);
             });
-    
+
             it("Has description", () => {
                 const f2 = {
                     startDate,
@@ -33,7 +33,7 @@ describe("Filter equals", () => {
                 };
                 expect(isEqual(f1, f2)).toEqual(false);
             });
-    
+
             it("Has tags", () => {
                 const f2 = {
                     startDate,

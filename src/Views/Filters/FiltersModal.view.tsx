@@ -31,8 +31,8 @@ const Modal: React.FC<Props> = (props: Props) => {
                         endValue={endDate ? endDate : new Date()}
                         maxValue={new Date()}
                         onChange={(event: {
-                                startValue?: Date;
-                                endValue?: Date;
+                            startValue?: Date;
+                            endValue?: Date;
                         }) => {
                             if (event.startValue) {
                                 isBefore(event.startValue, endDate) ? setStartDate(event.startValue) : setEndDate(event.startValue);

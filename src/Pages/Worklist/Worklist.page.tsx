@@ -37,14 +37,14 @@ const Worklist: React.FC<Props> = (props: Props) => {
                 </Button>
             </div>
             {!detailedWork && !isTableView &&
-                <Timeline Worklist={props.Worklist} onLoadDetailed={loadDetailed}/>
+                <Timeline Worklist={props.Worklist} onLoadDetailed={loadDetailed} />
             }
             {!detailedWork && isTableView &&
-                <Table Worklist={props.Worklist}/>
+                <Table Worklist={props.Worklist} />
             }
 
             {detailedWork &&
-                <Details work={detailedWork} onClose={removeDetailed}/>
+                <Details work={detailedWork} onClose={removeDetailed} />
             }
         </div>
     );

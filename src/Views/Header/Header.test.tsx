@@ -28,26 +28,26 @@ describe("Header", () => {
         render(
             <BrowserRouter>
                 <ToastProvider>
-                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter}/>
+                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
                 </ToastProvider>
             </BrowserRouter>
         );
 
         expect(screen.getByText("Worklog"));
         expect(screen.getByText("Home"));
-        expect(screen.getByRole("button", {name: /Worklog/}));
+        expect(screen.getByRole("button", { name: /Worklog/ }));
     });
 
     it("Renders filter", () => {
         render(
             <BrowserRouter>
                 <ToastProvider>
-                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter}/>
+                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
                 </ToastProvider>
             </BrowserRouter>
         );
 
-        expect(screen.getByRole("button", {name: "Filter"}));
+        expect(screen.getByRole("button", { name: "Filter" }));
         // Check the modal itself isn't visible
         expect(screen.queryByText("Set filters")).toBeNull();
     });
@@ -56,12 +56,12 @@ describe("Header", () => {
         render(
             <BrowserRouter>
                 <ToastProvider>
-                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter}/>
+                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
                 </ToastProvider>
             </BrowserRouter>
         );
 
-        expect(screen.getByRole("button", {name: "Timeline"}));
-        expect(screen.getByRole("button", {name: "Discover"}));
+        expect(screen.getByRole("button", { name: "Timeline" }));
+        expect(screen.getByRole("button", { name: "Discover" }));
     });
 });

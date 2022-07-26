@@ -5,11 +5,13 @@ import React from "react";
 
 import Comp from "./SidebarIcon.component";
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 const children = "foo";
 const tooltip = "bar";
 
+// Note: tests don't make use of tailwind, so the hover directives won't work
+// This kind of verification should be done at the integration/e2e test level 
 describe("SidebarIcon", () => {
     it("Renders children", () => {
         render(
@@ -19,13 +21,9 @@ describe("SidebarIcon", () => {
         );
 
         expect(screen.getByText(children));
-        expect(screen.queryByText(tooltip, { exact: false })).toBeNull();
-        
-        fireEvent.mouseOver(screen.getByText(children));
-        expect(screen.queryByText(tooltip, { exact: false })).toBeNull();
     });
 
-    it("Renders tooltip on hover", () => {
+    it("Renders tooltip", () => {
         render(
             <Comp tooltipText={tooltip}>
                 {children}
@@ -33,7 +31,6 @@ describe("SidebarIcon", () => {
         );
 
         expect(screen.getByText(children));
-        fireEvent.mouseOver(screen.getByText(children));
-        expect(screen.getByText(tooltip, { exact: false }));
+        expect(screen.getByText(tooltip));
     });
 });
