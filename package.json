@@ -55,6 +55,7 @@
     "@zendeskgarden/react-theming": "^8.53.0",
     "@zendeskgarden/react-typography": "^8.53.0",
     "autoprefixer": "^10.4.7",
+    "cssnano": "^5.1.12",
     "eslint": "^8.20.0",
     "eslint-plugin-jsx-a11y": "^6.6.0",
     "eslint-plugin-react": "^7.30.1",
