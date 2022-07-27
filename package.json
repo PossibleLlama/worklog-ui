@@ -1,6 +1,6 @@
 {
   "name": "worklog-ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "UI for discovering trends on what you have been doing. Part of the worklog project.",
   "scripts": {
     "start": "vite --port 3000",
