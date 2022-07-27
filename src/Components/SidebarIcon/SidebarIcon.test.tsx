@@ -6,6 +6,7 @@ import React from "react";
 import Comp from "./SidebarIcon.component";
 
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 const children = "foo";
 const tooltip = "bar";
@@ -20,7 +21,7 @@ describe("SidebarIcon", () => {
             </Comp>
         );
 
-        expect(screen.getByText(children));
+        expect(screen.getByText(children)).toBeInTheDocument();
     });
 
     it("Renders tooltip", () => {
@@ -30,7 +31,7 @@ describe("SidebarIcon", () => {
             </Comp>
         );
 
-        expect(screen.getByText(children));
-        expect(screen.getByText(tooltip));
+        expect(screen.getByText(children)).toBeInTheDocument();
+        expect(screen.getByText(tooltip)).toBeInTheDocument();
     });
 });
