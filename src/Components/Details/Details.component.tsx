@@ -6,7 +6,7 @@ import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { Tag } from "@zendeskgarden/react-tags";
 import { PencilIcon, XIcon } from "@heroicons/react/solid";
 
-import { formatDateTime } from "@helper/date";
+import { formatRelativeDateTimeDuration } from "@helper/date";
 import { Work } from "@model/work";
 
 type Props = {
@@ -24,7 +24,7 @@ const Details: React.FC<Props> = (props: Props) => {
                     </Col>
                     <Col sm={4}>
                         <Paragraph>
-                            {formatDateTime(props.work.When, props.work.Duration)}
+                            {formatRelativeDateTimeDuration(props.work.When, props.work.Duration)}
                         </Paragraph>
                     </Col>
                     <Col sm={1}>

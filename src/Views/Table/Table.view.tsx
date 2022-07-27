@@ -2,7 +2,7 @@ import React from "react";
 
 import { Work } from "@model/work";
 
-import { format } from "date-fns";
+import { formatRelativeDateTime } from "@helper/date";
 
 type Props = {
     Worklist: Work[],
@@ -42,7 +42,7 @@ const Table: React.FC<Props> = (props: Props) => {
                                     {wl.Title}
                                 </td>
                                 <td className="text-gray-900 px-6 py-4 whitespace-nowrap">
-                                    {format(wl.When, "do MMMM yyyy HH:mm")}
+                                    {formatRelativeDateTime(wl.When)}
                                 </td>
                                 <td className="text-gray-900 px-6 py-4 whitespace-nowrap">
                                     {wl.Duration}

@@ -1,13 +1,12 @@
 import React from "react";
 
-import { format, formatRelative, isSameWeek } from "date-fns";
-
 import { Button } from "@zendeskgarden/react-buttons";
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { EyeIcon } from "@heroicons/react/solid";
 
 import { Work } from "@model/work";
+import { formatRelativeDateTime } from "@helper/date";
 
 type Props = {
     work: Work,
@@ -23,9 +22,7 @@ const Preview: React.FC<Props> = (props: Props) => {
                         <Title>{props.work.Title}</Title>
                     </Col>
                     <Col sm={5}>
-                        <Paragraph>{isSameWeek(new Date(), props.work.When) ?
-                            formatRelative(props.work.When, new Date()) :
-                            format(props.work.When, "d MMMM yyyy")}
+                        <Paragraph>{formatRelativeDateTime(props.work.When)}
                         </Paragraph>
                     </Col>
                     <Col sm={2}>

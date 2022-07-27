@@ -5,9 +5,8 @@ import { DatepickerRange } from "@zendeskgarden/react-datepickers";
 import { Field, Label, Input, Hint, Textarea } from "@zendeskgarden/react-forms";
 import { Modal as ZenModal, Header, Body, Footer, FooterItem, Close } from "@zendeskgarden/react-modals";
 
-import { isBefore } from "date-fns";
-
 import { Filter } from "@model/filter";
+import { isBefore } from "@helper/date";
 
 type Props = {
     onClose: (filter: Filter) => void,

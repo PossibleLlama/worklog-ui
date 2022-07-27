@@ -7,7 +7,7 @@ import { subYears, subMonths, subWeeks, subDays, subHours, subMinutes, subSecond
 import Comp from "./Details.component";
 
 import { render, screen } from "@testing-library/react";
-import { formatDateTime, formatRelativeDate } from "@helper/date";
+import { formatRelativeDateTimeDuration, formatRelativeDateTime } from "@helper/date";
 
 describe("App", () => {
     let onCloseCalled = 0;
@@ -48,7 +48,7 @@ describe("App", () => {
             );
 
             expect(screen.getByText(wk.Title));
-            expect(screen.getByText(`${formatDateTime(wk.When)}`));
+            expect(screen.getByText(`${formatRelativeDateTimeDuration(wk.When)}`));
         });
 
         it("Does not have fields", () => {
@@ -58,7 +58,7 @@ describe("App", () => {
 
             expect(screen.queryByText(wk.ID, { exact: false })).toBeNull();
             expect(screen.queryByText(wk.Revision, { exact: false })).toBeNull();
-            expect(screen.queryByText(formatRelativeDate(wk.CreatedAt))).toBeNull();
+            expect(screen.queryByText(formatRelativeDateTime(wk.CreatedAt))).toBeNull();
         });
     });
 
@@ -81,7 +81,7 @@ describe("App", () => {
             );
 
             expect(screen.getByText(wk.Description));
-            expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+            expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             wk.Tags.forEach(e => {
                 expect(screen.getByText(e, { exact: false }));
             });
@@ -115,7 +115,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 
@@ -137,7 +137,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 
@@ -159,7 +159,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 
@@ -181,7 +181,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 
@@ -203,7 +203,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 
@@ -225,7 +225,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 
@@ -247,7 +247,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 
@@ -269,7 +269,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatDateTime(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
             });
         });
 

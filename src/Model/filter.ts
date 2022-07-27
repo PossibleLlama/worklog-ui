@@ -1,4 +1,4 @@
-import { isSameDay, isSameMonth, isSameYear } from "date-fns";
+import { dateEqual } from "@helper/date";
 
 export interface Filter {
     startDate: Date,
@@ -37,18 +37,6 @@ export const isEqual = (value: Filter, compare: Filter): boolean => {
         }
     }
     return true;
-};
-
-const dateEqual = (value: Date, compare: Date): boolean => {
-    if (!isSameYear(value, compare)) {
-        return false;
-    } else if (!isSameMonth(value, compare)) {
-        return false;
-    } else if (!isSameDay(value, compare)) {
-        return false;
-    } else {
-        return true;
-    }
 };
 
 const arrayEquals = (value: string[], compare: string[]): boolean => {
