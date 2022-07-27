@@ -7,6 +7,7 @@ export default {
         "^@model(.*)$": "<rootDir>/src/Model/$1",
         "^@component(.*)$": "<rootDir>/src/Components/$1",
         "^@view(.*)$": "<rootDir>/src/Views/$1",
-        "^@page(.*)$": "<rootDir>/src/Pages/$1"
+        "^@page(.*)$": "<rootDir>/src/Pages/$1",
+        "^@helper(.*)$": "<rootDir>/src/Helpers/$1",
     }
 }

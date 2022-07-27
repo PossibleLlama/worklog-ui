@@ -21,6 +21,7 @@
             "@component/*": ["./src/Components/*"],
             "@view/*": ["./src/Views/*"],
             "@page/*": ["./src/Pages/*"],
+            "@helper/*": ["./src/Helpers/*"],
         },
         "types": [
             "jest",
