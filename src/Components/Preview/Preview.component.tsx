@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Button } from "@zendeskgarden/react-buttons";
+import Button from "@component/Button/Button.component";
+
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { EyeIcon } from "@heroicons/react/solid";
@@ -26,8 +27,8 @@ const Preview: React.FC<Props> = (props: Props) => {
                         </Paragraph>
                     </Col>
                     <Col sm={2}>
-                        <Button onClick={() => props.onLoadDetailed(props.work)}>
-                            <EyeIcon className="h-5 w-5 text-gray-600" />
+                        <Button onClick={() => props.onLoadDetailed(props.work)} label="Open">
+                            <EyeIcon className="h-5 w-5" />
                         </Button>
                     </Col>
                 </Row>
