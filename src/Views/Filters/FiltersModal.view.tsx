@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button } from "@zendeskgarden/react-buttons";
+import Button from "@component/Button/Button.component";
 import { DatepickerRange } from "@zendeskgarden/react-datepickers";
 import { Field, Label, Input, Hint, Textarea } from "@zendeskgarden/react-forms";
 import { Modal as ZenModal, Header, Body, Footer, FooterItem, Close } from "@zendeskgarden/react-modals";
@@ -98,7 +98,7 @@ const Modal: React.FC<Props> = (props: Props) => {
             </Body>
             <Footer>
                 <FooterItem>
-                    <Button isBasic onClick={() => props.onClose(props.initalFilters)}>
+                    <Button isBasic onClick={() => props.onClose(props.initalFilters)} label="Cancel">
                         Cancel
                     </Button>
                 </FooterItem>
@@ -109,7 +109,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                         title: title.trim(),
                         description: description.trim(),
                         tags: tags.split(",").map(e => e.trim()),
-                    })}>
+                    })} label="Confirm">
                         Confirm
                     </Button>
                 </FooterItem>

@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Button } from "@zendeskgarden/react-buttons";
+import Button from "@component/Button/Button.component";
+
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { Tag } from "@zendeskgarden/react-tags";
@@ -11,7 +12,7 @@ import { Work } from "@model/work";
 
 type Props = {
     work: Work,
-    onClose: () => void;
+    onClose: () => void,
 };
 
 const Details: React.FC<Props> = (props: Props) => {
@@ -28,8 +29,8 @@ const Details: React.FC<Props> = (props: Props) => {
                         </Paragraph>
                     </Col>
                     <Col sm={1}>
-                        <Button onClick={props.onClose} aria-label="close">
-                            <XIcon className="h-5 w-5 text-gray-600" />
+                        <Button onClick={props.onClose} label="close">
+                            <XIcon className="h-5 w-5" />
                         </Button>
                     </Col>
                 </Row>
@@ -52,8 +53,10 @@ const Details: React.FC<Props> = (props: Props) => {
                         })}
                     </Col>
                     <Col sm={1}>
-                        <Button aria-label="edit">
-                            <PencilIcon className="h-5 w-5 text-gray-600" />
+                        <Button onClick={() => {
+                            alert("TODO, edit work");
+                        }} label="edit">
+                            <PencilIcon className="h-5 w-5" />
                         </Button>
                     </Col>
                 </Row>
