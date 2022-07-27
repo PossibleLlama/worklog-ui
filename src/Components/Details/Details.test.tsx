@@ -6,8 +6,10 @@ import { subYears, subMonths, subWeeks, subDays, subHours, subMinutes, subSecond
 
 import Comp from "./Details.component";
 
-import { render, screen } from "@testing-library/react";
 import { formatRelativeDateTimeDuration, formatRelativeDateTime } from "@helper/date";
+
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 describe("App", () => {
     let onCloseCalled = 0;
@@ -37,8 +39,8 @@ describe("App", () => {
                 <Comp onClose={onCloseFn} work={wk} />
             );
 
-            expect(screen.getAllByRole("button", { name: /close/i }));
-            expect(screen.getByRole("button", { name: /edit/i }));
+            expect(screen.getByLabelText("close", { selector: "button" })).toBeInTheDocument();
+            expect(screen.getByLabelText("edit", { selector: "button" })).toBeInTheDocument();
             expect(onCloseCalled).toEqual(0);
         });
 
@@ -47,8 +49,8 @@ describe("App", () => {
                 <Comp onClose={onCloseFn} work={wk} />
             );
 
-            expect(screen.getByText(wk.Title));
-            expect(screen.getByText(`${formatRelativeDateTimeDuration(wk.When)}`));
+            expect(screen.getByText(wk.Title)).toBeInTheDocument();
+            expect(screen.getByText(`${formatRelativeDateTimeDuration(wk.When)}`)).toBeInTheDocument();
         });
 
         it("Does not have fields", () => {
@@ -80,10 +82,10 @@ describe("App", () => {
                 <Comp onClose={onCloseFn} work={wk} />
             );
 
-            expect(screen.getByText(wk.Description));
-            expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+            expect(screen.getByText(wk.Description)).toBeInTheDocument();
+            expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             wk.Tags.forEach(e => {
-                expect(screen.getByText(e, { exact: false }));
+                expect(screen.getByText(e, { exact: false })).toBeInTheDocument();
             });
         });
 
@@ -115,7 +117,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -137,7 +139,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -159,7 +161,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -181,7 +183,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -203,7 +205,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -225,7 +227,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -247,7 +249,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -269,7 +271,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration)));
+                expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
             });
         });
 
@@ -291,7 +293,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`));
+                expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`)).toBeInTheDocument();
             });
         });
 
@@ -313,7 +315,7 @@ describe("App", () => {
                     <Comp onClose={onCloseFn} work={wk} />
                 );
 
-                expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`));
+                expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`)).toBeInTheDocument();
             });
         });
     });

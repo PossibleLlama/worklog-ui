@@ -11,6 +11,7 @@ import Comp from "./Header.view";
 import { Filter } from "@model/filter";
 
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 const updateFilterCallback = jest.fn();
 const startFilter: Filter = {
@@ -33,9 +34,9 @@ describe("Header", () => {
             </BrowserRouter>
         );
 
-        expect(screen.getByText("Worklog"));
-        expect(screen.getByText("Home"));
-        expect(screen.getByRole("button", { name: /Worklog/ }));
+        expect(screen.getByText("Worklog")).toBeInTheDocument();
+        expect(screen.getByText("Home")).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: /Worklog/ })).toBeInTheDocument();
     });
 
     it("Renders filter", () => {
@@ -47,7 +48,7 @@ describe("Header", () => {
             </BrowserRouter>
         );
 
-        expect(screen.getByRole("button", { name: "Filter" }));
+        expect(screen.getByRole("button", { name: "Filter" })).toBeInTheDocument();
         // Check the modal itself isn't visible
         expect(screen.queryByText("Set filters")).toBeNull();
     });
@@ -61,7 +62,7 @@ describe("Header", () => {
             </BrowserRouter>
         );
 
-        expect(screen.getByRole("button", { name: "Timeline" }));
-        expect(screen.getByRole("button", { name: "Discover" }));
+        expect(screen.getByRole("button", { name: "Timeline" })).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: "Discover" })).toBeInTheDocument();
     });
 });
