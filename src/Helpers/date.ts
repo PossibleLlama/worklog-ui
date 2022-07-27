@@ -45,7 +45,7 @@ export const dateEqual = (value: Date, compare: Date): boolean => {
 };
 
 export const formatRFC3339DateTime = (d: Date): string => {
-    return format(d, "dd-MM-yyyy'T'HH:mm:ss");
+    return format(d, "yyyy-MM-dd'T'HH:mm:ss");
 };
 
 export const subDays = (d: Date, amount: number): Date => {

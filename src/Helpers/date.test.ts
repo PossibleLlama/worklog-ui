@@ -1,18 +1,28 @@
 import { format } from "date-fns";
-import { formatRelativeDateTimeDuration, formatRelativeDateTime } from "./date";
+import {
+    dateEqual,
+    formatRelativeDateTimeDuration,
+    formatRelativeDateTime,
+    formatRFC3339DateTime,
+    subDays,
+    isBefore
+} from "./date";
 
-describe("Format date time", () => {
+describe("Format relative date time duration", () => {
     const now = new Date();
 
-    it("Further ago than a week without duration", () => {
-        const t = new Date(now);
-        t.setDate(t.getDate() - 10);
-        expect(formatRelativeDateTimeDuration(t)).toContain(format(t, "do MMMM yyyy"));
-        expect(formatRelativeDateTimeDuration(t)).toContain(format(t, "HH:mm"));
-        expect(formatRelativeDateTimeDuration(t)).toEqual(format(t, "do MMMM yyyy HH:mm."));
+    describe("Without duration", () => {
+        // Most cases are covered by the call to format relative date time
+        it("Further ago than a week without duration", () => {
+            const t = new Date(now);
+            t.setDate(t.getDate() - 10);
+            expect(formatRelativeDateTimeDuration(t)).toContain(format(t, "do MMMM yyyy"));
+            expect(formatRelativeDateTimeDuration(t)).toContain(format(t, "HH:mm"));
+            expect(formatRelativeDateTimeDuration(t)).toEqual(format(t, "do MMMM yyyy HH:mm."));
+        });
     });
 
-    describe("Including duration", () => {
+    describe("With duration", () => {
         it("Further ago than a week with a positive duration", () => {
             const t = new Date(now);
             const dur = 60;
@@ -43,7 +53,7 @@ describe("Format date time", () => {
     });
 });
 
-describe("Format relative date", () => {
+describe("Format relative date time", () => {
     const now = new Date();
 
     it("Same minute", () => {
@@ -79,10 +89,137 @@ describe("Format relative date", () => {
         expect(formatRelativeDateTime(t)).toContain(format(t, "do MMMM yyyy"));
         expect(formatRelativeDateTime(t)).toContain(format(t, "HH:mm"));
     });
+});
 
-    it("With leading zeros", () => {
-        const t = new Date("01 Jan 2000 00:00:00 GMT");
-        expect(formatRelativeDateTime(t)).toContain(format(t, "do MMMM yyyy"));
-        expect(formatRelativeDateTime(t)).toContain(format(t, "HH:mm"));
+// NOTE: this is equal DATE, not time
+describe("Date equal", () => {
+    const comparitor = new Date("2020-04-16T22:48:31");
+
+    it("Same instance", () => {
+        expect(dateEqual(comparitor, comparitor)).toEqual(true);
+    });
+
+    it("Same date time", () => {
+        expect(dateEqual(new Date("2020-04-16T22:48:31"), comparitor)).toEqual(true);
+    });
+
+    it("Different second", () => {
+        expect(dateEqual(new Date("2020-04-16T22:48:30"), comparitor)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T22:48:32"), comparitor)).toEqual(true);
+    });
+
+    it("Different minute", () => {
+        expect(dateEqual(new Date("2020-04-16T22:47:31"), comparitor)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T22:49:31"), comparitor)).toEqual(true);
+    });
+
+    it("Different hour", () => {
+        expect(dateEqual(new Date("2020-04-16T21:48:31"), comparitor)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T23:48:31"), comparitor)).toEqual(true);
+    });
+
+    it("Different day", () => {
+        expect(dateEqual(new Date("2020-04-15T22:48:31"), comparitor)).toEqual(false);
+        expect(dateEqual(new Date("2020-04-17T22:48:31"), comparitor)).toEqual(false);
+    });
+
+    it("Different month", () => {
+        expect(dateEqual(new Date("2020-03-16T22:48:31"), comparitor)).toEqual(false);
+        expect(dateEqual(new Date("2020-05-16T22:48:31"), comparitor)).toEqual(false);
+    });
+
+    it("Different year", () => {
+        expect(dateEqual(new Date("2019-04-16T22:48:31"), comparitor)).toEqual(false);
+        expect(dateEqual(new Date("2021-04-16T22:48:31"), comparitor)).toEqual(false);
+    });
+});
+
+describe("Format RFC3339 Date time", () => {
+    const t = new Date("2020-04-16T22:48:31");
+
+    it("Has year, month, day", () => {
+        expect(formatRFC3339DateTime(t)).toContain("2020-04-16");
+    });
+
+    it("Has hour, minute, second", () => {
+        expect(formatRFC3339DateTime(t)).toContain("22:48:31");
+    });
+
+    it("Full string, includes 'T'", () => {
+        expect(formatRFC3339DateTime(t)).toContain("2020-04-16T22:48:31");
+    });
+});
+
+describe("Sub days", () => {
+    const t = new Date("2020-04-16T22:48:31");
+
+    it("Stays the same", () => {
+        expect(subDays(t, 0)).toEqual(new Date("2020-04-16T22:48:31"));
+    });
+
+    it("Remove day", () => {
+        expect(subDays(t, 1)).toEqual(new Date("2020-04-15T22:48:31"));
+    });
+
+    it("Remove 7 days", () => {
+        expect(subDays(t, 7)).toEqual(new Date("2020-04-09T22:48:31"));
+    });
+
+    it("Remove 31 days", () => {
+        expect(subDays(t, 31)).toEqual(new Date("2020-03-16T22:48:31"));
+    });
+
+    it("Negative day", () => {
+        expect(subDays(t, -1)).toEqual(new Date("2020-04-17T22:48:31"));
+    });
+
+    it("Negative 7 days", () => {
+        expect(subDays(t, -7)).toEqual(new Date("2020-04-23T22:48:31"));
+    });
+
+    it("Negative 30 days", () => {
+        expect(subDays(t, -30)).toEqual(new Date("2020-05-16T22:48:31"));
+    });
+});
+
+describe("Is before", () => {
+    const t = new Date("2020-04-16T22:48:31");
+
+    it("Same instance", () => {
+        expect(isBefore(t, t)).toEqual(false);
+    });
+
+    it("Same date time", () => {
+        expect(isBefore(new Date("2020-04-16T22:48:31"), t)).toEqual(false);
+    });
+
+    it("Different second", () => {
+        expect(isBefore(new Date("2020-04-16T22:48:30"), t)).toEqual(true);
+        expect(isBefore(new Date("2020-04-16T22:48:32"), t)).toEqual(false);
+    });
+
+    it("Different minute", () => {
+        expect(isBefore(new Date("2020-04-16T22:47:31"), t)).toEqual(true);
+        expect(isBefore(new Date("2020-04-16T22:49:31"), t)).toEqual(false);
+    });
+
+    it("Different hour", () => {
+        expect(isBefore(new Date("2020-04-16T21:48:31"), t)).toEqual(true);
+        expect(isBefore(new Date("2020-04-16T23:48:31"), t)).toEqual(false);
+    });
+
+    it("Different day", () => {
+        expect(isBefore(new Date("2020-04-15T22:48:31"), t)).toEqual(true);
+        expect(isBefore(new Date("2020-04-17T22:48:31"), t)).toEqual(false);
+    });
+
+    it("Different month", () => {
+        expect(isBefore(new Date("2020-03-16T22:48:31"), t)).toEqual(true);
+        expect(isBefore(new Date("2020-05-16T22:48:31"), t)).toEqual(false);
+    });
+
+    it("Different year", () => {
+        expect(isBefore(new Date("2019-04-16T22:48:31"), t)).toEqual(true);
+        expect(isBefore(new Date("2021-04-16T22:48:31"), t)).toEqual(false);
     });
 });
