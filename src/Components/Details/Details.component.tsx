@@ -1,10 +1,10 @@
 import React from "react";
 
 import Button from "@component/Button/Button.component";
+import Tag from "@component/Tags/Tags.component";
 
 import { Grid, Row, Col } from "@zendeskgarden/react-grid";
 import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
-import { Tag } from "@zendeskgarden/react-tags";
 import { PencilIcon, XIcon } from "@heroicons/react/solid";
 
 import { formatRelativeDateTimeDuration } from "@helper/date";
@@ -44,11 +44,10 @@ const Details: React.FC<Props> = (props: Props) => {
                 <Row>
                     <Col sm={11}>
                         {props.work.Tags && props.work.Tags.map((el, index) => {
-                            return (<Tag isPill key={index} className="m-1">
+                            return (<Tag key={index} onClose={() => {
+                                alert("TODO, remove tag");
+                            }} >
                                 {el}
-                                <Tag.Close onClick={() => {
-                                    alert("TODO, remove tag");
-                                }} />
                             </Tag>);
                         })}
                     </Col>
