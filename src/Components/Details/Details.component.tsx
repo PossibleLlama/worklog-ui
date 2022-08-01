@@ -24,9 +24,11 @@ const Details: React.FC<Props> = (props: Props) => {
                     <p className="text-base subheading w-1/3" >
                         {formatRelativeDateTimeDuration(props.work.When, props.work.Duration)}
                     </p>
-                    <Button onClick={props.onClose} label="close" >
-                        <XIcon className="h-5 w-5" />
-                    </Button>
+                    <div className="w-5 h-5" >
+                        <Button onClick={props.onClose} label="close" >
+                            <XIcon className="h-5 w-5" />
+                        </Button>
+                    </div>
                 </div>
                 {props.work.Description &&
                     <p className="max-w-prose text-base bodytext">{props.work.Description}</p>
@@ -41,11 +43,13 @@ const Details: React.FC<Props> = (props: Props) => {
                             </Tag>);
                         })}
                     </div>
-                    <Button onClick={() => {
-                        alert("TODO, edit work");
-                    }} label="edit" >
-                        <PencilIcon className="h-5 w-5" />
-                    </Button>
+                    <div className="w-5 h-5" >
+                        <Button onClick={() => {
+                            alert("TODO, edit work");
+                        }} label="edit" >
+                            <PencilIcon className="h-5 w-5" />
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>
