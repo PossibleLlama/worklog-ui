@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import Button from "@component/Button/Button.component";
 import { DatepickerRange } from "@zendeskgarden/react-datepickers";
-import { Field, Label, Input, Hint, Textarea } from "@zendeskgarden/react-forms";
-import { Modal as ZenModal, Header, Body, Footer, FooterItem, Close } from "@zendeskgarden/react-modals";
+import { Field, Label, Input } from "@zendeskgarden/react-forms";
+import { Modal as ZenModal, Close } from "@zendeskgarden/react-modals";
 
 import { Filter } from "@model/filter";
 import { isBefore } from "@helper/date";
@@ -22,9 +22,11 @@ const Modal: React.FC<Props> = (props: Props) => {
 
     return (
         <ZenModal isLarge onClose={() => props.onClose(props.initalFilters)}>
-            <Header>Set filters</Header>
-            <Body>
+            <div className="flex w-5/6 mx-12" >
                 <form>
+                    <h2 className="heading font-semibold mt-4" >
+                        Set filters
+                    </h2>
                     <DatepickerRange
                         startValue={startDate}
                         endValue={endDate ? endDate : new Date()}
@@ -59,62 +61,56 @@ const Modal: React.FC<Props> = (props: Props) => {
                         </div>
                         <DatepickerRange.Calendar />
                     </DatepickerRange>
-                    <div className="pt-8">
-                        <Field>
-                            <Label>Title</Label>
-                            <Input placeholder="Title" value={title}
-                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                    setTitle(event.currentTarget.value);
-                                }}
-                            />
-                        </Field>
-                    </div>
-                    <div className="pt-8">
-                        <Field>
-                            <Label>Description</Label>
-                            <Textarea
-                                minRows={2}
-                                maxRows={12}
-                                placeholder="Description"
-                                value={description}
-                                onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
-                                    setDescription(event.currentTarget.value);
-                                }}
-                            />
-                        </Field>
-                    </div>
-                    <div className="pt-8">
-                        <Field>
-                            <Label>Tags</Label>
-                            <Hint>Comma seperated list of values</Hint>
-                            <Input placeholder="Tags" value={tags}
-                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                    setTags(event.currentTarget.value);
-                                }}
-                            />
-                        </Field>
+                    <hr className="border-0 my-4" />
+                    <label htmlFor="title" className="heading font-semibold" >
+                        Title
+                    </label>
+                    <input type="text" id="title" placeholder="Title" value={title}
+                        onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                            setTitle(event.currentTarget.value);
+                        }}
+                        className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                    />
+                    <label htmlFor="description" className="heading font-semibold" >
+                        Description
+                    </label>
+                    <textarea id="description" placeholder="Description" value={description}
+                        onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
+                            setDescription(event.currentTarget.value);
+                        }}
+                        className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                        rows={2}
+                    />
+                    <label htmlFor="tags" className="heading font-semibold" >
+                        Tags
+                    </label>
+                    <p className="subheading text-sm" >
+                        Comma seperated list of values
+                    </p>
+                    <input type="text" id="tags" placeholder="Tags" value={tags}
+                        onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                            setTags(event.currentTarget.value);
+                        }}
+                        className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                    />
+                    <hr className="border-0 my-4" />
+                    <div className="flex my-4">
+                        <Button isBasic onClick={() => props.onClose(props.initalFilters)} label="Cancel" className="mr-2" >
+                            Cancel
+                        </Button>
+                        <Button isPrimary onClick={() => props.onClose({
+                            startDate,
+                            endDate,
+                            title: title.trim(),
+                            description: description.trim(),
+                            tags: tags.split(",").map(e => e.trim()),
+                        })} label="Confirm">
+                            Confirm
+                        </Button>
                     </div>
                 </form>
-            </Body>
-            <Footer>
-                <FooterItem>
-                    <Button isBasic onClick={() => props.onClose(props.initalFilters)} label="Cancel">
-                        Cancel
-                    </Button>
-                </FooterItem>
-                <FooterItem>
-                    <Button isPrimary onClick={() => props.onClose({
-                        startDate,
-                        endDate,
-                        title: title.trim(),
-                        description: description.trim(),
-                        tags: tags.split(",").map(e => e.trim()),
-                    })} label="Confirm">
-                        Confirm
-                    </Button>
-                </FooterItem>
-            </Footer>
-            <Close aria-label="Close modal" />
+                <Close aria-label="Close modal" />
+            </div>
         </ZenModal>
     );
 };
