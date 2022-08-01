@@ -23,4 +23,19 @@
         text-xs font-bold
         transition-all duration-100 origin-top scale-0
     }
+
+    .heading {
+        @apply
+        font-bold text-gray-800
+    }
+
+    .subheading {
+        @apply
+        font-light text-gray-800
+    }
+
+    .bodytext {
+        @apply
+        font-normal text-gray-800
+    }
 }

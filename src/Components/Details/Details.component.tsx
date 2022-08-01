@@ -3,8 +3,6 @@ import React from "react";
 import Button from "@component/Button/Button.component";
 import Tag from "@component/Tags/Tags.component";
 
-import { Grid, Row, Col } from "@zendeskgarden/react-grid";
-import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { PencilIcon, XIcon } from "@heroicons/react/solid";
 
 import { formatRelativeDateTimeDuration } from "@helper/date";
@@ -17,50 +15,40 @@ type Props = {
 
 const Details: React.FC<Props> = (props: Props) => {
     return (
-        <Well isRecessed isFloating>
-            <Grid>
-                <Row>
-                    <Col sm={7}>
-                        <Title>{props.work.Title}</Title>
-                    </Col>
-                    <Col sm={4}>
-                        <Paragraph>
-                            {formatRelativeDateTimeDuration(props.work.When, props.work.Duration)}
-                        </Paragraph>
-                    </Col>
-                    <Col sm={1}>
-                        <Button onClick={props.onClose} label="close">
-                            <XIcon className="h-5 w-5" />
-                        </Button>
-                    </Col>
-                </Row>
+        <div className="m-4 bg-stone-100 outline-1 outline-gray-200 drop-shadow-lg" >
+            <div className="p-6 px-8" >
+                <div className="flex justify-between my-1">
+                    <h2 className="w-1/2 text-lg heading" >
+                        {props.work.Title}
+                    </h2>
+                    <p className="text-base subheading w-1/3" >
+                        {formatRelativeDateTimeDuration(props.work.When, props.work.Duration)}
+                    </p>
+                    <Button onClick={props.onClose} label="close" >
+                        <XIcon className="h-5 w-5" />
+                    </Button>
+                </div>
                 {props.work.Description &&
-                    <Row>
-                        <Col sm={11}>
-                            <Paragraph>{props.work.Description}</Paragraph>
-                        </Col>
-                    </Row>
+                    <p className="max-w-prose text-base bodytext">{props.work.Description}</p>
                 }
-                <Row>
-                    <Col sm={11}>
+                <div className="flex justify-between my-1">
+                    <div className="w-5/6">
                         {props.work.Tags && props.work.Tags.map((el, index) => {
                             return (<Tag key={index} onClose={() => {
                                 alert("TODO, remove tag");
                             }} >
-                                {el}
+                                <p className="text-sm" >{el}</p>
                             </Tag>);
                         })}
-                    </Col>
-                    <Col sm={1}>
-                        <Button onClick={() => {
-                            alert("TODO, edit work");
-                        }} label="edit">
-                            <PencilIcon className="h-5 w-5" />
-                        </Button>
-                    </Col>
-                </Row>
-            </Grid>
-        </Well>
+                    </div>
+                    <Button onClick={() => {
+                        alert("TODO, edit work");
+                    }} label="edit" >
+                        <PencilIcon className="h-5 w-5" />
+                    </Button>
+                </div>
+            </div>
+        </div>
     );
 };
 

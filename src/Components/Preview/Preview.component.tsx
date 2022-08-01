@@ -2,8 +2,6 @@ import React from "react";
 
 import Button from "@component/Button/Button.component";
 
-import { Grid, Row, Col } from "@zendeskgarden/react-grid";
-import { Well, Title, Paragraph } from "@zendeskgarden/react-notifications";
 import { EyeIcon } from "@heroicons/react/solid";
 
 import { Work } from "@model/work";
@@ -16,24 +14,15 @@ type Props = {
 
 const Preview: React.FC<Props> = (props: Props) => {
     return (
-        <Well isRecessed isFloating>
-            <Grid>
-                <Row>
-                    <Col sm={5}>
-                        <Title>{props.work.Title}</Title>
-                    </Col>
-                    <Col sm={5}>
-                        <Paragraph>{formatRelativeDateTime(props.work.When)}
-                        </Paragraph>
-                    </Col>
-                    <Col sm={2}>
-                        <Button onClick={() => props.onLoadDetailed(props.work)} label="Open">
-                            <EyeIcon className="h-5 w-5" />
-                        </Button>
-                    </Col>
-                </Row>
-            </Grid>
-        </Well>
+        <div className="p-5 bg-stone-100 outline-1 outline-gray-200 drop-shadow-lg flex justify-between items-center">
+            <div className="w-1/3" >
+                <h3 className="text-sm heading" >{props.work.Title}</h3>
+            </div>
+            <p className="text-sm subheading" >{formatRelativeDateTime(props.work.When)}</p>
+            <Button onClick={() => props.onLoadDetailed(props.work)} label="Open" className="float-right" >
+                <EyeIcon className="h-5 w-5" />
+            </Button>
+        </div>
     );
 };
 
