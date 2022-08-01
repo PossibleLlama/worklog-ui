@@ -64,6 +64,20 @@ const meeting: Work = {
     CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 12, 4), 2),
 };
 
+const customerMeeting: Work = {
+    ID: "abc2b",
+    Revision: 2,
+    Title: "Customer meeting",
+    Description: "Customer meeting related to topic b. It has been a few weeks since we last had a catchup with the customer, so it was great to have this chance to realign and check on progress." +
+        " Given an update on how we should be approaching the work for this subject. The team feels like the strategy that we have outlined will fulfil the brief, and all of the buzzwords that the customer has asked for." +
+        " We will continue to work towards this goal, with the aim to be finished in the next month. The customer has agreed that this timeframe works well for them, so they can finalise the dependencies on their side before it completes.",
+    Author: "Alex",
+    Duration: 60,
+    Tags: ["meetings", "topic b", "customer", "review", "team-a", "feedback"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 13, 30), 2),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 13, 46), 2),
+};
+
 const partB: Work = {
     ID: "abc3",
     Revision: 1,
@@ -100,7 +114,7 @@ const review: Work = {
 };
 
 export const exampleDay1: Work[] = [
-    emailsD1, standupD1, partA, feedback, meeting, partB, social, review,
+    emailsD1, standupD1, partA, feedback, meeting, customerMeeting, partB, social, review,
 ];
 
 const emailsD2: Work = {
