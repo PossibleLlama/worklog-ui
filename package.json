@@ -30,7 +30,7 @@
     "@heroicons/react": "^1.0.6",
     "@zendeskgarden/react-datepickers": "^8.53.1",
     "@zendeskgarden/react-forms": "^8.53.1",
-    "@zendeskgarden/react-modals": "^8.53.1",
+    "@zendeskgarden/react-modals": "^8.53.2",
     "axios": "^0.27.2",
     "date-fns": "^2.28.0",
     "react": "^18.2.0",
