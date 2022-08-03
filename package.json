@@ -28,7 +28,7 @@
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
-    "@zendeskgarden/react-datepickers": "^8.53.1",
+    "@zendeskgarden/react-datepickers": "^8.53.2",
     "@zendeskgarden/react-forms": "^8.53.1",
     "@zendeskgarden/react-modals": "^8.53.1",
     "axios": "^0.27.2",
