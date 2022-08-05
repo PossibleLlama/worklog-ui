@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
 import Button from "@component/Button/Button.component";
-import { DatepickerRange } from "@zendeskgarden/react-datepickers";
-import { Field, Label, Input } from "@zendeskgarden/react-forms";
 import { Modal as ZenModal, Close } from "@zendeskgarden/react-modals";
 
 import { Filter } from "@model/filter";
-import { isBefore } from "@helper/date";
+import { formatRFC3339Date, isAfter , isBefore } from "@helper/date";
 
 type Props = {
     onClose: (filter: Filter) => void,
@@ -20,48 +18,60 @@ const Modal: React.FC<Props> = (props: Props) => {
     const [description, setDescription] = useState<string>(props.initalFilters.description ? props.initalFilters.description : "");
     const [tags, setTags] = useState<string>(props.initalFilters.tags ? props.initalFilters.tags.join(", ") : "");
 
+    const updateDateSelection = (preferStartDate: boolean, event: React.FormEvent<HTMLInputElement>) => {
+        const d = new Date(event.currentTarget.value);
+        d.setHours(0);
+
+        if (preferStartDate) {
+            if (isAfter(d, new Date())) {
+                const today = new Date();
+                today.setHours(0);
+                today.setMinutes(0);
+                today.setSeconds(0);
+                today.setMilliseconds(0);
+                setStartDate(today);
+                setEndDate(today);
+            } else {
+                setStartDate(d);
+            }
+        } else {
+            if (isBefore(d, startDate)) {
+                setStartDate(d);
+            }
+            setEndDate(d);
+        }
+    };
+
     return (
         <ZenModal isLarge onClose={() => props.onClose(props.initalFilters)}>
             <div className="flex w-5/6 mx-12" >
                 <form>
-                    <h2 className="heading font-semibold mt-4" >
+                    <h2 className="heading font-semibold text-lg mt-4" >
                         Set filters
                     </h2>
-                    <DatepickerRange
-                        startValue={startDate}
-                        endValue={endDate ? endDate : new Date()}
-                        maxValue={new Date()}
-                        onChange={(event: {
-                            startValue?: Date;
-                            endValue?: Date;
-                        }) => {
-                            if (event.startValue) {
-                                isBefore(event.startValue, endDate) ? setStartDate(event.startValue) : setEndDate(event.startValue);
-                            }
-                            if (event.endValue) {
-                                isBefore(event.endValue, startDate) ? setStartDate(event.endValue) : setEndDate(event.endValue);
-                            }
-                        }}
-                    >
-                        <div className="pt-8">
-                            <Field>
-                                <Label>Start date</Label>
-                                <DatepickerRange.Start>
-                                    <Input />
-                                </DatepickerRange.Start>
-                            </Field>
+
+                    <div className="flex justify-between my-2" >
+                        <div>
+                            <label htmlFor="startDatePicker" className="heading font-semibold" >
+                                Start date
+                            </label><br />
+                            <input id="startDatePicker" type="date" value={formatRFC3339Date(startDate)} onChange={(e) => {
+                                updateDateSelection(true, e);
+                            }} />
                         </div>
-                        <div className="pt-8">
-                            <Field>
-                                <Label>End date</Label>
-                                <DatepickerRange.End>
-                                    <Input />
-                                </DatepickerRange.End>
-                            </Field>
+
+                        <div>
+                            <label htmlFor="endDatePicker" className="heading font-semibold" >
+                                End date
+                            </label><br />
+                            <input id="endDatePicker" type="date" value={formatRFC3339Date(endDate)} onChange={(e) => {
+                                updateDateSelection(false, e);
+                            }} />
                         </div>
-                        <DatepickerRange.Calendar />
-                    </DatepickerRange>
+                    </div>
+
                     <hr className="border-0 my-4" />
+
                     <label htmlFor="title" className="heading font-semibold" >
                         Title
                     </label>
@@ -71,6 +81,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                         }}
                         className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
                     />
+
                     <label htmlFor="description" className="heading font-semibold" >
                         Description
                     </label>
@@ -81,6 +92,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                         className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
                         rows={2}
                     />
+
                     <label htmlFor="tags" className="heading font-semibold" >
                         Tags
                     </label>
@@ -93,7 +105,9 @@ const Modal: React.FC<Props> = (props: Props) => {
                         }}
                         className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
                     />
+
                     <hr className="border-0 my-4" />
+
                     <div className="flex my-4">
                         <Button isBasic onClick={() => props.onClose(props.initalFilters)} label="Cancel" className="mr-2" >
                             Cancel
