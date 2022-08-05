@@ -5,7 +5,7 @@ import React from "react";
 
 import Comp from "./Tags.component";
 
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 describe("Tags", () => {
@@ -24,6 +24,7 @@ describe("Tags", () => {
 
         expect(screen.getByText("foo")).toBeInTheDocument();
         expect(screen.queryByLabelText("Remove", { selector: "button" })).toBeNull();
+        expect(mockClick).not.toHaveBeenCalled();
     });
 
     it("Renders with close button", () => {
@@ -35,5 +36,20 @@ describe("Tags", () => {
 
         expect(screen.getByText("foo")).toBeInTheDocument();
         expect(screen.getByLabelText("Remove", { selector: "button" })).toBeInTheDocument();
+        expect(mockClick).not.toHaveBeenCalled();
+    });
+
+    it("Button calls function", () => {
+        render(
+            <Comp onClose={mockClick}>
+                foo
+            </Comp>
+        );
+
+        expect(screen.getByLabelText("Remove", { selector: "button" })).toBeInTheDocument();
+        expect(mockClick).not.toHaveBeenCalled();
+        fireEvent.click(screen.getByLabelText("Remove", { selector: "button" }));
+        expect(mockClick).toHaveBeenCalled();
+        expect(mockClick).toHaveBeenCalledTimes(1);
     });
 });

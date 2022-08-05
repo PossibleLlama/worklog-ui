@@ -39,8 +39,8 @@ describe("App", () => {
                 <Comp onClose={onCloseFn} work={wk} />
             );
 
-            expect(screen.getByLabelText("close", { selector: "button" })).toBeInTheDocument();
-            expect(screen.getByLabelText("edit", { selector: "button" })).toBeInTheDocument();
+            expect(screen.getByLabelText("Close", { selector: "button" })).toBeInTheDocument();
+            expect(screen.getByLabelText("Edit", { selector: "button" })).toBeInTheDocument();
             expect(onCloseCalled).toEqual(0);
         });
 
