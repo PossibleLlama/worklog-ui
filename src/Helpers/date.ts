@@ -1,5 +1,6 @@
 import {
     format,
+    isAfter as after,
     isBefore as before,
     isSameDay,
     isSameHour,
@@ -44,6 +45,10 @@ export const dateEqual = (value: Date, compare: Date): boolean => {
     }
 };
 
+export const formatRFC3339Date = (d: Date): string => {
+    return format(d, "yyyy-MM-dd");
+};
+
 export const formatRFC3339DateTime = (d: Date): string => {
     return format(d, "yyyy-MM-dd'T'HH:mm:ss");
 };
@@ -54,4 +59,8 @@ export const subDays = (d: Date, amount: number): Date => {
 
 export const isBefore = (d: Date, c: Date): boolean => {
     return before(d, c);
+};
+
+export const isAfter = (d: Date, c: Date): boolean => {
+    return after(d, c);
 };

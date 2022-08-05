@@ -5,7 +5,9 @@ import {
     formatRelativeDateTime,
     formatRFC3339DateTime,
     subDays,
-    isBefore
+    isBefore,
+    formatRFC3339Date,
+    isAfter
 } from "./date";
 
 describe("Format relative date time duration", () => {
@@ -134,6 +136,22 @@ describe("Date equal", () => {
     });
 });
 
+describe("Format RFC3339 Date", () => {
+    const t = new Date("2020-04-16T22:48:31");
+
+    it("Has year, month, day", () => {
+        expect(formatRFC3339Date(t)).toContain("2020-04-16");
+    });
+
+    it("Does not have hour, minute, second", () => {
+        expect(formatRFC3339Date(t)).not.toContain("22:48:31");
+    });
+
+    it("Full string", () => {
+        expect(formatRFC3339Date(t)).toEqual("2020-04-16");
+    });
+});
+
 describe("Format RFC3339 Date time", () => {
     const t = new Date("2020-04-16T22:48:31");
 
@@ -146,7 +164,7 @@ describe("Format RFC3339 Date time", () => {
     });
 
     it("Full string, includes 'T'", () => {
-        expect(formatRFC3339DateTime(t)).toContain("2020-04-16T22:48:31");
+        expect(formatRFC3339DateTime(t)).toEqual("2020-04-16T22:48:31");
     });
 });
 
@@ -223,3 +241,46 @@ describe("Is before", () => {
         expect(isBefore(new Date("2021-04-16T22:48:31"), t)).toEqual(false);
     });
 });
+
+describe("Is after", () => {
+    const t = new Date("2020-04-16T22:48:31");
+
+    it("Same instance", () => {
+        expect(isAfter(t, t)).toEqual(false);
+    });
+
+    it("Same date time", () => {
+        expect(isAfter(new Date("2020-04-16T22:48:31"), t)).toEqual(false);
+    });
+
+    it("Different second", () => {
+        expect(isAfter(new Date("2020-04-16T22:48:30"), t)).toEqual(false);
+        expect(isAfter(new Date("2020-04-16T22:48:32"), t)).toEqual(true);
+    });
+
+    it("Different minute", () => {
+        expect(isAfter(new Date("2020-04-16T22:47:31"), t)).toEqual(false);
+        expect(isAfter(new Date("2020-04-16T22:49:31"), t)).toEqual(true);
+    });
+
+    it("Different hour", () => {
+        expect(isAfter(new Date("2020-04-16T21:48:31"), t)).toEqual(false);
+        expect(isAfter(new Date("2020-04-16T23:48:31"), t)).toEqual(true);
+    });
+
+    it("Different day", () => {
+        expect(isAfter(new Date("2020-04-15T22:48:31"), t)).toEqual(false);
+        expect(isAfter(new Date("2020-04-17T22:48:31"), t)).toEqual(true);
+    });
+
+    it("Different month", () => {
+        expect(isAfter(new Date("2020-03-16T22:48:31"), t)).toEqual(false);
+        expect(isAfter(new Date("2020-05-16T22:48:31"), t)).toEqual(true);
+    });
+
+    it("Different year", () => {
+        expect(isAfter(new Date("2019-04-16T22:48:31"), t)).toEqual(false);
+        expect(isAfter(new Date("2021-04-16T22:48:31"), t)).toEqual(true);
+    });
+});
+
