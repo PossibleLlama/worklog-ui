@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { BookmarkIcon, FilterIcon, GlobeAltIcon } from "@heroicons/react/solid";
-
-import { Alert, Close, useToast } from "@zendeskgarden/react-notifications";
 
 import SidebarIcon from "@component/SidebarIcon/SidebarIcon.component";
 import Modal from "@view/Filters/FiltersModal.view";
@@ -18,8 +17,6 @@ type Props = {
 const Header: React.FC<Props> = (props: Props) => {
     const [openModal, setOpenModal] = useState<boolean>(false);
 
-    const { addToast } = useToast();
-
     const openFilterModal = (): void => {
         setOpenModal(true);
     };
@@ -28,12 +25,8 @@ const Header: React.FC<Props> = (props: Props) => {
         setOpenModal(false);
         if (!isEqual(props.currentFilters, filter)) {
             props.updateFilters(filter);
-            addToast(({ close }) => (
-                <Alert type="success">
-                    Successfully updated filter
-                    <Close onClick={close} aria-label="Close" />
-                </Alert>
-            ));
+            toast.success("Successfully updated filter");
+            console.log("updated filter");
         }
     };
 

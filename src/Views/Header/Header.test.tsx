@@ -3,8 +3,7 @@
  */
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-
-import { ToastProvider } from "@zendeskgarden/react-notifications";
+import { ToastContainer } from "react-toastify";
 
 import Comp from "./Header.view";
 
@@ -28,9 +27,8 @@ describe("Header", () => {
     it("Renders title", () => {
         render(
             <BrowserRouter>
-                <ToastProvider>
-                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
-                </ToastProvider>
+                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
+                <ToastContainer />
             </BrowserRouter>
         );
 
@@ -42,9 +40,8 @@ describe("Header", () => {
     it("Renders filter", () => {
         render(
             <BrowserRouter>
-                <ToastProvider>
-                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
-                </ToastProvider>
+                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
+                <ToastContainer />
             </BrowserRouter>
         );
 
@@ -56,9 +53,8 @@ describe("Header", () => {
     it("Renders nav", () => {
         render(
             <BrowserRouter>
-                <ToastProvider>
-                    <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
-                </ToastProvider>
+                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
+                <ToastContainer />
             </BrowserRouter>
         );
 
