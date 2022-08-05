@@ -5,7 +5,7 @@ import React from "react";
 
 import Comp from "./Button.component";
 
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 describe("Button", () => {
@@ -25,5 +25,20 @@ describe("Button", () => {
 
         expect(screen.getByText("bar")).toBeInTheDocument();
         expect(screen.getByLabelText("foo")).toBeInTheDocument();
+        expect(mockClick).not.toHaveBeenCalled();
+    });
+
+    it("Button calls function", () => {
+        render(
+            <Comp onClick={mockClick} label={label}>
+                bar
+            </Comp>
+        );
+
+        expect(screen.getByText("bar", { selector: "button" })).toBeInTheDocument();
+        expect(mockClick).not.toHaveBeenCalled();
+        fireEvent.click(screen.getByText("bar", { selector: "button" }));
+        expect(mockClick).toHaveBeenCalled();
+        expect(mockClick).toHaveBeenCalledTimes(1);
     });
 });

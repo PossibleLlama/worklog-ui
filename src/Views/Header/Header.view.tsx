@@ -26,7 +26,6 @@ const Header: React.FC<Props> = (props: Props) => {
         if (!isEqual(props.currentFilters, filter)) {
             props.updateFilters(filter);
             toast.success("Successfully updated filter");
-            console.log("updated filter");
         }
     };
 

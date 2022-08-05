@@ -25,7 +25,7 @@ const Details: React.FC<Props> = (props: Props) => {
                         {formatRelativeDateTimeDuration(props.work.When, props.work.Duration)}
                     </p>
                     <div className="w-5 h-5" >
-                        <Button onClick={props.onClose} label="close" >
+                        <Button onClick={props.onClose} label="Close" >
                             <XIcon className="h-5 w-5" />
                         </Button>
                     </div>
@@ -46,7 +46,7 @@ const Details: React.FC<Props> = (props: Props) => {
                     <div className="w-5 h-5" >
                         <Button onClick={() => {
                             alert("TODO, edit work");
-                        }} label="edit" >
+                        }} label="Edit" >
                             <PencilIcon className="h-5 w-5" />
                         </Button>
                     </div>
