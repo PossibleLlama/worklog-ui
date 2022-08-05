@@ -5,7 +5,6 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { ToastProvider } from "@zendeskgarden/react-notifications";
 
 import { render, screen, waitFor } from "@testing-library/react";
@@ -17,13 +16,11 @@ describe("App", () => {
     it("Has header", async () => {
         mockGetWorklogs.mockResolvedValue([]);
         render(
-            <ThemeProvider>
-                <ToastProvider>
-                    <BrowserRouter>
-                        <App getWorklogs={mockGetWorklogs} />
-                    </BrowserRouter>
-                </ToastProvider>
-            </ThemeProvider>
+            <ToastProvider>
+                <BrowserRouter>
+                    <App getWorklogs={mockGetWorklogs} />
+                </BrowserRouter>
+            </ToastProvider>
         );
 
         await waitFor(() => expect(mockGetWorklogs).toHaveBeenCalledTimes(1));
