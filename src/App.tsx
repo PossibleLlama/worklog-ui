@@ -43,6 +43,7 @@ const App: React.FC<Props> = (props: Props) => {
     return (
         <Fragment>
             <Header updateFilters={updateFilters} currentFilters={filter} />
+            <div className="mb-16" />
             <Routes>
                 <Route path="/" element={<Worklist Worklist={work} />} />
                 <Route path="/timeline" element={<Worklist Worklist={work} />} />
