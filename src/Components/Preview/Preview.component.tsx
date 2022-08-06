@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "@component/Button/Button.component";
+import Container from "@component/Container/Container.component";
 
 import { EyeIcon } from "@heroicons/react/solid";
 
@@ -14,7 +15,7 @@ type Props = {
 
 const Preview: React.FC<Props> = (props: Props) => {
     return (
-        <div className="p-5 bg-stone-100 outline-1 outline-gray-200 drop-shadow-lg flex justify-between items-center">
+        <Container className="flex justify-between items-center">
             <div className="w-1/3" >
                 <h3 className="text-sm heading" >{props.work.Title}</h3>
             </div>
@@ -22,7 +23,7 @@ const Preview: React.FC<Props> = (props: Props) => {
             <Button onClick={() => props.onLoadDetailed(props.work)} label="Open" className="float-right" >
                 <EyeIcon className="h-5 w-5" />
             </Button>
-        </div>
+        </Container>
     );
 };
 

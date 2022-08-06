@@ -30,7 +30,7 @@ const Worklist: React.FC<Props> = (props: Props) => {
     };
 
     return (
-        <div className="flex relative justify-center min-h-full">
+        <div className="flex relative justify-center min-h-full" >
             <div className="absolute top-0 right-0">
                 <Button isBasic onClick={toggleTableView} label="Toggle table and timeline">
                     <ViewListIcon className="h-5 w-5" />
@@ -44,7 +44,7 @@ const Worklist: React.FC<Props> = (props: Props) => {
             }
 
             {detailedWork &&
-                <Details work={detailedWork} onClose={removeDetailed} />
+                <Details work={detailedWork} onClose={removeDetailed} className="m-4" />
             }
         </div>
     );
