@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "@component/Button/Button.component";
+import Container from "@component/Container/Container.component";
 import Tag from "@component/Tags/Tags.component";
 
 import { PencilIcon, XIcon } from "@heroicons/react/solid";
@@ -11,11 +12,12 @@ import { Work } from "@model/work";
 type Props = {
     work: Work,
     onClose: () => void,
+    className?: string,
 };
 
 const Details: React.FC<Props> = (props: Props) => {
     return (
-        <div className="m-4 bg-stone-100 outline-1 outline-gray-200 drop-shadow-lg" >
+        <Container className={`${props.className}`} >
             <div className="p-6 px-8" >
                 <div className="flex justify-between my-1">
                     <h2 className="w-1/2 text-lg heading" >
@@ -52,7 +54,7 @@ const Details: React.FC<Props> = (props: Props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };
 
