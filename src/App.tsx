@@ -3,8 +3,9 @@ import { Routes, Route } from "react-router-dom";
 
 import { subDays } from "@helper/date";
 
-import Worklist from "@page/Worklist/Worklist.page";
 import Header from "@view/Header/Header.view";
+import Worklist from "@page/Worklist/Worklist.page";
+import Discover from "@page/Discover/Discover.page";
 
 import { Filter } from "@model/filter";
 import { Work } from "@model/work";
@@ -19,12 +20,13 @@ const App: React.FC<Props> = (props: Props) => {
         startDate: subDays(new Date(), 7),
     });
 
-    const [work, setWork] = useState<Work[]>([]);
+    const [allWork, setWork] = useState<Work[]>([]);
+    const [filteredWork, setFilteredWork] = useState<Work[]>([]);
 
     useEffect(() => {
         let mounted = true;
-        props.getWorklogs(filter)
-            .then((data) => {
+        props.getWorklogs({ startDate: new Date("2000-01-01") })
+            .then((data: React.SetStateAction<Work[]>) => {
                 if (mounted) {
                     setWork(data);
                 }
@@ -32,9 +34,14 @@ const App: React.FC<Props> = (props: Props) => {
         return () => {
             mounted = false;
         };
+    }, [props]);
+
+    useEffect(() => {
+        // TODO actually filter
+        setFilteredWork(allWork);
         // Props is used to enable testing with the passed function, and should not change dynamically
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter]);
+    }, [allWork, filter]);
 
     const updateFilters = (filter: Filter): void => {
         setFilter(filter);
@@ -43,11 +50,10 @@ const App: React.FC<Props> = (props: Props) => {
     return (
         <Fragment>
             <Header updateFilters={updateFilters} currentFilters={filter} />
-            <div className="mb-16" />
             <Routes>
-                <Route path="/" element={<Worklist Worklist={work} />} />
-                <Route path="/timeline" element={<Worklist Worklist={work} />} />
-                <Route path="/discover" element={<h1>Coming soon</h1>} />
+                <Route path="/" element={<Worklist Worklist={filteredWork} />} />
+                <Route path="/timeline" element={<Worklist Worklist={filteredWork} />} />
+                <Route path="/discover" element={<Discover TotalWork={allWork} FilteredWork={filteredWork} />} />
             </Routes>
         </Fragment>
     );
