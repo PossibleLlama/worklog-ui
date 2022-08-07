@@ -5,9 +5,9 @@ import Details from "@component/Details/Details.component";
 import Table from "@view/Table/Table.view";
 import Timeline from "@view/Timeline/Timeline.view";
 
-import { ViewListIcon } from "@heroicons/react/solid";
-
 import { Work } from "@model/work";
+
+import { ViewListIcon } from "@heroicons/react/outline";
 
 type Props = {
     Worklist: Work[],

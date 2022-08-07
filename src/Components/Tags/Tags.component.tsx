@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "@component/Button/Button.component";
 
-import { XIcon } from "@heroicons/react/solid";
+import { XIcon } from "@heroicons/react/outline";
 
 type Props = {
     children: React.ReactNode,
