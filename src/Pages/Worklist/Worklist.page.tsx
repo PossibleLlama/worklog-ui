@@ -17,9 +17,9 @@ const sortedWork = (wk: Work[]): Work[] => {
         if (isEqual(a.When, b.When)) {
             return 0;
         } else {
-            return isBefore(a.When, b.When) ? 1 : -1
+            return isBefore(a.When, b.When) ? 1 : -1;
         }
-    })
+    });
 };
 
 type Props = {

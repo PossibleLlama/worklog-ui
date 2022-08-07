@@ -43,59 +43,59 @@ const Usage: React.FC<Props> = (props: Props) => {
             <h2 className="heading mb-2" >Usage</h2>
 
             <div className="flex" >
-                    <div className={`flex ${innerContainerStyling}`} >
-                        <div className={`${infographicStyling}`} >
-                            <h3 className="subheading" >All time</h3>
-                            <p className="bodytext" >{props.TotalWork.length}</p>
-                        </div>
-
-                        <div className={`${infographicStyling}`} >
-                            <h3 className="subheading" >In filter</h3>
-                            <p className="bodytext" >{props.FilteredWork.length}</p>
-                        </div>
-
-                        <div className={`${infographicStyling}`} >
-                            <h3 className="subheading" >This month</h3>
-                            <p className="bodytext" >{logsWithinAMonth.length}</p>
-                        </div>
-
-                        <div className={`${infographicStyling}`} >
-                            <h3 className="subheading" >Today</h3>
-                            <p className="bodytext" >{logsToday.length}</p>
-                        </div>
+                <div className={`flex ${innerContainerStyling}`} >
+                    <div className={`${infographicStyling}`} >
+                        <h3 className="subheading" >All time</h3>
+                        <p className="bodytext" >{props.TotalWork.length}</p>
                     </div>
 
-                    <div className={`${innerContainerStyling}`} >
-                        <h3 className="subheading p-2" >Average per day</h3>
-                        <div className="flex" >
-                            <div className={`${infographicStyling}`} >
-                                <h4 className="subheading" >All time</h4>
-                                <div className="flex" >
-                                    <p className="bodytext" >{averagePerDay(props.TotalWork)}</p>
-                                    {averagePerDay(props.TotalWork) > logsToday.length &&
-                                        <ChevronUpIcon className={`${positiveArrowStyling}`} />
-                                    }
-                                    {averagePerDay(props.TotalWork) < logsToday.length &&
-                                        <ChevronDownIcon className={`${negativeArrowStyling}`} />
-                                    }
-                                </div>
-                            </div>
+                    <div className={`${infographicStyling}`} >
+                        <h3 className="subheading" >In filter</h3>
+                        <p className="bodytext" >{props.FilteredWork.length}</p>
+                    </div>
 
-                            <div className={`${infographicStyling}`} >
-                                <h4 className="subheading" >This month</h4>
-                                <div className="flex" >
-                                    <p className="bodytext" >{averagePerDay(logsWithinAMonth)}</p>
-                                    {averagePerDay(logsWithinAMonth) > logsToday.length &&
-                                        <ChevronUpIcon className={`${positiveArrowStyling}`} />
-                                    }
-                                    {averagePerDay(logsWithinAMonth) < logsToday.length &&
-                                        <ChevronDownIcon className={`${negativeArrowStyling}`} />
-                                    }
-                                </div>
+                    <div className={`${infographicStyling}`} >
+                        <h3 className="subheading" >This month</h3>
+                        <p className="bodytext" >{logsWithinAMonth.length}</p>
+                    </div>
+
+                    <div className={`${infographicStyling}`} >
+                        <h3 className="subheading" >Today</h3>
+                        <p className="bodytext" >{logsToday.length}</p>
+                    </div>
+                </div>
+
+                <div className={`${innerContainerStyling}`} >
+                    <h3 className="subheading p-2" >Average per day</h3>
+                    <div className="flex" >
+                        <div className={`${infographicStyling}`} >
+                            <h4 className="subheading" >All time</h4>
+                            <div className="flex" >
+                                <p className="bodytext" >{averagePerDay(props.TotalWork)}</p>
+                                {averagePerDay(props.TotalWork) > logsToday.length &&
+                                    <ChevronUpIcon className={`${positiveArrowStyling}`} />
+                                }
+                                {averagePerDay(props.TotalWork) < logsToday.length &&
+                                    <ChevronDownIcon className={`${negativeArrowStyling}`} />
+                                }
+                            </div>
+                        </div>
+
+                        <div className={`${infographicStyling}`} >
+                            <h4 className="subheading" >This month</h4>
+                            <div className="flex" >
+                                <p className="bodytext" >{averagePerDay(logsWithinAMonth)}</p>
+                                {averagePerDay(logsWithinAMonth) > logsToday.length &&
+                                    <ChevronUpIcon className={`${positiveArrowStyling}`} />
+                                }
+                                {averagePerDay(logsWithinAMonth) < logsToday.length &&
+                                    <ChevronDownIcon className={`${negativeArrowStyling}`} />
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </Container>
     );
 };
