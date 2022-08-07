@@ -227,3 +227,60 @@ const documentationP2D2: Work = {
 export const exampleDay2: Work[] = [
     emailsD2, finishD2, standupD2, startD2, reviewMeetingD2, supportD2, fixedD2, documentationP1D2, documentationP2D2
 ];
+
+const reading: Work = {
+    ID: "ff1",
+    Revision: 1,
+    Title: "Reading",
+    Description: "Looking through what work I have done recently.",
+    Author: "Alex",
+    Duration: 15,
+    Tags: ["meta"].sort(),
+    When: t,
+    CreatedAt: t,
+};
+
+export const exampleDayToday: Work[] = [
+    reading,
+];
+
+const startD3: Work = {
+    ID: "caaa",
+    Revision: 1,
+    Title: "Emails",
+    Author: "Alex",
+    Duration: 5,
+    Tags: ["meta"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 28), 32),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 28), 32),
+};
+
+const interviewPrep: Work = {
+    ID: "caab",
+    Revision: 2,
+    Title: "Interview - Preperation",
+    Description: "Checking the CV for the person that we are interviewing today for the new position.",
+    Author: "Alex",
+    Duration: 20,
+    Tags: ["preperation, interview"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 9, 57), 32),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 10, 2), 32),
+};
+
+const interview: Work = {
+    ID: "caac",
+    Revision: 1,
+    Title: "Interview",
+    Description: "Interview with the person that we would like to hire for the position."+
+        " A lot of good knowledge around the company, and the areas that we will require."+
+        " Believe that they will be a great personality fit for the company.",
+    Author: "Alex",
+    Duration: 60,
+    Tags: ["meetings, interview"].sort(),
+    When: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 11, 0), 32),
+    CreatedAt: subDays(new Date(t.getFullYear(), t.getMonth(), t.getDay(), 11, 12), 32),
+};
+
+export const exampleDayLastMonth: Work[] = [
+    startD3, interviewPrep, interview
+];
