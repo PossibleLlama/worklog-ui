@@ -38,7 +38,7 @@ const Header: React.FC<Props> = (props: Props) => {
                         <div className="text-lg font-bold">Worklog</div>
                         <span className="sidebar-tooltip group-hover:scale-100 top-14">
                             Home
-                    </span>
+                        </span>
                     </button>
                 </Link>
                 <button onClick={openFilterModal}>

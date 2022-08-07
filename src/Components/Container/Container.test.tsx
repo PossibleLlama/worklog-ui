@@ -13,7 +13,7 @@ describe("Button", () => {
         render(
             <Comp>
                 bar
-             </Comp>
+            </Comp>
         );
 
         expect(screen.getByText("bar")).toBeInTheDocument();
