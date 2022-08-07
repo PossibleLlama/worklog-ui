@@ -9,6 +9,19 @@ import { Work } from "@model/work";
 
 import { ViewListIcon } from "@heroicons/react/outline";
 
+import { isEqual } from "date-fns";
+import { isBefore } from "@helper/date";
+
+const sortedWork = (wk: Work[]): Work[] => {
+    return [...wk].sort((a, b): number => {
+        if (isEqual(a.When, b.When)) {
+            return 0;
+        } else {
+            return isBefore(a.When, b.When) ? 1 : -1
+        }
+    })
+};
+
 type Props = {
     Worklist: Work[],
 };
@@ -20,6 +33,7 @@ const Worklist: React.FC<Props> = (props: Props) => {
     const loadDetailed = (detail: Work): void => {
         setDetailedWork(detail);
     };
+
     const removeDetailed = (): void => {
         setDetailedWork(undefined);
         setTableView(false);
@@ -37,10 +51,10 @@ const Worklist: React.FC<Props> = (props: Props) => {
                 </Button>
             </div>
             {!detailedWork && !isTableView &&
-                <Timeline Worklist={props.Worklist} onLoadDetailed={loadDetailed} />
+                <Timeline Worklist={sortedWork(props.Worklist)} onLoadDetailed={loadDetailed} />
             }
             {!detailedWork && isTableView &&
-                <Table Worklist={props.Worklist} />
+                <Table Worklist={sortedWork(props.Worklist)} />
             }
 
             {detailedWork &&
