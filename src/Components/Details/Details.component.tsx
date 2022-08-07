@@ -4,7 +4,7 @@ import Button from "@component/Button/Button.component";
 import Container from "@component/Container/Container.component";
 import Tag from "@component/Tags/Tags.component";
 
-import { PencilIcon, XIcon } from "@heroicons/react/solid";
+import { PencilIcon, XIcon } from "@heroicons/react/outline";
 
 import { formatRelativeDateTimeDuration } from "@helper/date";
 import { Work } from "@model/work";

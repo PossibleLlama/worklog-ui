@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { BookmarkIcon, FilterIcon, GlobeAltIcon } from "@heroicons/react/solid";
+import { BookmarkIcon, FilterIcon, GlobeAltIcon } from "@heroicons/react/outline";
 
 import SidebarIcon from "@component/SidebarIcon/SidebarIcon.component";
 import Modal from "@view/Filters/FiltersModal.view";
