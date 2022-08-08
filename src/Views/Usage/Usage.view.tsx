@@ -15,7 +15,10 @@ const positiveArrowStyling = "h-5 w-5 mx-1 text-green-500 bg-stone-300 hover:tex
 const negativeArrowStyling = "h-5 w-5 mx-1 text-red-600 bg-stone-300 hover:text-red-300 hover:bg-gray-800 rounded-3xl transition-all";
 
 const averagePerDay = (wk: Work[]): number => {
-    return wk.length;
+    const uniqueDays = [... new Set(wk.map((e) => {
+        return `${e.When.getFullYear()}-${e.When.getMonth()}-${e.When.getDate()}`;
+    }))];
+    return Math.round(((wk.length / uniqueDays.length) || 0) * 100) / 100;
 };
 
 type Props = {
@@ -28,14 +31,8 @@ const Usage: React.FC<Props> = (props: Props) => {
     const [logsToday, setLogsToday] = useState<Work[]>([]);
 
     useEffect(() => {
-        const now = new Date();
-        setLogsWithinAMonth(props.TotalWork.filter((e) => {
-            return isAfter(e.When, subMonths(now, 1));
-        }));
-
-        setLogsToday(props.TotalWork.filter((e) => {
-            return isToday(e.When);
-        }));
+        setLogsWithinAMonth(props.TotalWork.filter((e) => isAfter(e.When, subMonths(new Date(), 1))));
+        setLogsToday(props.TotalWork.filter((e) => isToday(e.When)));
     }, [props.TotalWork]);
 
     return (

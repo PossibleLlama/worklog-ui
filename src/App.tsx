@@ -12,8 +12,8 @@ import { Work } from "@model/work";
 
 const getLastMonday = (): Date => {
     const t = new Date();
-    return new Date(t.getFullYear(), t.getMonth(), subDays(t, (t.getDay() + 6) % 7).getDate())
-}
+    return new Date(t.getFullYear(), t.getMonth(), subDays(t, (t.getDay() + 6) % 7).getDate());
+};
 
 type Props = {
     getWorklogs: (f: Filter) => Promise<Work[]>;
