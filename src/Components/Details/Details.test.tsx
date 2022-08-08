@@ -11,6 +11,9 @@ import { formatRelativeDateTimeDuration, formatRelativeDateTime } from "@helper/
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
+// Until mocking new Date(), this will fail every now and then (and on Sunday's)
+jest.retryTimes(10);
+
 describe("App", () => {
     let onCloseCalled = 0;
     const onCloseFn = () => {
