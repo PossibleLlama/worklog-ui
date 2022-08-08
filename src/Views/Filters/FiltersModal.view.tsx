@@ -14,7 +14,7 @@ type Props = {
 
 const Modal: React.FC<Props> = (props: Props) => {
     const [startDate, setStartDate] = useState<Date>(props.initalFilters.startDate);
-    const [endDate, setEndDate] = useState<Date>(props.initalFilters.endDate ? props.initalFilters.endDate : new Date());
+    const [endDate, setEndDate] = useState<Date>(props.initalFilters.endDate ? props.initalFilters.endDate : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 23, 59, 59));
     const [title, setTitle] = useState<string>(props.initalFilters.title ? props.initalFilters.title : "");
     const [description, setDescription] = useState<string>(props.initalFilters.description ? props.initalFilters.description : "");
     const [tags, setTags] = useState<string>(props.initalFilters.tags ? props.initalFilters.tags.join(", ") : "");
@@ -39,7 +39,7 @@ const Modal: React.FC<Props> = (props: Props) => {
             if (isBefore(d, startDate)) {
                 setStartDate(d);
             }
-            setEndDate(d);
+            setEndDate(subSeconds(addDays(d, 1), 1));
         }
     };
 
