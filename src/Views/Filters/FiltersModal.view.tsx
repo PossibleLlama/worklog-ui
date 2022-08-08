@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { addDays, subSeconds } from "date-fns";
+
 import Button from "@component/Button/Button.component";
 
 import { Filter } from "@model/filter";
@@ -29,7 +31,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                 today.setSeconds(0);
                 today.setMilliseconds(0);
                 setStartDate(today);
-                setEndDate(today);
+                setEndDate(subSeconds(addDays(today, 1), 1));
             } else {
                 setStartDate(d);
             }
