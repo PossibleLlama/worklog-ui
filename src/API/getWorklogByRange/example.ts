@@ -240,8 +240,91 @@ const reading: Work = {
     CreatedAt: t,
 };
 
+const startD1: Work = {
+    ID: "ff2",
+    Revision: 1,
+    Title: "Emails",
+    Author: "Alex",
+    Duration: 15,
+    Tags: ["morning"].sort(),
+    When: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 8, 58, 17),
+    CreatedAt: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 8, 58, 17),
+};
+
+const onboarding: Work = {
+    ID: "ff3",
+    Revision: 1,
+    Title: "On boarding",
+    Description: "Introductions for the new starter to the team, as well as the building and where all of the required items are.",
+    Author: "Alex",
+    Duration: 45,
+    Tags: ["onboarding", "team a"].sort(),
+    When: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 10, 45, 0),
+    CreatedAt: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 10, 43, 48),
+};
+
+const scanning: Work = {
+    ID: "ff4",
+    Revision: 1,
+    Title: "Scanning",
+    Description: "Going through some legacy files with the new starter, which need to be digitalised." +
+    " Scanning these into the computer systems.",
+    Author: "Alex",
+    Duration: 60,
+    Tags: ["scanning"].sort(),
+    When: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 12, 14, 33),
+    CreatedAt: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 12, 14, 33),
+};
+
+const reception: Work = {
+    ID: "ff5",
+    Revision: 1,
+    Title: "Reception",
+    Description: "Covering the building reception so that others can take their lunches.",
+    Author: "Alex",
+    Duration: 120,
+    Tags: ["reception"].sort(),
+    When: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 14, 0, 0),
+    CreatedAt: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 14, 3, 0),
+};
+
+const lunch: Work = {
+    ID: "ff6",
+    Revision: 1,
+    Title: "Lunch",
+    Author: "Alex",
+    Duration: 30,
+    Tags: ["lunch"].sort(),
+    When: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 14, 30, 0),
+    CreatedAt: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 14, 32, 29),
+};
+
+const introductions: Work = {
+    ID: "ff7",
+    Revision: 1,
+    Title: "Introductions",
+    Description: "Introducing the new starter to other teams in the building and the people that they'll be working with going forwards.",
+    Author: "Alex",
+    Duration: 60,
+    Tags: ["onboarding", "team a"].sort(),
+    When: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 15, 59, 21),
+    CreatedAt: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 15, 59, 21),
+};
+
+const socialIntroductions: Work = {
+    ID: "ff8",
+    Revision: 1,
+    Title: "Social",
+    Description: "Little chat with the new starter to get to know the team.",
+    Author: "Alex",
+    Duration: 30,
+    Tags: ["onboarding", "team a", "social"].sort(),
+    When: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 16, 32, 8),
+    CreatedAt: new Date(t.getFullYear(), t.getMonth(), t.getDate(), 16, 32, 8),
+};
+
 export const exampleDayToday: Work[] = [
-    reading,
+    startD1, onboarding, scanning, reception, lunch, introductions, socialIntroductions, reading,
 ];
 
 const startD3: Work = {
