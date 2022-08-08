@@ -7,17 +7,22 @@ import Header from "@view/Header/Header.view";
 import Worklist from "@page/Worklist/Worklist.page";
 import Discover from "@page/Discover/Discover.page";
 
-import { Filter } from "@model/filter";
+import { Filter, filter as filterFn } from "@model/filter";
 import { Work } from "@model/work";
+
+const getLastMonday = (): Date => {
+    const t = new Date();
+    return new Date(t.getFullYear(), t.getMonth(), subDays(t, (t.getDay() + 6) % 7).getDate())
+}
 
 type Props = {
     getWorklogs: (f: Filter) => Promise<Work[]>;
 };
 
 const App: React.FC<Props> = (props: Props) => {
-    // Start with filter showing last 7 days
+    // Start with filter showing this week (starting from the latest Monday)
     const [filter, setFilter] = useState<Filter>({
-        startDate: subDays(new Date(), 7),
+        startDate: getLastMonday(),
     });
 
     const [allWork, setWork] = useState<Work[]>([]);
@@ -37,8 +42,7 @@ const App: React.FC<Props> = (props: Props) => {
     }, [props]);
 
     useEffect(() => {
-        // TODO actually filter
-        setFilteredWork(allWork);
+        setFilteredWork(filterFn(allWork, filter));
         // Props is used to enable testing with the passed function, and should not change dynamically
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allWork, filter]);
