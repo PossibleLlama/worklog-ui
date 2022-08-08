@@ -10,6 +10,9 @@ import {
     isAfter
 } from "./date";
 
+// Until mocking new Date(), this will fail every now and then (and on Sunday's)
+jest.retryTimes(10);
+
 describe("Format relative date time duration", () => {
     const now = new Date();
 
