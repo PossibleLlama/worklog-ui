@@ -70,10 +70,10 @@ const Usage: React.FC<Props> = (props: Props) => {
                             <div className="flex" >
                                 <p className="bodytext" >{averagePerDay(props.TotalWork)}</p>
                                 {averagePerDay(props.TotalWork) > logsToday.length &&
-                                    <ChevronUpIcon className={`${positiveArrowStyling}`} />
+                                    <ChevronDownIcon className={`${negativeArrowStyling}`} />
                                 }
                                 {averagePerDay(props.TotalWork) < logsToday.length &&
-                                    <ChevronDownIcon className={`${negativeArrowStyling}`} />
+                                    <ChevronUpIcon className={`${positiveArrowStyling}`} />
                                 }
                             </div>
                         </div>
@@ -83,10 +83,10 @@ const Usage: React.FC<Props> = (props: Props) => {
                             <div className="flex" >
                                 <p className="bodytext" >{averagePerDay(logsWithinAMonth)}</p>
                                 {averagePerDay(logsWithinAMonth) > logsToday.length &&
-                                    <ChevronUpIcon className={`${positiveArrowStyling}`} />
+                                    <ChevronDownIcon className={`${negativeArrowStyling}`} />
                                 }
                                 {averagePerDay(logsWithinAMonth) < logsToday.length &&
-                                    <ChevronDownIcon className={`${negativeArrowStyling}`} />
+                                    <ChevronUpIcon className={`${positiveArrowStyling}`} />
                                 }
                             </div>
                         </div>
