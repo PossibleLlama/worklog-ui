@@ -1,6 +1,10 @@
-import { isEqual } from "./filter";
+import { Filter, filter, isEqual } from "./filter";
 
-describe("Filter equals", () => {
+import { Work } from "@model/work";
+
+import { addDays } from "date-fns";
+
+describe("Is equal", () => {
     const startDate = new Date(2021, 1, 1, 8, 35);
     describe("Start Date only", () => {
         const f1 = { startDate };
@@ -232,5 +236,166 @@ describe("Filter equals", () => {
             };
             expect(isEqual(f1, f2)).toEqual(false);
         });
+    });
+});
+
+describe("Filter work", () => {
+    const t = new Date(2000, 4, 18, 15, 42, 0);
+    const work: Work[] = [
+        {
+            ID: (Math.random() + 1).toString(36).substring(7),
+            Revision: Math.random() + 1,
+            Title: "foo",
+            When: addDays(t, 1),
+            CreatedAt: addDays(t, 1),
+        },
+        {
+            ID: (Math.random() + 1).toString(36).substring(7),
+            Revision: Math.random() + 1,
+            Title: "bar",
+            Description: "I am a description.",
+            Author: "Alice",
+            Tags: ["a", "b"],
+            When: addDays(t, 3),
+            CreatedAt: addDays(t, 3),
+        },
+        {
+            ID: (Math.random() + 1).toString(36).substring(7),
+            Revision: Math.random() + 1,
+            Title: "buzz",
+            Description: "I am another description.",
+            Author: "Bob",
+            Tags: ["a", "c"],
+            When: addDays(t, 3),
+            CreatedAt: addDays(t, 3),
+        },
+        {
+            ID: (Math.random() + 1).toString(36).substring(7),
+            Revision: Math.random() + 1,
+            Title: "bang",
+            Description: "I am a different description.",
+            Author: "Alice",
+            Tags: ["d"],
+            When: addDays(t, 3),
+            CreatedAt: addDays(t, 3),
+        },
+        {
+            ID: (Math.random() + 1).toString(36).substring(7),
+            Revision: Math.random() + 1,
+            Title: "sploosh",
+            Description: "I am a yet another description.",
+            Author: "Alice",
+            Tags: ["ac"],
+            When: addDays(t, 5),
+            CreatedAt: addDays(t, 5),
+        },
+    ];
+
+    it("Empty filter with earlier start date returns all work", () => {
+        const f: Filter = {
+            startDate: t,
+        };
+
+        expect(filter(work, f)).toHaveLength(work.length);
+        expect(filter(work, f)).toEqual(work);
+    });
+
+    it("Empty filter with start date in middle returns some work", () => {
+        const f: Filter = {
+            startDate: addDays(t, 2),
+        };
+
+        expect(filter(work, f)).toHaveLength(work.length - 1);
+        work.forEach((e, i) => {
+            if (i === 0) {
+                return;
+            }
+            expect(filter(work, f)).toEqual(expect.arrayContaining([e]));
+        });
+    });
+
+    it("Start date and end date in middle returns some work", () => {
+        const f: Filter = {
+            startDate: addDays(t, 2),
+            endDate: addDays(t, 4),
+        };
+
+        expect(filter(work, f)).toHaveLength(work.length - 2);
+        work.forEach((e, i) => {
+            if (i === 0 || i === work.length-1) {
+                return;
+            }
+            expect(filter(work, f)).toEqual(expect.arrayContaining([e]));
+        });
+    });
+
+    it("Start date and full title returns one", () => {
+        const f: Filter = {
+            startDate: t,
+            title: "bang",
+        };
+
+        expect(filter(work, f)).toHaveLength(1);
+        expect(filter(work, f)).toEqual([work[3]]);
+    });
+
+    it("Start date and partial title returns some work", () => {
+        const f: Filter = {
+            startDate: t,
+            title: "b",
+        };
+
+        expect(filter(work, f)).toHaveLength(3);
+        expect(filter(work, f)).toEqual(expect.arrayContaining([work[1], work[2], work[3]]));
+    });
+
+    it("Start date and full description returns one", () => {
+        const f: Filter = {
+            startDate: t,
+            description: "I am a yet another description.",
+        };
+
+        expect(filter(work, f)).toHaveLength(1);
+        expect(filter(work, f)).toEqual(expect.arrayContaining([work[4]]));
+    });
+
+    it("Start date and partial description returns one", () => {
+        const f: Filter = {
+            startDate: t,
+            description: "description",
+        };
+
+        expect(filter(work, f)).toHaveLength(4);
+        expect(filter(work, f)).toEqual(expect.arrayContaining([work[1], work[2], work[3], work[4]]));
+    });
+
+    it("Start date and empty tags returns same as without tags filter", () => {
+        const f: Filter = {
+            startDate: t,
+            tags: [],
+        };
+
+        expect(filter(work, f)).toHaveLength(work.length);
+        expect(filter(work, f)).toEqual(work);
+    });
+
+    it("Start date and full and all tags returns one", () => {
+        const f: Filter = {
+            startDate: t,
+            tags: ["a", "b"],
+        };
+
+        expect(filter(work, f)).toHaveLength(1);
+        expect(filter(work, f)).toEqual(expect.arrayContaining([work[1]]));
+    });
+
+    it("Start date and partial tags returns two", () => {
+        const f: Filter = {
+            startDate: t,
+            tags: ["c"],
+        };
+
+        expect(filter(work, f)).toHaveLength(2);
+        expect(filter(work, f)).toEqual(expect.arrayContaining([work[2], work[4]]));
     });
 });
