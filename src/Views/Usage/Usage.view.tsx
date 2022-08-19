@@ -24,6 +24,7 @@ const averagePerDay = (wk: Work[]): number => {
 type Props = {
     TotalWork: Work[],
     FilteredWork: Work[],
+    className?: string,
 };
 
 const Usage: React.FC<Props> = (props: Props) => {
@@ -36,10 +37,10 @@ const Usage: React.FC<Props> = (props: Props) => {
     }, [props.TotalWork]);
 
     return (
-        <Container className="m-2" >
+        <Container className={`max-w-2xl mx-auto my-4 ${props.className}`} >
             <h2 className="heading mb-2" >Usage</h2>
 
-            <div className="flex" >
+            <div className="md:flex" >
                 <div className={`flex ${innerContainerStyling}`} >
                     <div className={`${infographicStyling}`} >
                         <h3 className="subheading" >All time</h3>
