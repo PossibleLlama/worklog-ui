@@ -11,7 +11,6 @@ import {
     subDays as subtract
 } from "date-fns";
 
-
 export const formatRelativeDateTimeDuration = (d: Date, dur?: number): string => {
     return dur && dur > 0 ?
         `${formatRelativeDateTime(d)} for ${dur} minutes.` :
