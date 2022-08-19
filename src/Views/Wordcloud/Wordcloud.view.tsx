@@ -22,10 +22,6 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
 
     useEffect(() => {
         const values: number[] = [...new Set(props.words.map((w) => w.value))].sort();
-        // If there are more than 9 entries, only use the most popular
-        if (values.length > 9) {
-            values.slice(0, 9);
-        }
         const computedSizeRange:SizeRange[] = [];
         const midpoint = values.length > 2 ? values[values.length/2] : values[0];
         values.forEach((e) => {
@@ -51,11 +47,12 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
 
     return (
         <Container className={`max-w-2xl mx-auto my-4 ${props.className}`} >
-            <ul className="flex flex-wrap items-center justify-center text-base" >
+            <h2 className="heading mb-2" >Frequently used tags</h2>
+            <ul className="flex flex-wrap items-center justify-center text-base bg-stone-200 bg-opacity-40 rounded-lg shadow-lg" >
                 {shuffleWordData(props.words).map((word) => {
                     return (
                         <li key={word.text} className={`p-1 block relative text-gray-800 ${sizeRange.find((e) => e.value === word.value)?.style}`} >
-                            {word.text} - {word.value}
+                            {word.text}
                         </li>
                     );
                 })}
@@ -79,7 +76,7 @@ const randomPrime = 51071;
 
 // From https://stackoverflow.com/a/61634233
 // We don't care about uniqueness, just a pseudo random number
-const decimalHash = (str: string) => {
+const decimalHash = (str: string): number => {
     let sum = 0;
     for (let i = 0; i < str.length; i++)
         sum += (i + 1) * (str.codePointAt(i) ?? randomPrime) / (1 << 8);
