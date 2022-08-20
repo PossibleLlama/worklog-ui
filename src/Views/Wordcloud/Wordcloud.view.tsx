@@ -51,9 +51,14 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
             <ul className="flex flex-wrap items-center justify-center text-base bg-stone-200 bg-opacity-40 rounded-lg shadow-lg" >
                 {shuffleWordData(props.words).map((word) => {
                     return (
-                        <li key={word.text} className={`p-1 block relative text-gray-800 ${sizeRange.find((e) => e.value === word.value)?.style}`} >
-                            {word.text}
-                        </li>
+                        <div key={word.text} className="group" >
+                            <li className={`p-1 rounded-xl group-hover:bg-stone-600 text-gray-800 group-hover:text-gray-200 group-hover:font-bold transition-all ease-linear cursor-default block relative ${sizeRange.find((e) => e.value === word.value)?.style}`} >
+                                {word.text}
+                            </li>
+                            <span className="absolute w-auto p-2 m-2 min-w-max top-4 bg-stone-600 text-gray-200 rounded-md shadow-md text-xs font-bold transition-all duration-100 origin-top scale-0 group-hover:scale-100">
+                                {word.value}
+                            </span>
+                        </div>
                     );
                 })}
             </ul>
