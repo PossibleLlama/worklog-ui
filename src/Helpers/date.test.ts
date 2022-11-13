@@ -83,7 +83,8 @@ describe("Format relative date time", () => {
 
     it("Same week", () => {
         const t = new Date(now);
-        t.setDate(t.getDate() - 1);
+        // If day of week is a Monday, add day (to stay within the week), otherwise remove
+        t.getDay() == 1 ? t.setDate(t.getDate() + 1) : t.setDate(t.getDate() - 1);
         expect(formatRelativeDateTime(t)).toContain(format(t, "EEEE"));
         expect(formatRelativeDateTime(t)).toContain(format(t, "'at' HH:mm"));
     });

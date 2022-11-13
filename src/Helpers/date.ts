@@ -25,7 +25,8 @@ export const formatRelativeDateTime = (d: Date): string => {
         return `This hour at ${format(d, "HH:mm")}`;
     } else if (isSameDay(d, now)) {
         return `Today at ${format(d, "HH:mm")}`;
-    } else if (isSameWeek(d, now)) {
+    // Start the week on Monday
+    } else if (isSameWeek(d, now, { weekStartsOn: 1 })) {
         return `${format(d, "EEEE")} at ${format(d, "HH:mm")}`;
     } else {
         return format(d, "do MMMM yyyy HH:mm");
