@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 import { Work } from "@model/work";
 
-const port = 8000;
+const port = 8080;
 
 const instance = axios.create({
     baseURL: `http://localhost:${port}/`,
