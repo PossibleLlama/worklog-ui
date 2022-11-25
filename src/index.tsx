@@ -7,7 +7,7 @@ import App from "./App";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.min.css";
 
-import getWorklogs from "@api/getWorklogByRange/getWorklogByRange";
+import getWorklogs from "@api/getWorklogs/getWorklogs";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
