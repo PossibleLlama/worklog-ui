@@ -1,17 +1,43 @@
-import request from "@api/helper";
+import { instance, responseBody, workResponseToWork } from "@api/helper";
 
 import { formatRFC3339DateTime } from "@helper/date";
 
 import { Filter } from "@model/filter";
 import { Work } from "@model/work";
 
-import { exampleDay1, exampleDay2, exampleDayLastMonth, exampleDayToday } from "./example";
+export interface WorkResponse {
+    id: string;
+    revision: number;
+    title: string;
+    description?: string;
+    author?: string;
+    duration?: number;
+    tags?: string[];
+    when: string;
+    createdAt: string;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getWorklogByRange = (f: Filter): Promise<Work[]> => {
-    return request.get(`worklog`);
-    // return request.get(`worklog/${formatRFC3339DateTime(f.startDate)}`);
-    // return Promise.resolve([...exampleDay1, ...exampleDay2, ...exampleDayToday, ...exampleDayLastMonth]);
+const generateFilter = (f: Filter): string => {
+    let filter = `startDate=${formatRFC3339DateTime(f.startDate)}`;
+    if (f.endDate) {
+        filter = `${filter}&endDate=${formatRFC3339DateTime(f.endDate)}`;
+    }
+    if (f.title) {
+        filter = `${filter}&title=${f.title}`;
+    }
+    if (f.description) {
+        filter = `${filter}&description=${f.description}`;
+    }
+    if (f.tags) {
+        filter = `${filter}&tags=${f.tags.join(",")}`;
+    }
+    return filter;
 };
 
-export default getWorklogByRange;
+const getWorklogs = (f: Filter): Promise<Work[]> => {
+    return instance.get<WorkResponse[]>(`worklog?${generateFilter(f)}`).
+        then(responseBody).
+        then((w: WorkResponse[]) => w.map(workResponseToWork));
+};
+
+export default getWorklogs;

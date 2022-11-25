@@ -1,18 +1,37 @@
-import axios, { AxiosResponse } from "axios";
-
 import { Work } from "@model/work";
+import axios, { AxiosResponse } from "axios";
 
 const port = 8080;
 
-const instance = axios.create({
+export const instance = axios.create({
     baseURL: `http://localhost:${port}/`,
     timeout: 2000,
 });
 
-const request = {
-    get: (url: string): Promise<Work[]> => instance.get(url).then((res: AxiosResponse) => res.data),
-    post: (url: string, body: Work): Promise<null> => instance.post(url, body).then((res: AxiosResponse) => res.data),
-    put: (url: string, body: Work): Promise<null> => instance.put(url, body).then((res: AxiosResponse) => res.data),
-};
+export const responseBody = (response: AxiosResponse) => response.data;
 
-export default request;
+export interface WorkResponse {
+    id: string;
+    revision: number;
+    title: string;
+    description?: string;
+    author?: string;
+    duration?: number;
+    tags?: string[];
+    when: string;
+    createdAt: string;
+}
+
+export const workResponseToWork = (e: WorkResponse): Work => {
+    return {
+        ID: e.id,
+        Revision: e.revision,
+        Title: e.title,
+        Description: e.description,
+        Author: e.author,
+        Duration: e.duration,
+        Tags: e.tags,
+        When: new Date(e.when),
+        CreatedAt: new Date(e.createdAt),
+    };
+};

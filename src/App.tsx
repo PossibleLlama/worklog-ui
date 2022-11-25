@@ -7,8 +7,10 @@ import Header from "@view/Header/Header.view";
 import Worklist from "@page/Worklist/Worklist.page";
 import Discover from "@page/Discover/Discover.page";
 
-import { Filter, filter as filterFn } from "@model/filter";
+import { Filter } from "@model/filter";
 import { Work } from "@model/work";
+
+import { toast } from "react-toastify";
 
 const getLastMonday = (): Date => {
     const t = new Date();
@@ -25,7 +27,7 @@ const App: React.FC<Props> = (props: Props) => {
         startDate: getLastMonday(),
     });
 
-    const [allWork, setWork] = useState<Work[]>([]);
+    const [allWork, setAllWork] = useState<Work[]>([]);
     const [filteredWork, setFilteredWork] = useState<Work[]>([]);
 
     useEffect(() => {
@@ -33,22 +35,33 @@ const App: React.FC<Props> = (props: Props) => {
         props.getWorklogs({ startDate: new Date("2000-01-01") })
             .then((data: React.SetStateAction<Work[]>) => {
                 if (mounted) {
-                    setWork(data);
+                    setAllWork(data);
+                    mounted = false;
+                    toast.success("Updated all work items");
                 }
+            }).catch(() => {
+                toast.error("Failed to get all work items");
             });
-        return () => {
-            mounted = false;
-        };
     }, [props]);
 
     useEffect(() => {
-        setFilteredWork(filterFn(allWork, filter));
+        if (allWork.length == 0) {
+            return;
+        }
+        let mounted = true;
+        props.getWorklogs(filter)
+            .then((data: React.SetStateAction<Work[]>) => {
+                if (mounted) {
+                    setFilteredWork(data);
+                    mounted = false;
+                }
+            });
         // Props is used to enable testing with the passed function, and should not change dynamically
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allWork, filter]);
 
-    const updateFilters = (filter: Filter): void => {
-        setFilter(filter);
+    const updateFilters = (newFilter: Filter): void => {
+        setFilter(newFilter);
     };
 
     return (

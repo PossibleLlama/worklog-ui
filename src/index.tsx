@@ -7,12 +7,12 @@ import App from "./App";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.min.css";
 
-import getWorklogByRange from "@api/getWorklogByRange/getWorklogByRange";
+import getWorklogs from "@api/getWorklogByRange/getWorklogByRange";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <BrowserRouter>
-            <App getWorklogs={getWorklogByRange} />
+            <App getWorklogs={getWorklogs} />
         </BrowserRouter>
         <ToastContainer
             position="bottom-right"
