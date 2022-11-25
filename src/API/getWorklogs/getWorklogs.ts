@@ -1,21 +1,9 @@
-import { instance, responseBody, workResponseToWork } from "@api/helper";
+import { instance, responseBody, WorkResponse, workResponseToWork } from "@api/helper";
 
 import { formatRFC3339DateTime } from "@helper/date";
 
 import { Filter } from "@model/filter";
 import { Work } from "@model/work";
-
-export interface WorkResponse {
-    id: string;
-    revision: number;
-    title: string;
-    description?: string;
-    author?: string;
-    duration?: number;
-    tags?: string[];
-    when: string;
-    createdAt: string;
-}
 
 const generateFilter = (f: Filter): string => {
     let filter = `startDate=${formatRFC3339DateTime(f.startDate)}`;
