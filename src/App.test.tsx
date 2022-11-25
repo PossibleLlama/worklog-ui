@@ -9,13 +9,15 @@ import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 const mockGetWorklogs = jest.fn();
+const mockCreateWorklogs = jest.fn();
+const mockEditWorklogs = jest.fn();
 
 describe("App", () => {
     it("Has header", async () => {
         mockGetWorklogs.mockResolvedValue([]);
         render(
             <BrowserRouter>
-                <App getWorklogs={mockGetWorklogs} />
+                <App getWorklogs={mockGetWorklogs} createWork={mockCreateWorklogs} editWork={mockEditWorklogs} />
             </BrowserRouter>
         );
 
