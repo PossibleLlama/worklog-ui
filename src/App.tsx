@@ -19,6 +19,8 @@ const getLastMonday = (): Date => {
 
 type Props = {
     getWorklogs: (f: Filter) => Promise<Work[]>;
+    createWork: (w: Work) => Promise<Work>;
+    editWork: (w: Work) => Promise<Work>;
 };
 
 const App: React.FC<Props> = (props: Props) => {

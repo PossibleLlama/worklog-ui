@@ -8,11 +8,13 @@ import "./index.css";
 import "react-toastify/dist/ReactToastify.min.css";
 
 import getWorklogs from "@api/getWorklogs/getWorklogs";
+import createWorklog from "@api/createWorklog/createWorklog";
+import editWorklog from "@api/editWorklog/editWorklog";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <BrowserRouter>
-            <App getWorklogs={getWorklogs} />
+            <App getWorklogs={getWorklogs} createWork={createWorklog} editWork={editWorklog} />
         </BrowserRouter>
         <ToastContainer
             position="bottom-right"
