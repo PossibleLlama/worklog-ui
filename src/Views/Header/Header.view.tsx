@@ -2,30 +2,45 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { BookmarkIcon, FilterIcon, GlobeAltIcon } from "@heroicons/react/outline";
+import { BookmarkIcon, FilterIcon, GlobeAltIcon, PlusIcon } from "@heroicons/react/outline";
 
 import SidebarIcon from "@component/SidebarIcon/SidebarIcon.component";
-import Modal from "@view/Filters/FiltersModal.view";
+import FilterModal from "@view/Filters/FiltersModal.view";
+import CreateModal from "@view/Create/CreateModal.view";
 
 import { Filter, isEqual } from "@model/filter";
+import { Work } from "@model/work";
 
 type Props = {
     updateFilters: (filters: Filter) => void,
     currentFilters: Filter,
+    createWork: (w: Work | undefined) => Promise<Work | void>;
 };
 
 const Header: React.FC<Props> = (props: Props) => {
-    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [filterModal, setFilterModal] = useState<boolean>(false);
+    const [createModal, setCreateModal] = useState<boolean>(false);
 
     const openFilterModal = (): void => {
-        setOpenModal(true);
+        setFilterModal(true);
+    };
+
+    const openCreateModal = (): void => {
+        setCreateModal(true);
     };
 
     const closeFilterModal = (filter: Filter): void => {
-        setOpenModal(false);
+        setFilterModal(false);
         if (!isEqual(props.currentFilters, filter)) {
             props.updateFilters(filter);
             toast.success("Successfully updated filter");
+        }
+    };
+
+    const closeCreateModal = (w: Work | undefined): void => {
+        setCreateModal(false);
+        if (w !== undefined) {
+            props.createWork(w);
         }
     };
 
@@ -46,6 +61,11 @@ const Header: React.FC<Props> = (props: Props) => {
                         <FilterIcon className="h-5/6" />
                     </SidebarIcon>
                 </button>
+                <button onClick={openCreateModal}>
+                    <SidebarIcon tooltipText="New">
+                        <PlusIcon className="h-5/6" />
+                    </SidebarIcon>
+                </button>
                 <nav className="flex mr-4">
                     <Link to="/timeline" className="px-1">
                         <button>
@@ -62,11 +82,16 @@ const Header: React.FC<Props> = (props: Props) => {
                         </button>
                     </Link>
                 </nav>
-                {openModal &&
-                    <Modal
+                {filterModal &&
+                    <FilterModal
                         onClose={closeFilterModal}
                         initalFilters={props.currentFilters}
                     />}
+                {createModal &&
+                    <CreateModal
+                        onClose={closeCreateModal}
+                    />
+                }
             </div>
         </div>
     );
