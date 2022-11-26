@@ -13,6 +13,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 const updateFilterCallback = jest.fn();
+const mockCreate = jest.fn();
 const startFilter: Filter = {
     startDate: new Date("2000/01/20"),
 };
@@ -27,7 +28,7 @@ describe("Header", () => {
     it("Renders title", () => {
         render(
             <BrowserRouter>
-                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
+                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} createWork={mockCreate} />
                 <ToastContainer />
             </BrowserRouter>
         );
@@ -40,7 +41,7 @@ describe("Header", () => {
     it("Renders filter", () => {
         render(
             <BrowserRouter>
-                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
+                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} createWork={mockCreate} />
                 <ToastContainer />
             </BrowserRouter>
         );
@@ -53,7 +54,7 @@ describe("Header", () => {
     it("Renders nav", () => {
         render(
             <BrowserRouter>
-                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} />
+                <Comp updateFilters={updateFilterCallback} currentFilters={startFilter} createWork={mockCreate} />
                 <ToastContainer />
             </BrowserRouter>
         );

@@ -7,7 +7,7 @@ import Header from "@view/Header/Header.view";
 import Worklist from "@page/Worklist/Worklist.page";
 import Discover from "@page/Discover/Discover.page";
 
-import { Filter } from "@model/filter";
+import { Filter, filter as filterFunc } from "@model/filter";
 import { Work } from "@model/work";
 
 import { toast } from "react-toastify";
@@ -66,9 +66,24 @@ const App: React.FC<Props> = (props: Props) => {
         setFilter(newFilter);
     };
 
+    const createWork = (newWork: Work | undefined): Promise<Work | void> => {
+        if (newWork === undefined) {
+            return Promise.resolve(undefined);
+        }
+        return props.createWork(newWork).then((e) => {
+            setAllWork(allWork.concat(e));
+            if (filterFunc([e], filter).length > 0) {
+                setFilteredWork(filteredWork.concat(e));
+            }
+            toast.success("Created new work");
+        }).catch(() => {
+            toast.error("Failed to create new work");
+        });
+    };
+
     return (
         <Fragment>
-            <Header updateFilters={updateFilters} currentFilters={filter} />
+            <Header updateFilters={updateFilters} currentFilters={filter} createWork={createWork} />
             <Routes>
                 <Route path="/" element={<Worklist Worklist={filteredWork} />} />
                 <Route path="/timeline" element={<Worklist Worklist={filteredWork} />} />
