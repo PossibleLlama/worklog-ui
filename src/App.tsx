@@ -8,7 +8,7 @@ import Worklist from "@page/Worklist/Worklist.page";
 import Discover from "@page/Discover/Discover.page";
 
 import { Filter, filter as filterFunc } from "@model/filter";
-import { Work } from "@model/work";
+import { Work, isEqual } from "@model/work";
 
 import { toast } from "react-toastify";
 
@@ -70,7 +70,7 @@ const App: React.FC<Props> = (props: Props) => {
         if (newWork === undefined) {
             return Promise.resolve(undefined);
         }
-        return props.createWork(newWork).then((e) => {
+        return props.createWork(newWork).then((e: Work) => {
             setAllWork(allWork.concat(e));
             if (filterFunc([e], filter).length > 0) {
                 setFilteredWork(filteredWork.concat(e));
@@ -78,6 +78,21 @@ const App: React.FC<Props> = (props: Props) => {
             toast.success("Created new work");
         }).catch(() => {
             toast.error("Failed to create new work");
+        });
+    };
+
+    const editWork = (newWork: Work): Promise<Work | void> => {
+        if (isEqual(newWork, allWork.filter((e: Work) => e.ID === newWork.ID)[0])) {
+            return Promise.resolve(undefined);
+        }
+        return props.editWork(newWork).then((e: Work) => {
+            setAllWork(allWork.concat(e));
+            if (filterFunc([e], filter).length > 0) {
+                setFilteredWork(filteredWork.concat(e));
+            }
+            toast.success("Edited work");
+        }).catch(() => {
+            toast.error("Failed to edit work");
         });
     };
 

@@ -3,7 +3,7 @@ import { instance, responseBody, WorkResponse, workResponseToWork, workToWorkReq
 import { Work } from "@model/work";
 
 const editWorklog = (w: Work): Promise<Work> => {
-    return instance.post<WorkResponse>(`worklog/${w.ID}`, workToWorkRequest(w)).
+    return instance.put<WorkResponse>(`worklog/${w.ID}`, workToWorkRequest(w)).
         then(responseBody).
         then(workResponseToWork);
 };
