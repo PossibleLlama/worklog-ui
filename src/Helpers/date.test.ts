@@ -190,7 +190,6 @@ describe("Format Minutes", () => {
     });
 });
 
-
 describe("Sub days", () => {
     const t = new Date("2020-04-16T22:48:31");
 
