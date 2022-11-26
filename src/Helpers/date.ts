@@ -27,7 +27,7 @@ export const formatRelativeDateTime = (d: Date): string => {
     } else if (isSameWeek(d, now, { weekStartsOn: 1 })) {
         return `${format(d, "EEEE")} at ${format(d, "HH:mm")}`;
     } else {
-        return format(d, "do MMMM yyyy HH:mm");
+        return format(d, "do MMMM yyyy HH:mm", { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone });
     }
 };
 
