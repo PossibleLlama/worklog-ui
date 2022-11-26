@@ -81,6 +81,7 @@ const App: React.FC<Props> = (props: Props) => {
         });
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const editWork = (newWork: Work): Promise<Work | void> => {
         if (isEqual(newWork, allWork.filter((e: Work) => e.ID === newWork.ID)[0])) {
             return Promise.resolve(undefined);
