@@ -167,8 +167,8 @@ describe("Format RFC3339 Date time", () => {
         expect(formatRFC3339DateTime(t)).toContain("22:48:31");
     });
 
-    it("Full string, includes 'T'", () => {
-        expect(formatRFC3339DateTime(t)).toEqual("2020-04-16T22:48:31");
+    it("Full string, includes 'T' and 'Z'", () => {
+        expect(formatRFC3339DateTime(t)).toEqual("2020-04-16T22:48:31Z");
     });
 });
 

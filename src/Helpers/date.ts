@@ -1,5 +1,4 @@
 import {
-    format,
     isAfter as after,
     isBefore as before,
     isSameDay,
@@ -10,6 +9,7 @@ import {
     isSameYear,
     subDays as subtract
 } from "date-fns";
+import { format, utcToZonedTime } from "date-fns-tz";
 
 export const formatRelativeDateTimeDuration = (d: Date, dur?: number): string => {
     return dur && dur > 0 ?
@@ -46,11 +46,11 @@ export const dateEqual = (value: Date, compare: Date): boolean => {
 };
 
 export const formatRFC3339Date = (d: Date): string => {
-    return format(d, "yyyy-MM-dd");
+    return format(utcToZonedTime(d, Intl.DateTimeFormat().resolvedOptions().timeZone), "yyyy-MM-dd");
 };
 
 export const formatRFC3339DateTime = (d: Date): string => {
-    return format(d, "yyyy-MM-dd'T'HH:mm:ss");
+    return format(utcToZonedTime(d, Intl.DateTimeFormat().resolvedOptions().timeZone), "yyyy-MM-dd'T'HH:mm:ss'Z'");
 };
 
 export const subDays = (d: Date, amount: number): Date => {
