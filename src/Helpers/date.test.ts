@@ -316,35 +316,49 @@ describe("Is equal", () => {
 
     it("Same date time", () => {
         expect(isEqual(new Date("2020-04-16T22:48:31"), t)).toEqual(true);
+        expect(isEqual(new Date(2020, 3, 16, 22, 48, 31), t)).toEqual(true);
     });
 
     it("Different second", () => {
         expect(isEqual(new Date("2020-04-16T22:48:30"), t)).toEqual(false);
         expect(isEqual(new Date("2020-04-16T22:48:32"), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 16, 22, 48, 30), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 16, 22, 48, 32), t)).toEqual(false);
     });
 
     it("Different minute", () => {
         expect(isEqual(new Date("2020-04-16T22:47:31"), t)).toEqual(false);
         expect(isEqual(new Date("2020-04-16T22:49:31"), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 16, 22, 47, 31), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 16, 22, 49, 31), t)).toEqual(false);
     });
 
     it("Different hour", () => {
         expect(isEqual(new Date("2020-04-16T21:48:31"), t)).toEqual(false);
         expect(isEqual(new Date("2020-04-16T23:48:31"), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 16, 21, 48, 31), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 16, 23, 48, 31), t)).toEqual(false);
     });
 
     it("Different day", () => {
         expect(isEqual(new Date("2020-04-15T22:48:31"), t)).toEqual(false);
         expect(isEqual(new Date("2020-04-17T22:48:31"), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 15, 22, 48, 31), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 3, 17, 22, 48, 31), t)).toEqual(false);
     });
 
+    // Month is zero indexed when building using numbers
     it("Different month", () => {
         expect(isEqual(new Date("2020-03-16T22:48:31"), t)).toEqual(false);
         expect(isEqual(new Date("2020-05-16T22:48:31"), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 2, 16, 22, 48, 31), t)).toEqual(false);
+        expect(isEqual(new Date(2020, 4, 16, 22, 48, 31), t)).toEqual(false);
     });
 
     it("Different year", () => {
         expect(isEqual(new Date("2019-04-16T22:48:31"), t)).toEqual(false);
         expect(isEqual(new Date("2021-04-16T22:48:31"), t)).toEqual(false);
+        expect(isEqual(new Date(2019, 3, 16, 22, 48, 31), t)).toEqual(false);
+        expect(isEqual(new Date(2021, 3, 16, 22, 48, 31), t)).toEqual(false);
     });
 });
