@@ -1,4 +1,4 @@
-import { formatRFC3339DateTime } from "@helper/date";
+import { formatRFC3339DateTime, isEqual } from "@helper/date";
 
 import { Work } from "@model/work";
 
@@ -55,6 +55,6 @@ export const workToWorkRequest = (w: Work): WorkRequest => {
         author: w.Author,
         duration: w.Duration,
         tags: w.Tags,
-        when: formatRFC3339DateTime(w.When),
+        when: isEqual(w.When, new Date(0)) ? undefined : formatRFC3339DateTime(w.When),
     };
 };

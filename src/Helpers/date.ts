@@ -1,8 +1,8 @@
 import {
     isAfter as after,
     isBefore as before,
+    isEqual as equal,
     isSameDay,
-    isSameHour,
     isSameMinute,
     isSameMonth,
     isSameWeek,
@@ -21,8 +21,6 @@ export const formatRelativeDateTime = (d: Date): string => {
     const now = new Date();
     if (isSameMinute(d, now)) {
         return "A few seconds ago";
-    } else if (isSameHour(d, now)) {
-        return `This hour at ${format(d, "HH:mm")}`;
     } else if (isSameDay(d, now)) {
         return `Today at ${format(d, "HH:mm")}`;
     // Start the week on Monday
@@ -53,6 +51,10 @@ export const formatRFC3339DateTime = (d: Date): string => {
     return format(utcToZonedTime(d, Intl.DateTimeFormat().resolvedOptions().timeZone), "yyyy-MM-dd'T'HH:mm:ss'Z'");
 };
 
+export const formatMinutes = (d: Date): string => {
+    return format(utcToZonedTime(d, Intl.DateTimeFormat().resolvedOptions().timeZone), "yyyy-MM-dd'T'HH:mm");
+};
+
 export const subDays = (d: Date, amount: number): Date => {
     return subtract(d, amount);
 };
@@ -63,4 +65,8 @@ export const isBefore = (d: Date, c: Date): boolean => {
 
 export const isAfter = (d: Date, c: Date): boolean => {
     return after(d, c);
+};
+
+export const isEqual = (d: Date, c: Date): boolean => {
+    return equal(d, c);
 };
