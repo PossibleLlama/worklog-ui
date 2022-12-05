@@ -4,7 +4,7 @@ import Button from "@component/Button/Button.component";
 import Container from "@component/Container/Container.component";
 import Tag from "@component/Tags/Tags.component";
 
-import { PencilIcon, XIcon } from "@heroicons/react/outline";
+import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { formatRelativeDateTimeDuration } from "@helper/date";
 import { Work } from "@model/work";
@@ -28,7 +28,7 @@ const Details: React.FC<Props> = (props: Props) => {
                     </p>
                     <div className="w-5 h-5" >
                         <Button onClick={props.onClose} label="Close" >
-                            <XIcon className="h-5 w-5" />
+                            <XMarkIcon className="h-5 w-5" />
                         </Button>
                     </div>
                 </div>

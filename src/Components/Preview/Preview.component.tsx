@@ -3,7 +3,7 @@ import React from "react";
 import Button from "@component/Button/Button.component";
 import Container from "@component/Container/Container.component";
 
-import { EyeIcon } from "@heroicons/react/outline";
+import { EyeIcon } from "@heroicons/react/24/outline";
 
 import { Work } from "@model/work";
 import { formatRelativeDateTime } from "@helper/date";

@@ -7,7 +7,7 @@ import Timeline from "@view/Timeline/Timeline.view";
 
 import { Work } from "@model/work";
 
-import { ViewListIcon } from "@heroicons/react/outline";
+import { ListBulletIcon } from "@heroicons/react/24/outline";
 
 import { isEqual } from "date-fns";
 import { isBefore } from "@helper/date";
@@ -47,7 +47,7 @@ const Worklist: React.FC<Props> = (props: Props) => {
         <div className="flex relative justify-center min-h-full" >
             <div className="absolute top-0 right-0">
                 <Button isBasic onClick={toggleTableView} label="Toggle table and timeline">
-                    <ViewListIcon className="h-5 w-5" />
+                    <ListBulletIcon className="h-5 w-5" />
                 </Button>
             </div>
             {!detailedWork && !isTableView &&
