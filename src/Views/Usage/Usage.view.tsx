@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
 import Container from "@component/Container/Container.component";
 

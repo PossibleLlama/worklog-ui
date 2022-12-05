@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { BookmarkIcon, FilterIcon, GlobeAltIcon, PlusIcon } from "@heroicons/react/outline";
+import { BookmarkIcon, FunnelIcon, GlobeAltIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 import SidebarIcon from "@component/SidebarIcon/SidebarIcon.component";
 import FilterModal from "@view/Filters/FiltersModal.view";
@@ -58,7 +58,7 @@ const Header: React.FC<Props> = (props: Props) => {
                 </Link>
                 <button onClick={openFilterModal}>
                     <SidebarIcon tooltipText="Filter">
-                        <FilterIcon className="h-5/6" />
+                        <FunnelIcon className="h-5/6" />
                     </SidebarIcon>
                 </button>
                 <button onClick={openCreateModal}>
