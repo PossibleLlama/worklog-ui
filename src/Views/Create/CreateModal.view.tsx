@@ -13,7 +13,7 @@ const Modal: React.FC<Props> = (props: Props) => {
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [duration, setDuration] = useState<number>(15);
-    const [author, setAuthor] = useState<string | undefined>(undefined);
+    const [author, setAuthor] = useState<string>("");
     const [tags, setTags] = useState<string>("");
     const [when, setWhen] = useState<Date | undefined>(undefined);
 
@@ -25,7 +25,7 @@ const Modal: React.FC<Props> = (props: Props) => {
         }} >
             <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
                 <div className="flex w-5/6 mx-12" >
-                    <form>
+                    <form onSubmit={(e) => e.preventDefault()}>
                         <h2 className="heading font-semibold text-lg mt-4" >
                             Log new work
                         </h2>
@@ -120,7 +120,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 Description: description.trim(),
                                 Author: author,
                                 Duration: duration,
-                                Tags: tags.split(",").map(e => e.trim()),
+                                Tags: tags.split(",").map(e => e.trim()).filter(e => e.length > 0),
                                 When: when ? when : new Date(0),
                                 CreatedAt: new Date(0),
                             })} label="Confirm">
