@@ -46,37 +46,25 @@ describe("Create Modal", () => {
                     <ToastContainer />
                 </BrowserRouter>
             );
-    
+
             expect(mockClose).not.toHaveBeenCalled();
             fireEvent.click(screen.getByRole("button", { name: /Cancel/ }));
-            expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
             expect(mockClose).toHaveBeenCalledWith(undefined);
         });
 
-        it("On confirm", () => {
+        it("On confirm - without filling in fields", () => {
             render(
                 <BrowserRouter>
                     <Comp onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
-    
+
             expect(mockClose).not.toHaveBeenCalled();
-            fireEvent.click(screen.getByRole("button", { name: /Confirm/ }));
-            expect(mockClose).toHaveBeenCalled();
+            fireEvent.click(screen.getByRole("button", { name: /Cancel/ }));
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith({
-                ID: "",
-                Revision: -1,
-                Title: "",
-                Description: "",
-                Author: "",
-                Duration: 15,
-                Tags: [],
-                When: new Date(0),
-                CreatedAt: new Date(0),
-            });
+            expect(mockClose).toHaveBeenCalledWith(undefined);
         });
     });
 
@@ -89,7 +77,7 @@ describe("Create Modal", () => {
                     <ToastContainer />
                 </BrowserRouter>
             );
-    
+
             expect(screen.getByText("Title")).toBeInTheDocument();
             fireEvent.change(screen.getByLabelText("Title"), { target: { value: newTitle }});
             expect(mockClose).not.toHaveBeenCalled();
@@ -107,7 +95,9 @@ describe("Create Modal", () => {
                     <ToastContainer />
                 </BrowserRouter>
             );
-    
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            fireEvent.change(screen.getByLabelText("Title"), { target: { value: "required" }});
             expect(screen.getByText("Description")).toBeInTheDocument();
             fireEvent.change(screen.getByLabelText("Description"), { target: { value: newDesc }});
             expect(mockClose).not.toHaveBeenCalled();
@@ -125,7 +115,9 @@ describe("Create Modal", () => {
                     <ToastContainer />
                 </BrowserRouter>
             );
-    
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            fireEvent.change(screen.getByLabelText("Title"), { target: { value: "required" }});
             expect(screen.getByText("Author")).toBeInTheDocument();
             fireEvent.change(screen.getByLabelText("Author"), { target: { value: newAuth }});
             expect(mockClose).not.toHaveBeenCalled();
@@ -143,7 +135,9 @@ describe("Create Modal", () => {
                     <ToastContainer />
                 </BrowserRouter>
             );
-    
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            fireEvent.change(screen.getByLabelText("Title"), { target: { value: "required" }});
             expect(screen.getByText("Duration")).toBeInTheDocument();
             fireEvent.change(screen.getByLabelText("Duration"), { target: { value: `${newDur}` }});
             expect(mockClose).not.toHaveBeenCalled();
@@ -161,7 +155,9 @@ describe("Create Modal", () => {
                     <ToastContainer />
                 </BrowserRouter>
             );
-    
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            fireEvent.change(screen.getByLabelText("Title"), { target: { value: "required" }});
             expect(screen.getByText("When")).toBeInTheDocument();
             fireEvent.change(screen.getByLabelText("When"), { target: { value: newWhen }});
             expect(mockClose).not.toHaveBeenCalled();
