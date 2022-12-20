@@ -17,6 +17,21 @@ const Modal: React.FC<Props> = (props: Props) => {
     const [tags, setTags] = useState<string>("");
     const [when, setWhen] = useState<Date | undefined>(undefined);
 
+    const closeModal = () => {
+        title.trim().length > 0 ?
+        props.onClose({
+            ID: "",
+            Revision: -1,
+            Title: title.trim(),
+            Description: description.trim(),
+            Author: author,
+            Duration: duration,
+            Tags: tags.split(",").map(e => e.trim()).filter(e => e.length > 0),
+            When: when ? when : new Date(0),
+            CreatedAt: new Date(0),
+        }) : props.onClose(undefined);
+    };
+
     return (
         <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 flex items-center justify-center bg-stone-800" role="none" tabIndex={-1} onClick={(event) => {
             if (event.currentTarget === event.target) {
@@ -110,20 +125,13 @@ const Modal: React.FC<Props> = (props: Props) => {
                         <hr className="border-0 my-4" />
 
                         <div className="flex my-4">
-                            <Button isBasic onClick={() => props.onClose(undefined)} label="Cancel" className="mr-2" >
+                            <Button isBasic onClick={() => {
+                                    setTitle("");
+                                    closeModal();
+                                }} label="Cancel" className="mr-2" >
                                 Cancel
                             </Button>
-                            <Button isPrimary onClick={() => props.onClose({
-                                ID: "",
-                                Revision: -1,
-                                Title: title.trim(),
-                                Description: description.trim(),
-                                Author: author,
-                                Duration: duration,
-                                Tags: tags.split(",").map(e => e.trim()).filter(e => e.length > 0),
-                                When: when ? when : new Date(0),
-                                CreatedAt: new Date(0),
-                            })} label="Confirm">
+                            <Button isPrimary onClick={closeModal} label="Confirm">
                                 Confirm
                             </Button>
                         </div>
