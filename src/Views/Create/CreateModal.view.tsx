@@ -19,17 +19,17 @@ const Modal: React.FC<Props> = (props: Props) => {
 
     const closeModal = () => {
         title.trim().length > 0 ?
-        props.onClose({
-            ID: "",
-            Revision: -1,
-            Title: title.trim(),
-            Description: description.trim(),
-            Author: author,
-            Duration: duration,
-            Tags: tags.split(",").map(e => e.trim()).filter(e => e.length > 0),
-            When: when ? when : new Date(0),
-            CreatedAt: new Date(0),
-        }) : props.onClose(undefined);
+            props.onClose({
+                ID: "",
+                Revision: -1,
+                Title: title.trim(),
+                Description: description.trim(),
+                Author: author,
+                Duration: duration,
+                Tags: tags.split(",").map(e => e.trim()).filter(e => e.length > 0),
+                When: when ? when : new Date(0),
+                CreatedAt: new Date(0),
+            }) : props.onClose(undefined);
     };
 
     return (
@@ -40,7 +40,7 @@ const Modal: React.FC<Props> = (props: Props) => {
         }} >
             <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
                 <div className="flex w-5/6 mx-12" >
-                    <form onSubmit={(e) => e.preventDefault()}>
+                    <form onSubmit={(e) => e.preventDefault()} aria-label="form">
                         <h2 className="heading font-semibold text-lg mt-4" >
                             Log new work
                         </h2>
@@ -92,19 +92,6 @@ const Modal: React.FC<Props> = (props: Props) => {
                             className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
                         />
 
-                        <label htmlFor="tags" className="heading font-semibold" >
-                            Tags
-                        </label>
-                        <p className="subheading text-sm" >
-                            Comma separated list of values
-                        </p>
-                        <input type="text" id="tags" placeholder="Tags" value={tags}
-                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                setTags(event.currentTarget.value);
-                            }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
-                        />
-
                         <label htmlFor="dateTimePicker" className="heading font-semibold" >
                             When
                         </label><br />
@@ -122,13 +109,28 @@ const Modal: React.FC<Props> = (props: Props) => {
                             setWhen(new Date());
                         }} />
 
+                        <hr className="border-0 my-1" />
+
+                        <label htmlFor="tags" className="heading font-semibold" >
+                            Tags
+                        </label>
+                        <p className="subheading text-sm" >
+                            Comma separated list of values
+                        </p>
+                        <input type="text" id="tags" placeholder="Tags" value={tags}
+                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                setTags(event.currentTarget.value);
+                            }}
+                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                        />
+
                         <hr className="border-0 my-4" />
 
                         <div className="flex my-4">
                             <Button isBasic onClick={() => {
-                                    setTitle("");
-                                    closeModal();
-                                }} label="Cancel" className="mr-2" >
+                                setTitle("");
+                                closeModal();
+                            }} label="Cancel" className="mr-2" >
                                 Cancel
                             </Button>
                             <Button isPrimary onClick={closeModal} label="Confirm">
