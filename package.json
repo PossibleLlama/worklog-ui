@@ -5,10 +5,10 @@
   "scripts": {
     "start": "vite --port 3000",
     "build": "vite build",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test:all": "npm run test:type && npm run test:lint && npm test",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch --detectOpenHandles",
+    "test:coverage": "jest --coverage --detectOpenHandles",
     "test:type": "tsc",
     "test:lint": "eslint src/**/*.ts{,x}",
     "lint-fix": "eslint src/**/*.ts{,x} --fix"
@@ -40,6 +40,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
