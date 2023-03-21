@@ -6,6 +6,7 @@
     "start": "vite --port 3000",
     "build": "vite build",
     "test": "jest",
+    "test:all": "npm run test:type && npm run test:lint && npm test",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:type": "tsc",
