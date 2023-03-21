@@ -41,90 +41,100 @@ const Modal: React.FC<Props> = (props: Props) => {
             <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
                 <div className="flex w-5/6 mx-12" >
                     <form onSubmit={(e) => e.preventDefault()} aria-label="form">
-                        <h2 className="heading font-semibold text-lg mt-4" >
-                            Log new work
-                        </h2>
+                        <div className="border-0 my-4">
+                            <h2 className="heading font-semibold text-xl" >
+                                Log new work
+                            </h2>
+                        </div>
 
-                        <label htmlFor="title" className="heading font-semibold" >
-                            Title
-                        </label>
-                        <input type="text" id="title" placeholder="Title" value={title}
-                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                setTitle(event.currentTarget.value);
+                        <div>
+                            <label htmlFor="title" className="heading font-semibold" >
+                                Title
+                            </label>
+                            <input type="text" id="title" placeholder="Title" value={title}
+                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                    setTitle(event.currentTarget.value);
+                                }}
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="description" className="heading font-semibold" >
+                                Description
+                            </label>
+                            <textarea id="description" placeholder="Description" value={description}
+                                onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
+                                    setDescription(event.currentTarget.value);
+                                }}
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                                rows={2}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="tags" className="heading font-semibold" >
+                                Tags
+                            </label>
+                            <p className="subheading text-sm" >
+                                Comma separated list of values
+                            </p>
+                            <input type="text" id="tags" placeholder="Tags" value={tags}
+                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                    setTags(event.currentTarget.value);
+                                }}
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="author" className="heading font-semibold" >
+                                Author
+                            </label>
+                            <p className="subheading text-sm" >
+                                Will default to value in config file if not specified
+                            </p>
+                            <input type="text" id="author" placeholder="Author" value={author}
+                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                    setAuthor(event.currentTarget.value);
+                                }}
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="duration" className="heading font-semibold" >
+                                Duration
+                            </label>
+                            <p className="subheading text-sm" >
+                                Will default to value in config file if not specified
+                            </p>
+                            <input type="number" id="duration" placeholder="15" value={duration + 0}
+                                onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                                    setDuration(parseInt(event.currentTarget.value, 10));
+                                }}
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="dateTimePicker" className="heading font-semibold" >
+                                When
+                            </label><br />
+                            <p className="subheading text-sm" >
+                                Will default to now if not specified
+                            </p>
+                            <input id="dateTimePicker" type="datetime-local" value={when ? formatMinutes(when) : ""} onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                try {
+                                    setWhen(new Date(e.currentTarget.value));
+                                } catch (error) {
+                                    setWhen(undefined);
+                                }
                             }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
-                        />
-
-                        <label htmlFor="description" className="heading font-semibold" >
-                            Description
-                        </label>
-                        <textarea id="description" placeholder="Description" value={description}
-                            onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
-                                setDescription(event.currentTarget.value);
-                            }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
-                            rows={2}
-                        />
-
-                        <label htmlFor="author" className="heading font-semibold" >
-                            Author
-                        </label>
-                        <p className="subheading text-sm" >
-                            Will default to value in config file if not specified
-                        </p>
-                        <input type="text" id="author" placeholder="Author" value={author}
-                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                setAuthor(event.currentTarget.value);
-                            }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
-                        />
-
-                        <label htmlFor="duration" className="heading font-semibold" >
-                            Duration
-                        </label>
-                        <p className="subheading text-sm" >
-                            Will default to value in config file if not specified
-                        </p>
-                        <input type="number" id="duration" placeholder="15" value={duration + 0}
-                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                setDuration(parseInt(event.currentTarget.value, 10));
-                            }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
-                        />
-
-                        <label htmlFor="dateTimePicker" className="heading font-semibold" >
-                            When
-                        </label><br />
-                        <p className="subheading text-sm" >
-                            Will default to now if not specified
-                        </p>
-                        <input id="dateTimePicker" type="datetime-local" value={when ? formatMinutes(when) : ""} onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                            try {
-                                setWhen(new Date(e.currentTarget.value));
-                            } catch (error) {
-                                setWhen(undefined);
-                            }
-                        }}
-                        onClick={() => {
-                            setWhen(new Date());
-                        }} />
-
-                        <hr className="border-0 my-1" />
-
-                        <label htmlFor="tags" className="heading font-semibold" >
-                            Tags
-                        </label>
-                        <p className="subheading text-sm" >
-                            Comma separated list of values
-                        </p>
-                        <input type="text" id="tags" placeholder="Tags" value={tags}
-                            onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                setTags(event.currentTarget.value);
-                            }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
-                        />
-
-                        <hr className="border-0 my-4" />
+                            onClick={() => {
+                                setWhen(new Date());
+                            }} />
+                        </div>
 
                         <div className="flex my-4">
                             <Button isBasic onClick={() => {
