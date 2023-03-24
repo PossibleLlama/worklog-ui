@@ -8,8 +8,8 @@ import { ToastContainer } from "react-toastify";
 import Comp from "./CreateModal.view";
 
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
+import "@testing-library/jest-dom";
 
 const mockClose = jest.fn();
 
@@ -63,13 +63,47 @@ describe("Create Modal", () => {
             );
 
             expect(mockClose).not.toHaveBeenCalled();
-            await userEvent.click(screen.getByRole("button", { name: /Cancel/ }));
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
             expect(mockClose).toHaveBeenCalledTimes(1);
             expect(mockClose).toHaveBeenCalledWith(undefined);
+        });
+
+        it("On confirm - with default fields", async () => {
+            const newTitle = "abcd";
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.type(screen.getByLabelText("Title"), newTitle);
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ ID: "" }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Revision: -1 }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Title: newTitle }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Description: "" }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Author: "" }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Duration: -1 }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Tags: [] }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: new Date(0) }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ CreatedAt: new Date(0) }));
         });
     });
 
     describe("Fills in fields", () => {
+        const fakeNow = new Date("2019-10-23T19:38:00Z");
+
+        beforeAll(() => {
+            jest.useFakeTimers({doNotFake: ["setTimeout"]}).setSystemTime(fakeNow);
+        });
+
+        afterAll(() => {
+            jest.useRealTimers();
+        });
+
         it("Fills in title", async () => {
             const newTitle = "abcd";
             render(
@@ -85,7 +119,7 @@ describe("Create Modal", () => {
             await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
             expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({Title: newTitle}));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Title: newTitle }));
         });
 
         it("Fills in title - Submit via enter", async () => {
@@ -99,10 +133,10 @@ describe("Create Modal", () => {
 
             expect(screen.getByText("Title")).toBeInTheDocument();
             expect(mockClose).not.toHaveBeenCalled();
-            await userEvent.type(screen.getByLabelText("Title"), newTitle+"{enter}");
+            await userEvent.type(screen.getByLabelText("Title"), newTitle + "{enter}");
             expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({Title: newTitle}));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Title: newTitle }));
         });
 
         it("Fills in description", async () => {
@@ -122,7 +156,7 @@ describe("Create Modal", () => {
             await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
             expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({Description: newDesc}));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Description: newDesc }));
         });
 
         it("Fills in author", async () => {
@@ -142,7 +176,7 @@ describe("Create Modal", () => {
             await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
             expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({Author: newAuth}));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Author: newAuth }));
         });
 
         it("Fills in duration", async () => {
@@ -157,17 +191,16 @@ describe("Create Modal", () => {
             expect(screen.getByText("Title")).toBeInTheDocument();
             await userEvent.type(screen.getByLabelText("Title"), "required");
             expect(screen.getByText("Duration")).toBeInTheDocument();
-            await userEvent.type(screen.getByLabelText("Duration"), `{backspace}${newDur}`, { initialSelectionStart: 0, initialSelectionEnd: 100});
+            await userEvent.type(screen.getByLabelText("Duration"), `${newDur}`);
             expect(mockClose).not.toHaveBeenCalled();
             await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
             expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({Duration: newDur}));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Duration: newDur }));
         });
 
-        // TODO fix filling in the date field
+        // Figure out how to type in the when field correctly
         it.skip("Fills in when via text", async () => {
-            const newWhen = "2022-12-01 19:35:02";
             render(
                 <BrowserRouter>
                     <Comp onClose={mockClose} />
@@ -178,12 +211,50 @@ describe("Create Modal", () => {
             expect(screen.getByText("Title")).toBeInTheDocument();
             await userEvent.type(screen.getByLabelText("Title"), "required");
             expect(screen.getByText("When")).toBeInTheDocument();
-            await userEvent.type(screen.getByLabelText("When"), `{backspace}${newWhen}`, { initialSelectionStart: 0, initialSelectionEnd: 100});
+            await userEvent.type(screen.getByLabelText("When"), "04122022{arrowright}1935");
             expect(mockClose).not.toHaveBeenCalled();
             await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
             expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({When: new Date(newWhen)}));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: new Date("2022-12-04 19:35") }));
+        });
+
+        it("Fills in when with now when clicked", async () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Title"), "required");
+            expect(screen.getByText("When")).toBeInTheDocument();
+            await userEvent.click(screen.getByLabelText("When"));
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
+            expect(mockClose).toHaveBeenCalled();
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
+        });
+
+        it("Can clear when", async () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Title"), "required");
+            expect(screen.getByText("When")).toBeInTheDocument();
+            await userEvent.clear(screen.getByLabelText("When"));
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
+            expect(mockClose).toHaveBeenCalled();
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: new Date(0) }));
         });
     });
 });
