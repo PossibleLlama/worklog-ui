@@ -1,4 +1,4 @@
-import { Work, isEqual } from "./work";
+import { Work, isEqual, generateCreateCommand } from "./work";
 
 describe("Is equal", () => {
     const comparison: Work = {
@@ -249,5 +249,116 @@ describe("Is equal", () => {
             When: new Date(2021, 1, 1, 8, 35),
             CreatedAt: new Date(2021, 1, 1, 8, 36),
         }, comparison)).toEqual(false);
+    });
+});
+
+describe("Generate create command", () => {
+    const baseWork: Work = {
+        Title: "abc",
+        ID: "",
+        Revision: -1,
+        When: new Date(0),
+        CreatedAt: new Date(0),
+    };
+
+    it("Has title and zero when", () => {
+        expect(generateCreateCommand(baseWork))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has empty title", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Title: "" }}))
+            .toEqual("worklog create --title \"\"");
+    });
+
+    it("Has non zero when", () => {
+        expect(generateCreateCommand({...baseWork ,...{ When: new Date(1000) }}))
+            .toEqual("worklog create --title \"abc\" --when \"1970-01-01 01:00\"");
+    });
+
+    it("Has zero when", () => {
+        expect(generateCreateCommand({...baseWork ,...{ When: new Date(0) }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has description", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Description: "foo" }}))
+            .toEqual("worklog create --title \"abc\" --description \"foo\"");
+    });
+
+    it("Has empty description", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Description: "" }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has undefined description", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Description: undefined }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has author", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Author: "Alice" }}))
+            .toEqual("worklog create --title \"abc\" --author \"Alice\"");
+    });
+
+    it("Has empty author", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Author: "" }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has undefined author", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Author: undefined }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has positive duration", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Duration: 1 }}))
+            .toEqual("worklog create --title \"abc\" --duration 1");
+    });
+
+    it("Has negative duration", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Duration: -1 }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has zero duration", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Duration: 0 }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has single tag", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Tags: ["a"] }}))
+            .toEqual("worklog create --title \"abc\" --tags \"a\"");
+    });
+
+    it("Has multiple tags", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Tags: ["a", "b", "c"] }}))
+            .toEqual("worklog create --title \"abc\" --tags \"a, b, c\"");
+    });
+
+    it("Has empty tag", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Tags: [] }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has undefined tag", () => {
+        expect(generateCreateCommand({...baseWork ,...{ Tags: undefined }}))
+            .toEqual("worklog create --title \"abc\"");
+    });
+
+    it("Has all elements", () => {
+        const fullWork: Work = {
+            Title: "BANG",
+            ID: "",
+            Revision: -1,
+            Description: "I am a description",
+            Author: "Bob",
+            Duration: 1,
+            Tags: ["a", "b", "c"],
+            When: new Date(1000),
+            CreatedAt: new Date(0),
+        };
+        expect(generateCreateCommand(fullWork))
+            .toEqual("worklog create --title \"BANG\" --when \"1970-01-01 01:00\" --description \"I am a description\" --author \"Bob\" --duration 1 --tags \"a, b, c\"");
     });
 });
