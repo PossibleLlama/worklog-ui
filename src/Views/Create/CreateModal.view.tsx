@@ -12,7 +12,7 @@ type Props = {
 const Modal: React.FC<Props> = (props: Props) => {
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [duration, setDuration] = useState<number>(15);
+    const [duration, setDuration] = useState<number>(-1);
     const [author, setAuthor] = useState<string>("");
     const [tags, setTags] = useState<string>("");
     const [when, setWhen] = useState<Date | undefined>(undefined);
@@ -109,9 +109,20 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <p className="subheading text-sm" >
                                 Will default to value in config file if not specified
                             </p>
-                            <input type="number" id="duration" placeholder="15" value={duration + 0}
+                            <input
+                                type="number"
+                                id="duration"
+                                placeholder="30"
+                                value={duration > 0 ? duration : ""}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
-                                    setDuration(parseInt(event.currentTarget.value, 10));
+                                    try {
+                                        const dur = parseInt(event.currentTarget.value, 10);
+                                        if (dur > 0) {
+                                            setDuration(dur);
+                                        }
+                                    } catch(error) {
+                                        console.log("oops");
+                                    }
                                 }}
                                 className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
                             />
@@ -124,15 +135,21 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <p className="subheading text-sm" >
                                 Will default to now if not specified
                             </p>
-                            <input id="dateTimePicker" type="datetime-local" value={when ? formatMinutes(when) : ""} onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                            <input id="dateTimePicker" type="datetime-local" value={when === undefined ? "" : formatMinutes(when)} onChange={(e: React.FormEvent<HTMLInputElement>) => {
                                 try {
-                                    setWhen(new Date(e.currentTarget.value));
+                                    if (e.currentTarget.value !== "") {
+                                        setWhen(new Date(e.currentTarget.value));
+                                    } else {
+                                        setWhen(undefined);
+                                    }
                                 } catch (error) {
                                     setWhen(undefined);
                                 }
                             }}
                             onClick={() => {
-                                setWhen(new Date());
+                                if (when === undefined) {
+                                    setWhen(new Date());
+                                }
                             }} />
                         </div>
 
