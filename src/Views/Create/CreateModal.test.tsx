@@ -40,6 +40,16 @@ describe("Create Modal", () => {
     });
 
     describe("Calls close", () => {
+        const fakeNow = new Date("2019-10-23T19:38:00Z");
+
+        beforeAll(() => {
+            jest.useFakeTimers({doNotFake: ["setTimeout"]}).setSystemTime(fakeNow);
+        });
+
+        afterAll(() => {
+            jest.useRealTimers();
+        });
+
         it("On cancel", async () => {
             render(
                 <BrowserRouter>
@@ -88,7 +98,7 @@ describe("Create Modal", () => {
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Author: "" }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Duration: -1 }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Tags: [] }));
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: new Date(0) }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ CreatedAt: new Date(0) }));
         });
     });
@@ -254,7 +264,7 @@ describe("Create Modal", () => {
             await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
             expect(mockClose).toHaveBeenCalled();
             expect(mockClose).toHaveBeenCalledTimes(1);
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: new Date(0) }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
         });
     });
 });

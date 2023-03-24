@@ -27,7 +27,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                 Author: author,
                 Duration: duration,
                 Tags: tags.split(",").map(e => e.trim()).filter(e => e.length > 0),
-                When: when ? when : new Date(0),
+                When: when === undefined ? new Date() : when,
                 CreatedAt: new Date(0),
             }) : props.onClose(undefined);
     };
