@@ -51,7 +51,11 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <label htmlFor="title" className="heading font-semibold" >
                                 Title
                             </label>
-                            <input type="text" id="title" placeholder="Title" value={title}
+                            <input
+                                type="text"
+                                id="title"
+                                placeholder="Title"
+                                value={title}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTitle(event.currentTarget.value);
                                 }}
@@ -63,7 +67,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <label htmlFor="description" className="heading font-semibold" >
                                 Description
                             </label>
-                            <textarea id="description" placeholder="Description" value={description}
+                            <textarea
+                                id="description"
+                                placeholder="Description"
+                                value={description}
                                 onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
                                     setDescription(event.currentTarget.value);
                                 }}
@@ -79,7 +86,11 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <p className="subheading text-sm" >
                                 Comma separated list of values
                             </p>
-                            <input type="text" id="tags" placeholder="Tags" value={tags}
+                            <input
+                                type="text"
+                                id="tags"
+                                placeholder="Tags"
+                                value={tags}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTags(event.currentTarget.value);
                                 }}
@@ -94,7 +105,11 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <p className="subheading text-sm" >
                                 Will default to value in config file if not specified
                             </p>
-                            <input type="text" id="author" placeholder="Author" value={author}
+                            <input
+                                type="text"
+                                id="author"
+                                placeholder="Author"
+                                value={author}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setAuthor(event.currentTarget.value);
                                 }}
@@ -135,22 +150,27 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <p className="subheading text-sm" >
                                 Will default to now if not specified
                             </p>
-                            <input id="dateTimePicker" type="datetime-local" value={when === undefined ? "" : formatMinutes(when)} onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                                try {
-                                    if (e.currentTarget.value !== "") {
-                                        setWhen(new Date(e.currentTarget.value));
-                                    } else {
+                            <input
+                                id="dateTimePicker"
+                                type="datetime-local"
+                                value={when === undefined ? "" : formatMinutes(when)}
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    try {
+                                        if (e.currentTarget.value !== "") {
+                                            setWhen(new Date(e.currentTarget.value));
+                                        } else {
+                                            setWhen(undefined);
+                                        }
+                                    } catch (error) {
                                         setWhen(undefined);
                                     }
-                                } catch (error) {
-                                    setWhen(undefined);
-                                }
-                            }}
-                            onClick={() => {
-                                if (when === undefined) {
-                                    setWhen(new Date());
-                                }
-                            }} />
+                                }}
+                                onClick={() => {
+                                    if (when === undefined) {
+                                        setWhen(new Date());
+                                    }
+                                }}
+                            />
                         </div>
 
                         <div className="flex my-4">
