@@ -11,16 +11,21 @@ import { formatRelativeDateTimeDuration, formatRelativeDateTime } from "@helper/
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-// Until mocking new Date(), this will fail every now and then (and on Sunday's)
-jest.retryTimes(10);
+const fakeNow = new Date("2019-10-23T19:38:28Z");
 
 describe("App", () => {
+    beforeAll(() => {
+        jest.useFakeTimers().setSystemTime(fakeNow);
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+    });
+
     let onCloseCalled = 0;
     const onCloseFn = () => {
         onCloseCalled++;
     };
-
-    const t = new Date();
 
     beforeEach(() => {
         onCloseCalled = 0;
@@ -111,8 +116,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subYears(t, 1),
-                CreatedAt: subYears(t, 1),
+                When: subYears(fakeNow, 1),
+                CreatedAt: subYears(fakeNow, 1),
             };
 
             it("Relative time", () => {
@@ -133,8 +138,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subMonths(t, 1),
-                CreatedAt: subMonths(t, 1),
+                When: subMonths(fakeNow, 1),
+                CreatedAt: subMonths(fakeNow, 1),
             };
 
             it("Relative time", () => {
@@ -155,8 +160,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subWeeks(t, 1),
-                CreatedAt: subWeeks(t, 1),
+                When: subWeeks(fakeNow, 1),
+                CreatedAt: subWeeks(fakeNow, 1),
             };
 
             it("Relative time", () => {
@@ -177,8 +182,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subDays(t, 1),
-                CreatedAt: subDays(t, 1),
+                When: subDays(fakeNow, 1),
+                CreatedAt: subDays(fakeNow, 1),
             };
 
             it("Relative time", () => {
@@ -199,8 +204,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subHours(t, 3),
-                CreatedAt: subHours(t, 3),
+                When: subHours(fakeNow, 3),
+                CreatedAt: subHours(fakeNow, 3),
             };
 
             it("Relative time", () => {
@@ -221,8 +226,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subHours(t, 1),
-                CreatedAt: subHours(t, 1),
+                When: subHours(fakeNow, 1),
+                CreatedAt: subHours(fakeNow, 1),
             };
 
             it("Relative time", () => {
@@ -243,8 +248,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subMinutes(t, 3),
-                CreatedAt: subMinutes(t, 3),
+                When: subMinutes(fakeNow, 3),
+                CreatedAt: subMinutes(fakeNow, 3),
             };
 
             it("Relative time", () => {
@@ -265,8 +270,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subMinutes(t, 1),
-                CreatedAt: subMinutes(t, 1),
+                When: subMinutes(fakeNow, 1),
+                CreatedAt: subMinutes(fakeNow, 1),
             };
 
             it("Relative time", () => {
@@ -287,8 +292,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subSeconds(t, 3),
-                CreatedAt: subSeconds(t, 3),
+                When: subSeconds(fakeNow, 3),
+                CreatedAt: subSeconds(fakeNow, 3),
             };
 
             it("Relative time", () => {
@@ -309,8 +314,8 @@ describe("App", () => {
                 Author: "author",
                 Duration: 15,
                 Tags: ["tag1", "tag2"],
-                When: subSeconds(t, 1),
-                CreatedAt: subSeconds(t, 1),
+                When: subSeconds(fakeNow, 1),
+                CreatedAt: subSeconds(fakeNow, 1),
             };
 
             it("Relative time", () => {

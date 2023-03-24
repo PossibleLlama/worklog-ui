@@ -12,16 +12,21 @@ import {
     formatMinutes
 } from "./date";
 
-// Until mocking new Date(), this will fail every now and then (and on Sunday's)
-jest.retryTimes(10);
+const fakeNow = new Date("2019-10-23T19:38:28Z");
 
 describe("Format relative date time duration", () => {
-    const now = new Date();
+    beforeAll(() => {
+        jest.useFakeTimers().setSystemTime(fakeNow);
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+    });
 
     describe("Without duration", () => {
         // Most cases are covered by the call to format relative date time
         it("Further ago than a week without duration", () => {
-            const t = new Date(now);
+            const t = new Date();
             t.setDate(t.getDate() - 10);
             expect(formatRelativeDateTimeDuration(t)).toContain(format(t, "do MMMM yyyy"));
             expect(formatRelativeDateTimeDuration(t)).toContain(format(t, "HH:mm"));
@@ -31,7 +36,7 @@ describe("Format relative date time duration", () => {
 
     describe("With duration", () => {
         it("Further ago than a week with a positive duration", () => {
-            const t = new Date(now);
+            const t = new Date();
             const dur = 60;
             t.setDate(t.getDate() - 10);
             expect(formatRelativeDateTimeDuration(t, dur)).toContain(format(t, "do MMMM yyyy"));
@@ -41,7 +46,7 @@ describe("Format relative date time duration", () => {
         });
 
         it("Further ago than a week with a zero duration", () => {
-            const t = new Date(now);
+            const t = new Date();
             const dur = 0;
             t.setDate(t.getDate() - 10);
             expect(formatRelativeDateTimeDuration(t, dur)).toContain(format(t, "do MMMM yyyy"));
@@ -50,7 +55,7 @@ describe("Format relative date time duration", () => {
         });
 
         it("Further ago than a week with a negative duration", () => {
-            const t = new Date(now);
+            const t = new Date();
             const dur = -10;
             t.setDate(t.getDate() - 10);
             expect(formatRelativeDateTimeDuration(t, dur)).toContain(format(t, "do MMMM yyyy"));
@@ -61,30 +66,36 @@ describe("Format relative date time duration", () => {
 });
 
 describe("Format relative date time", () => {
-    const now = new Date();
+    beforeAll(() => {
+        jest.useFakeTimers().setSystemTime(fakeNow);
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+    });
 
     it("Same minute", () => {
-        const t = new Date(now);
+        const t = new Date();
         t.setSeconds(t.getSeconds() - 1);
         expect(formatRelativeDateTime(t)).toEqual("A few seconds ago");
     });
 
     it("Same hour", () => {
-        const t = new Date(now);
+        const t = new Date();
         t.setMinutes(t.getMinutes() - 1);
         expect(formatRelativeDateTime(t)).toContain("Today at");
         expect(formatRelativeDateTime(t)).toContain(format(t, "HH:mm"));
     });
 
     it("Same day", () => {
-        const t = new Date(now);
+        const t = new Date();
         t.setHours(t.getHours() - 1);
         expect(formatRelativeDateTime(t)).toContain("Today at");
         expect(formatRelativeDateTime(t)).toContain(format(t, "HH:mm"));
     });
 
     it("Same week", () => {
-        const t = new Date(now);
+        const t = new Date();
         // If day of week is a Monday, add day (to stay within the week), otherwise remove
         t.getDay() == 1 ? t.setDate(t.getDate() + 1) : t.setDate(t.getDate() - 1);
         expect(formatRelativeDateTime(t)).toContain(format(t, "EEEE"));
@@ -92,7 +103,7 @@ describe("Format relative date time", () => {
     });
 
     it("Further ago than a week", () => {
-        const t = new Date(now);
+        const t = new Date();
         t.setDate(t.getDate() - 10);
         expect(formatRelativeDateTime(t)).toContain(format(t, "do MMMM yyyy"));
         expect(formatRelativeDateTime(t)).toContain(format(t, "HH:mm"));
@@ -101,44 +112,44 @@ describe("Format relative date time", () => {
 
 // NOTE: this is equal DATE, not time
 describe("Date equal", () => {
-    const comparitor = new Date("2020-04-16T22:48:31");
+    const comparator = new Date("2020-04-16T22:48:31");
 
     it("Same instance", () => {
-        expect(dateEqual(comparitor, comparitor)).toEqual(true);
+        expect(dateEqual(comparator, comparator)).toEqual(true);
     });
 
     it("Same date time", () => {
-        expect(dateEqual(new Date("2020-04-16T22:48:31"), comparitor)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T22:48:31"), comparator)).toEqual(true);
     });
 
     it("Different second", () => {
-        expect(dateEqual(new Date("2020-04-16T22:48:30"), comparitor)).toEqual(true);
-        expect(dateEqual(new Date("2020-04-16T22:48:32"), comparitor)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T22:48:30"), comparator)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T22:48:32"), comparator)).toEqual(true);
     });
 
     it("Different minute", () => {
-        expect(dateEqual(new Date("2020-04-16T22:47:31"), comparitor)).toEqual(true);
-        expect(dateEqual(new Date("2020-04-16T22:49:31"), comparitor)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T22:47:31"), comparator)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T22:49:31"), comparator)).toEqual(true);
     });
 
     it("Different hour", () => {
-        expect(dateEqual(new Date("2020-04-16T21:48:31"), comparitor)).toEqual(true);
-        expect(dateEqual(new Date("2020-04-16T23:48:31"), comparitor)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T21:48:31"), comparator)).toEqual(true);
+        expect(dateEqual(new Date("2020-04-16T23:48:31"), comparator)).toEqual(true);
     });
 
     it("Different day", () => {
-        expect(dateEqual(new Date("2020-04-15T22:48:31"), comparitor)).toEqual(false);
-        expect(dateEqual(new Date("2020-04-17T22:48:31"), comparitor)).toEqual(false);
+        expect(dateEqual(new Date("2020-04-15T22:48:31"), comparator)).toEqual(false);
+        expect(dateEqual(new Date("2020-04-17T22:48:31"), comparator)).toEqual(false);
     });
 
     it("Different month", () => {
-        expect(dateEqual(new Date("2020-03-16T22:48:31"), comparitor)).toEqual(false);
-        expect(dateEqual(new Date("2020-05-16T22:48:31"), comparitor)).toEqual(false);
+        expect(dateEqual(new Date("2020-03-16T22:48:31"), comparator)).toEqual(false);
+        expect(dateEqual(new Date("2020-05-16T22:48:31"), comparator)).toEqual(false);
     });
 
     it("Different year", () => {
-        expect(dateEqual(new Date("2019-04-16T22:48:31"), comparitor)).toEqual(false);
-        expect(dateEqual(new Date("2021-04-16T22:48:31"), comparitor)).toEqual(false);
+        expect(dateEqual(new Date("2019-04-16T22:48:31"), comparator)).toEqual(false);
+        expect(dateEqual(new Date("2021-04-16T22:48:31"), comparator)).toEqual(false);
     });
 });
 
