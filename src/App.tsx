@@ -8,7 +8,7 @@ import Worklist from "@page/Worklist/Worklist.page";
 import Discover from "@page/Discover/Discover.page";
 
 import { Filter, filter as filterFunc } from "@model/filter";
-import { Work, isEqual } from "@model/work";
+import { Work, isEqual, generateCreateCommand } from "@model/work";
 
 import { toast } from "react-toastify";
 
@@ -77,7 +77,9 @@ const App: React.FC<Props> = (props: Props) => {
             }
             toast.success("Created new work");
         }).catch(() => {
-            toast.error("Failed to create new work");
+            toast.error("Failed to create new work - view CLI command in console");
+            console.log(generateCreateCommand(newWork));
+            console.log(newWork);
         });
     };
 
