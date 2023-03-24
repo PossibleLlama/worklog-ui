@@ -1,5 +1,7 @@
 import { Work, isEqual, generateCreateCommand } from "./work";
 
+import { formatMinutes } from "@helper/date";
+
 describe("Is equal", () => {
     const comparison: Work = {
         ID: "abc",
@@ -261,6 +263,16 @@ describe("Generate create command", () => {
         CreatedAt: new Date(0),
     };
 
+    const fakeNow = new Date("2019-10-23T19:38:28Z");
+
+    beforeAll(() => {
+        jest.useFakeTimers().setSystemTime(fakeNow);
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+    });
+
     it("Has title and zero when", () => {
         expect(generateCreateCommand(baseWork))
             .toEqual("worklog create --title \"abc\"");
@@ -272,8 +284,8 @@ describe("Generate create command", () => {
     });
 
     it("Has non zero when", () => {
-        expect(generateCreateCommand({...baseWork ,...{ When: new Date(1000) }}))
-            .toEqual("worklog create --title \"abc\" --when \"1970-01-01 01:00\"");
+        expect(generateCreateCommand({...baseWork ,...{ When: new Date() }}))
+            .toEqual("worklog create --title \"abc\" --when \"" + formatMinutes(new Date()).replace("T", " ") + "\"");
     });
 
     it("Has zero when", () => {
@@ -355,10 +367,10 @@ describe("Generate create command", () => {
             Author: "Bob",
             Duration: 1,
             Tags: ["a", "b", "c"],
-            When: new Date(1000),
+            When: new Date(),
             CreatedAt: new Date(0),
         };
         expect(generateCreateCommand(fullWork))
-            .toEqual("worklog create --title \"BANG\" --when \"1970-01-01 01:00\" --description \"I am a description\" --author \"Bob\" --duration 1 --tags \"a, b, c\"");
+            .toEqual("worklog create --title \"BANG\" --when \"" + formatMinutes(new Date()).replace("T", " ") + "\" --description \"I am a description\" --author \"Bob\" --duration 1 --tags \"a, b, c\"");
     });
 });

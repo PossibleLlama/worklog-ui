@@ -1,4 +1,4 @@
-import { formatRFC3339DateTime, isEqual as isDateEqual } from "@helper/date";
+import { formatMinutes, isEqual as isDateEqual } from "@helper/date";
 
 export interface Work {
     ID: string;
@@ -30,7 +30,7 @@ export const isEqual = (w: Work, c: Work): boolean => {
 export const generateCreateCommand = (w: Work): string => {
     return "worklog create" +
         ` --title "${w.Title}"` +
-        (isDateEqual(w.When, new Date(0)) ? "" : " --when \"" + formatRFC3339DateTime(w.When).replace("T", " ").slice(0, -4) + "\"") +
+        (isDateEqual(w.When, new Date(0)) ? "" : " --when \"" + formatMinutes(w.When).replace("T", " ") + "\"") +
         (w.Description === undefined || w.Description === "" ? "" : " --description \"" + w.Description + "\"") +
         (w.Author === undefined || w.Author === "" ? "" : " --author \"" + w.Author + "\"") +
         (w.Duration === undefined || w.Duration <= 0 ? "" : ` --duration ${w.Duration}`) +
