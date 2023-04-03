@@ -149,6 +149,23 @@ describe("Create Modal", () => {
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Title: newTitle }));
         });
 
+        it("Fills in title - Closes without submitting", async () => {
+            const newTitle = "abcd";
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Title"), newTitle);
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.click(screen.getByRole("button", { name: /Cancel/ }));
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(undefined);
+        });
+
         it("Fills in description", async () => {
             const newDesc = "abcd";
             render(

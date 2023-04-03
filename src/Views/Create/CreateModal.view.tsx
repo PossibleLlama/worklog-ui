@@ -17,6 +17,10 @@ const Modal: React.FC<Props> = (props: Props) => {
     const [tags, setTags] = useState<string>("");
     const [when, setWhen] = useState<Date | undefined>(undefined);
 
+    const cancelModal = () => {
+        props.onClose(undefined);
+    };
+
     const closeModal = () => {
         title.trim().length > 0 ?
             props.onClose({
@@ -174,13 +178,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div className="flex my-4">
-                            <Button isBasic onClick={() => {
-                                setTitle("");
-                                closeModal();
-                            }} label="Cancel" className="mr-2" >
+                            <Button isBasic onClick={cancelModal} label="Cancel" className="mr-2" >
                                 Cancel
                             </Button>
-                            <Button isPrimary onClick={closeModal} label="Confirm">
+                            <Button isPrimary isSubmit onClick={closeModal} label="Confirm">
                                 Confirm
                             </Button>
                         </div>
