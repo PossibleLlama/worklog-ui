@@ -19,6 +19,7 @@ interface SizeRange {
 
 const Wordcloud: React.FC<Props> = (props: Props) => {
     const [sizeRange, setSizeRange] = useState<SizeRange[]>([]);
+    const [wordCloudData, setWordCloudData] = useState<WordData[]>([]);
 
     useEffect(() => {
         const values: number[] = [...new Set(props.words.map((w) => w.value))].sort();
@@ -43,13 +44,14 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
         });
 
         setSizeRange(computedSizeRange);
+        setWordCloudData(shuffleWordData(props.words));
     }, [props.words]);
 
     return (
         <Container className={`max-w-2xl mx-auto my-4 ${props.className}`} >
             <h2 className="heading mb-2" >Frequently used tags</h2>
             <ul className="flex flex-wrap items-center justify-center text-base bg-stone-200 bg-opacity-40 rounded-lg shadow-lg" >
-                {shuffleWordData(props.words).map((word) => {
+                {wordCloudData.map((word) => {
                     return (
                         <div key={word.text} className="group" >
                             <li className={`p-1 rounded-xl group-hover:bg-stone-600 text-gray-800 group-hover:text-gray-200 group-hover:font-bold transition-all ease-linear cursor-default block relative ${sizeRange.find((e) => e.value === word.value)?.style}`} >
