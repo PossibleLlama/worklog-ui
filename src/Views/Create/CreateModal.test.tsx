@@ -94,9 +94,9 @@ describe("Create Modal", () => {
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ ID: "" }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Revision: -1 }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Title: newTitle }));
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Description: "" }));
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Author: "" }));
-            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Duration: -1 }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Description: undefined }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Author: undefined }));
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Duration: undefined }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Tags: [] }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ CreatedAt: new Date(0) }));
