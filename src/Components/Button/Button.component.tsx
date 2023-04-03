@@ -6,12 +6,17 @@ type Props = {
     children: React.ReactNode,
     isPrimary?: boolean,
     isBasic?: boolean,
+    isSubmit?: boolean,
     className?: string,
 };
 
 const Button: React.FC<Props> = (props: Props) => {
     return (
-        <button onClick={props.onClick} aria-label={props.label} className={`${props.className} cursor-default border-solid border-2 border-transparent rounded-md p-2 ${styleFromProps(props)}`}>
+        <button
+            onClick={props.onClick}
+            type={props.isSubmit ? "submit" : "button"}
+            aria-label={props.label}
+            className={`${props.className} cursor-default border-solid border-2 border-transparent rounded-md p-2 ${styleFromProps(props)}`}>
             {props.children}
         </button>
     );
