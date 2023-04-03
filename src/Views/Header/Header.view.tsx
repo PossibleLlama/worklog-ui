@@ -85,7 +85,7 @@ const Header: React.FC<Props> = (props: Props) => {
                 {filterModal &&
                     <FilterModal
                         onClose={closeFilterModal}
-                        initalFilters={props.currentFilters}
+                        initialFilters={props.currentFilters}
                     />}
                 {createModal &&
                     <CreateModal

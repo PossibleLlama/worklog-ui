@@ -9,15 +9,15 @@ import { formatRFC3339Date, isAfter, isBefore } from "@helper/date";
 
 type Props = {
     onClose: (filter: Filter) => void,
-    initalFilters: Filter,
+    initialFilters: Filter,
 };
 
 const Modal: React.FC<Props> = (props: Props) => {
-    const [startDate, setStartDate] = useState<Date>(props.initalFilters.startDate);
-    const [endDate, setEndDate] = useState<Date>(props.initalFilters.endDate ? props.initalFilters.endDate : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 23, 59, 59));
-    const [title, setTitle] = useState<string>(props.initalFilters.title ? props.initalFilters.title : "");
-    const [description, setDescription] = useState<string>(props.initalFilters.description ? props.initalFilters.description : "");
-    const [tags, setTags] = useState<string>(props.initalFilters.tags ? props.initalFilters.tags.join(", ") : "");
+    const [startDate, setStartDate] = useState<Date>(props.initialFilters.startDate);
+    const [endDate, setEndDate] = useState<Date>(props.initialFilters.endDate ? props.initialFilters.endDate : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 23, 59, 59));
+    const [title, setTitle] = useState<string>(props.initialFilters.title ? props.initialFilters.title : "");
+    const [description, setDescription] = useState<string>(props.initialFilters.description ? props.initialFilters.description : "");
+    const [tags, setTags] = useState<string>(props.initialFilters.tags ? props.initialFilters.tags.join(", ") : "");
 
     const updateDateSelection = (preferStartDate: boolean, event: React.FormEvent<HTMLInputElement>) => {
         const d = new Date(event.currentTarget.value);
@@ -46,7 +46,7 @@ const Modal: React.FC<Props> = (props: Props) => {
     return (
         <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 flex items-center justify-center bg-stone-800" role="none" tabIndex={-1} onClick={(event) => {
             if (event.currentTarget === event.target) {
-                props.onClose(props.initalFilters);
+                props.onClose(props.initialFilters);
             }
         }} >
             <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
@@ -115,7 +115,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                         <hr className="border-0 my-4" />
 
                         <div className="flex my-4">
-                            <Button isBasic onClick={() => props.onClose(props.initalFilters)} label="Cancel" className="mr-2" >
+                            <Button isBasic onClick={() => props.onClose(props.initialFilters)} label="Cancel" className="mr-2" >
                                 Cancel
                             </Button>
                             <Button isPrimary onClick={() => props.onClose({
