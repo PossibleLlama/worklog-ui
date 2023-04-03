@@ -40,12 +40,50 @@ describe("Word Data Array", () => {
     it("Multiple in", () => {
         expect(wordDataFrequencyOfTags([wk1, wk2])).toEqual([{text: "1234", value: 1 }, {text: "0987", value: 1}]);
         expect(wordDataFrequencyOfTags([wk1, wk1, wk2])).toEqual([{text: "1234", value: 2 }, {text: "0987", value: 1}]);
-        expect(wordDataFrequencyOfTags([wk1, wk2, wk2])).toEqual([{text: "1234", value: 1 }, {text: "0987", value: 2}]);
+        expect(wordDataFrequencyOfTags([wk1, wk2, wk2])).toEqual([{text: "0987", value: 2 }, {text: "1234", value: 1}]);
 
         expect(wordDataFrequencyOfTags([wk1, wk2])).toEqual([{text: "1234", value: 1 }, {text: "0987", value: 1}]);
         expect(wordDataFrequencyOfTags([wk1, wk1, wk2])).toEqual([{text: "1234", value: 2 }, {text: "0987", value: 1}]);
-        expect(wordDataFrequencyOfTags([wk1, wk2, wk2])).toEqual([{text: "1234", value: 1 }, {text: "0987", value: 2}]);
+        expect(wordDataFrequencyOfTags([wk1, wk2, wk2])).toEqual([{text: "0987", value: 2 }, {text: "1234", value: 1}]);
 
         expect(wordDataFrequencyOfTags([wk1, wk3])).toEqual([{text: "1234", value: 1 }, {text: "12345", value: 1}]);
+    });
+
+    it("Keeps only the highest frequency items", () => {
+        expect(wordDataFrequencyOfTags(
+            [wk1, wk1, wk1, wk1, wk1, wk2, wk2, wk2, wk3, wk3, wk3, wk3], 2)
+        ).toEqual(
+            [{text: "1234", value: 5 }, {text: "12345", value: 4}]
+        );
+        expect(wordDataFrequencyOfTags(
+            [wk1, wk1, wk1, wk1, wk2, wk2, wk2, wk3, wk3, wk3, wk3, wk3], 2)
+        ).toEqual(
+            [{text: "12345", value: 5 }, {text: "1234", value: 4}]
+        );
+        expect(wordDataFrequencyOfTags(
+            [wk1, wk1, wk2, wk2, wk2, wk3, wk3, wk3, wk3], 2)
+        ).toEqual(
+            [{text: "12345", value: 4 }, {text: "0987", value: 3}]
+        );
+        expect(wordDataFrequencyOfTags(
+            [wk1, wk1, wk1, wk1, wk1, wk2, wk2, wk2, wk3, wk3, wk3, wk3], 1)
+        ).toEqual(
+            [{text: "1234", value: 5 }]
+        );
+        expect(wordDataFrequencyOfTags(
+            [wk1, wk1, wk1, wk2, wk3], 1)
+        ).toEqual(
+            [{text: "1234", value: 3 }]
+        );
+        expect(wordDataFrequencyOfTags(
+            [wk1, wk1, wk1, wk1, wk1, wk2, wk2, wk2, wk3, wk3, wk3, wk3], 3)
+        ).toEqual(
+            [{text: "1234", value: 5 }, {text: "12345", value: 4}, {text: "0987", value: 3}]
+        );
+        expect(wordDataFrequencyOfTags(
+            [wk1, wk1, wk1, wk1, wk1, wk2, wk2, wk2, wk3, wk3, wk3, wk3])
+        ).toEqual(
+            [{text: "1234", value: 5 }, {text: "12345", value: 4}, {text: "0987", value: 3}]
+        );
     });
 });
