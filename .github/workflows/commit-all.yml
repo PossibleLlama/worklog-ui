@@ -17,7 +17,7 @@ jobs:
         cache: npm
 
     - name: Get dependencies
-      run: npm install --no-optional
+      run: npm install --omit=optional
 
     - name: Build
       run: npm run build
@@ -42,7 +42,7 @@ jobs:
         cache: npm
 
     - name: Get dependencies
-      run: npm install --no-optional
+      run: npm install
 
     - name: Check formatting
       run: npm run test:lint
@@ -64,7 +64,7 @@ jobs:
         cache: npm
 
     - name: Get dependencies
-      run: npm install --no-optional
+      run: npm install
 
     - name: Increase watchers
       run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
