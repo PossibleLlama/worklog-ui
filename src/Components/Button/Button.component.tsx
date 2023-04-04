@@ -16,7 +16,7 @@ const Button: React.FC<Props> = (props: Props) => {
             onClick={props.onClick}
             type={props.isSubmit ? "submit" : "button"}
             aria-label={props.label}
-            className={`${props.className} cursor-default border-solid border-2 border-transparent rounded-md p-2 ${styleFromProps(props)}`}>
+            className={`${props.className} cursor-default border-solid border-2 border-transparent rounded-md p-2 hover:rounded-xl sidebar-item ${styleFromProps(props)}`}>
             {props.children}
         </button>
     );

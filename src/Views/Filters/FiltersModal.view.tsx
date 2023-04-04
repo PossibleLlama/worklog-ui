@@ -52,13 +52,13 @@ const Modal: React.FC<Props> = (props: Props) => {
             <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
                 <div className="flex w-5/6 mx-12" >
                     <form>
-                        <h2 className="heading font-semibold text-lg mt-4" >
+                        <h2 className="heading-text font-semibold text-lg mt-4" >
                             Set filters
                         </h2>
 
                         <div className="flex justify-between my-2" >
                             <div>
-                                <label htmlFor="startDatePicker" className="heading font-semibold" >
+                                <label htmlFor="startDatePicker" className="heading-text font-semibold" >
                                     Start date
                                 </label><br />
                                 <input id="startDatePicker" type="date" value={formatRFC3339Date(startDate)} onChange={(e) => {
@@ -67,7 +67,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             </div>
 
                             <div>
-                                <label htmlFor="endDatePicker" className="heading font-semibold" >
+                                <label htmlFor="endDatePicker" className="heading-text font-semibold" >
                                     End date
                                 </label><br />
                                 <input id="endDatePicker" type="date" value={formatRFC3339Date(endDate)} onChange={(e) => {
@@ -78,7 +78,7 @@ const Modal: React.FC<Props> = (props: Props) => {
 
                         <hr className="border-0 my-4" />
 
-                        <label htmlFor="title" className="heading font-semibold" >
+                        <label htmlFor="title" className="heading-text font-semibold" >
                             Title
                         </label>
                         <input type="text" id="title" placeholder="Title" value={title}
@@ -88,7 +88,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
                         />
 
-                        <label htmlFor="description" className="heading font-semibold" >
+                        <label htmlFor="description" className="heading-text font-semibold" >
                             Description
                         </label>
                         <textarea id="description" placeholder="Description" value={description}
@@ -99,10 +99,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                             rows={2}
                         />
 
-                        <label htmlFor="tags" className="heading font-semibold" >
+                        <label htmlFor="tags" className="heading-text font-semibold" >
                             Tags
                         </label>
-                        <p className="subheading text-sm" >
+                        <p className="subheading-text text-sm" >
                             Comma seperated list of values
                         </p>
                         <input type="text" id="tags" placeholder="Tags" value={tags}

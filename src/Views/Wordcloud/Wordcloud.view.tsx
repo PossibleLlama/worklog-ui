@@ -49,7 +49,7 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
 
     return (
         <Container className={`max-w-2xl mx-auto my-4 ${props.className}`} >
-            <h2 className="heading mb-2" >Frequently used tags</h2>
+            <h2 className="heading-text mb-2" >Frequently used tags</h2>
             <ul className="flex flex-wrap items-center justify-center text-base bg-stone-200 bg-opacity-40 rounded-lg shadow-lg" >
                 {wordCloudData.map((word) => {
                     return (

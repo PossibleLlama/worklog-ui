@@ -17,9 +17,9 @@ const Preview: React.FC<Props> = (props: Props) => {
     return (
         <Container className="flex justify-between items-center">
             <div className="w-1/3" >
-                <h3 className="text-sm heading" >{props.work.Title}</h3>
+                <h3 className="text-sm heading-text" >{props.work.Title}</h3>
             </div>
-            <p className="text-sm subheading" >{formatRelativeDateTime(props.work.When)}</p>
+            <p className="text-sm subheading-text" >{formatRelativeDateTime(props.work.When)}</p>
             <Button onClick={() => props.onLoadDetailed(props.work)} label="Open" className="float-right" >
                 <EyeIcon className="h-5 w-5" />
             </Button>

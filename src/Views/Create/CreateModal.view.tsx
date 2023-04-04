@@ -46,13 +46,13 @@ const Modal: React.FC<Props> = (props: Props) => {
                 <div className="flex w-5/6 mx-12" >
                     <form onSubmit={(e) => e.preventDefault()} aria-label="form">
                         <div className="border-0 my-4">
-                            <h2 className="heading font-semibold text-xl" >
+                            <h2 className="heading-text font-semibold text-xl" >
                                 Log new work
                             </h2>
                         </div>
 
                         <div>
-                            <label htmlFor="title" className="heading font-semibold" >
+                            <label htmlFor="title" className="heading-text font-semibold" >
                                 Title
                             </label>
                             <input
@@ -68,7 +68,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div>
-                            <label htmlFor="description" className="heading font-semibold" >
+                            <label htmlFor="description" className="heading-text font-semibold" >
                                 Description
                             </label>
                             <textarea
@@ -84,10 +84,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div>
-                            <label htmlFor="tags" className="heading font-semibold" >
+                            <label htmlFor="tags" className="heading-text font-semibold" >
                                 Tags
                             </label>
-                            <p className="subheading text-sm" >
+                            <p className="subheading-text text-sm" >
                                 Comma separated list of values
                             </p>
                             <input
@@ -103,10 +103,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div>
-                            <label htmlFor="author" className="heading font-semibold" >
+                            <label htmlFor="author" className="heading-text font-semibold" >
                                 Author
                             </label>
-                            <p className="subheading text-sm" >
+                            <p className="subheading-text text-sm" >
                                 Will default to value in config file if not specified
                             </p>
                             <input
@@ -122,10 +122,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div>
-                            <label htmlFor="duration" className="heading font-semibold" >
+                            <label htmlFor="duration" className="heading-text font-semibold" >
                                 Duration
                             </label>
-                            <p className="subheading text-sm" >
+                            <p className="subheading-text text-sm" >
                                 Will default to value in config file if not specified
                             </p>
                             <input
@@ -148,10 +148,10 @@ const Modal: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div>
-                            <label htmlFor="dateTimePicker" className="heading font-semibold" >
+                            <label htmlFor="dateTimePicker" className="heading-text font-semibold" >
                                 When
                             </label><br />
-                            <p className="subheading text-sm" >
+                            <p className="subheading-text text-sm" >
                                 Will default to now if not specified
                             </p>
                             <input
