@@ -24,17 +24,17 @@
         transition-all duration-100 origin-top scale-0
     }
 
-    .heading {
+    .heading-text {
         @apply
         font-bold text-gray-800
     }
 
-    .subheading {
+    .subheading-text {
         @apply
         font-light text-gray-800
     }
 
-    .bodytext {
+    .body-text {
         @apply
         font-normal text-gray-800
     }

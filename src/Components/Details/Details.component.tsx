@@ -20,10 +20,10 @@ const Details: React.FC<Props> = (props: Props) => {
         <Container className={`${props.className}`} >
             <div className="p-6 px-8" >
                 <div className="flex justify-between my-1">
-                    <h2 className="w-1/2 text-lg heading" >
+                    <h2 className="w-1/2 text-lg heading-text" >
                         {props.work.Title}
                     </h2>
-                    <p className="text-base subheading w-1/3" >
+                    <p className="text-base subheading-text w-1/3" >
                         {formatRelativeDateTimeDuration(props.work.When, props.work.Duration)}
                     </p>
                     <div className="w-5 h-5" >

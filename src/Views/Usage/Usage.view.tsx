@@ -38,36 +38,36 @@ const Usage: React.FC<Props> = (props: Props) => {
 
     return (
         <Container className={`max-w-2xl mx-auto my-4 ${props.className}`} >
-            <h2 className="heading mb-2" >Usage</h2>
+            <h2 className="heading-text mb-2" >Usage</h2>
 
             <div className="md:flex" >
                 <div className={`flex ${innerContainerStyling}`} >
                     <div className={`${infographicStyling}`} >
-                        <h3 className="subheading" >All time</h3>
+                        <h3 className="subheading-text" >All time</h3>
                         <p className="bodytext" >{props.TotalWork.length}</p>
                     </div>
 
                     <div className={`${infographicStyling}`} >
-                        <h3 className="subheading" >In filter</h3>
+                        <h3 className="subheading-text" >In filter</h3>
                         <p className="bodytext" >{props.FilteredWork.length}</p>
                     </div>
 
                     <div className={`${infographicStyling}`} >
-                        <h3 className="subheading" >This month</h3>
+                        <h3 className="subheading-text" >This month</h3>
                         <p className="bodytext" >{logsWithinAMonth.length}</p>
                     </div>
 
                     <div className={`${infographicStyling}`} >
-                        <h3 className="subheading" >Today</h3>
+                        <h3 className="subheading-text" >Today</h3>
                         <p className="bodytext" >{logsToday.length}</p>
                     </div>
                 </div>
 
                 <div className={`${innerContainerStyling}`} >
-                    <h3 className="subheading p-2" >Average per day</h3>
+                    <h3 className="subheading-text p-2" >Average per day</h3>
                     <div className="flex" >
                         <div className={`${infographicStyling}`} >
-                            <h4 className="subheading" >All time</h4>
+                            <h4 className="subheading-text" >All time</h4>
                             <div className="flex" >
                                 <p className="bodytext" >{averagePerDay(props.TotalWork)}</p>
                                 {averagePerDay(props.TotalWork) > logsToday.length &&
@@ -80,7 +80,7 @@ const Usage: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div className={`${infographicStyling}`} >
-                            <h4 className="subheading" >This month</h4>
+                            <h4 className="subheading-text" >This month</h4>
                             <div className="flex" >
                                 <p className="bodytext" >{averagePerDay(logsWithinAMonth)}</p>
                                 {averagePerDay(logsWithinAMonth) > logsToday.length &&
