@@ -35,7 +35,7 @@ const Table: React.FC<Props> = (props: Props) => {
                     {props.Worklist.map((wl) => {
                         return (
                             <tr
-                                className="bg-white border-b transition duration-300 ease-in-out hover:bg-stone-100 font-light"
+                                className="bg-white border-b ease-in-out hover:bg-stone-100 font-light flip-flop"
                                 key={wl.ID}
                             >
                                 <td className="text-gray-900 px-6 py-4">
