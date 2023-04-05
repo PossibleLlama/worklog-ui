@@ -42,7 +42,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                 props.onClose(undefined);
             }
         }} >
-            <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
+            <div className="bg-stone-100 opacity-100 rounded-lg p-10 colour-text-primary-no-hover" >
                 <div className="flex w-5/6 mx-12" >
                     <form onSubmit={(e) => e.preventDefault()} aria-label="form">
                         <div className="border-0 my-4">
@@ -63,7 +63,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTitle(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
@@ -78,7 +78,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
                                     setDescription(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                                 rows={2}
                             />
                         </div>
@@ -98,7 +98,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTags(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
@@ -117,7 +117,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setAuthor(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
@@ -143,7 +143,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                         console.log("oops");
                                     }
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
@@ -174,7 +174,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                         setWhen(new Date());
                                     }
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 

@@ -50,7 +50,7 @@ const Header: React.FC<Props> = (props: Props) => {
             <div className="fixed top-0 left-0 w-screen h-16 z-10 bg-stone-100 shadow-lg flex px-2 justify-between items-center">
                 <Link to="/" className="sidebar-item ml-4 px-4 rounded-3xl hover:rounded-xl group">
                     <button className="cursor-default">
-                        <div className="heading-text text-lg">Worklog</div>
+                        <div className="heading-text text-lg colour-text-primary">Worklog</div>
                         <span className="sidebar-tooltip group-hover:scale-100 top-14">
                             Home
                         </span>
@@ -58,26 +58,26 @@ const Header: React.FC<Props> = (props: Props) => {
                 </Link>
                 <button onClick={openFilterModal}>
                     <SidebarIcon tooltipText="Filter">
-                        <FunnelIcon className="h-5/6" />
+                        <FunnelIcon className="h-5/6 colour-text-primary" />
                     </SidebarIcon>
                 </button>
                 <button onClick={openCreateModal}>
                     <SidebarIcon tooltipText="New">
-                        <PlusIcon className="h-5/6" />
+                        <PlusIcon className="h-5/6 colour-text-primary" />
                     </SidebarIcon>
                 </button>
                 <nav className="flex mr-4">
                     <Link to="/timeline" className="px-1">
                         <button>
                             <SidebarIcon tooltipText="Timeline">
-                                <BookmarkIcon className="h-5/6" />
+                                <BookmarkIcon className="h-5/6 colour-text-primary" />
                             </SidebarIcon>
                         </button>
                     </Link>
                     <Link to="/discover" className="px-1">
                         <button>
                             <SidebarIcon tooltipText="Discover">
-                                <GlobeAltIcon className="h-5/6" />
+                                <GlobeAltIcon className="h-5/6 colour-text-primary" />
                             </SidebarIcon>
                         </button>
                     </Link>

@@ -56,7 +56,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             Set filters
                         </h2>
 
-                        <div className="flex justify-between my-2" >
+                        <div className="flex justify-between my-2 colour-text-primary-no-hover" >
                             <div>
                                 <label htmlFor="startDatePicker" className="heading-text" >
                                     Start date
@@ -68,7 +68,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                     onChange={(e) => {
                                         updateDateSelection(true, e);
                                     }}
-                                    className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                    className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                                 />
                             </div>
 
@@ -83,7 +83,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                     onChange={(e) => {
                                         updateDateSelection(false, e);
                                     }}
-                                    className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                    className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                                 />
                             </div>
                         </div>
@@ -97,7 +97,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                 setTitle(event.currentTarget.value);
                             }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                         />
 
                         <label htmlFor="description" className="heading-text" >
@@ -107,7 +107,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
                                 setDescription(event.currentTarget.value);
                             }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                             rows={2}
                         />
 
@@ -121,7 +121,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                 setTags(event.currentTarget.value);
                             }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"
                         />
 
                         <hr className="border-0 my-4" />
