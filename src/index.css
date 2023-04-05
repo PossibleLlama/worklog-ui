@@ -11,7 +11,7 @@
     .sidebar-item {
         @apply
         flip-flop
-        bg-stone-200 hover:bg-stone-600 text-gray-800 hover:text-gray-200
+        bg-stone-200 hover:bg-stone-600 colour-text-primary
         cursor-default
     }
 
@@ -25,7 +25,7 @@
         @apply absolute
         flip-flop
         w-auto p-2 m-2 min-w-max top-12
-        bg-stone-600 text-gray-200
+        bg-stone-600 colour-text-primary-no-hover-inverse
         rounded-md shadow-md
         text-xs font-bold
         origin-top scale-0
@@ -33,16 +33,31 @@
 
     .heading-text {
         @apply
-        font-bold text-gray-800
+        font-bold colour-text-primary-no-hover
     }
 
     .subheading-text {
         @apply
-        font-light text-gray-800
+        font-light colour-text-primary-no-hover
     }
 
     .body-text {
         @apply
-        font-normal text-gray-800
+        font-normal colour-text-primary-no-hover
+    }
+
+    .colour-text-primary {
+        @apply
+        text-gray-800 hover:text-gray-200
+    }
+
+    .colour-text-primary-no-hover {
+        @apply
+        text-gray-800
+    }
+
+    .colour-text-primary-no-hover-inverse {
+        @apply
+        text-gray-200
     }
 }

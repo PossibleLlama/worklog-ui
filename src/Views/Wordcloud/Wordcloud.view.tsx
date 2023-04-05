@@ -53,8 +53,8 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
             <ul className="flex flex-wrap items-center justify-center text-base bg-stone-200 bg-opacity-40 rounded-lg shadow-lg" >
                 {wordCloudData.map((word) => {
                     return (
-                        <div key={word.text} className="group" >
-                            <li className={`p-1 rounded-xl group-hover:bg-stone-600 text-gray-800 group-hover:text-gray-200 cursor-default block relative flip-flop ${sizeRange.find((e) => e.value === word.value)?.style}`} >
+                        <div key={word.text} className="group" > 
+                            <li className={`p-1 rounded-xl group-hover:bg-stone-600 group-hover:text-gray-200 cursor-default block relative colour-text-primary flip-flop ${sizeRange.find((e) => e.value === word.value)?.style}`} >
                                 {word.text}
                             </li>
                             <span className="absolute w-auto p-2 m-2 min-w-max top-4 bg-stone-600 text-gray-200 rounded-md shadow-md text-xs origin-top scale-0 group-hover:scale-100 heading-text flip-flop">
