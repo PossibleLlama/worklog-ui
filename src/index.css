@@ -3,10 +3,16 @@
 @tailwind utilities;
 
 @layer components {
+    .flip-flop {
+        @apply
+        transition-all ease-linear duration-100
+    }
+
     .sidebar-item {
         @apply
+        flip-flop
         bg-stone-200 hover:bg-stone-600 text-gray-800 hover:text-gray-200
-        transition-all ease-linear cursor-default
+        cursor-default
     }
 
     .sidebar-icon {
@@ -17,11 +23,12 @@
 
     .sidebar-tooltip {
         @apply absolute
+        flip-flop
         w-auto p-2 m-2 min-w-max top-12
         bg-stone-600 text-gray-200
         rounded-md shadow-md
         text-xs font-bold
-        transition-all duration-100 origin-top scale-0
+        origin-top scale-0
     }
 
     .heading-text {
