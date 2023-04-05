@@ -50,7 +50,7 @@ const Header: React.FC<Props> = (props: Props) => {
             <div className="fixed top-0 left-0 w-screen h-16 z-10 bg-stone-100 shadow-lg flex px-2 justify-between items-center">
                 <Link to="/" className="sidebar-item ml-4 px-4 rounded-3xl hover:rounded-xl group">
                     <button className="cursor-default">
-                        <div className="text-lg font-bold">Worklog</div>
+                        <div className="heading-text text-lg">Worklog</div>
                         <span className="sidebar-tooltip group-hover:scale-100 top-14">
                             Home
                         </span>

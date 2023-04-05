@@ -57,7 +57,7 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
                             <li className={`p-1 rounded-xl group-hover:bg-stone-600 text-gray-800 group-hover:text-gray-200 cursor-default block relative flip-flop ${sizeRange.find((e) => e.value === word.value)?.style}`} >
                                 {word.text}
                             </li>
-                            <span className="absolute w-auto p-2 m-2 min-w-max top-4 bg-stone-600 text-gray-200 rounded-md shadow-md text-xs font-bold origin-top scale-0 group-hover:scale-100 flip-flop">
+                            <span className="absolute w-auto p-2 m-2 min-w-max top-4 bg-stone-600 text-gray-200 rounded-md shadow-md text-xs origin-top scale-0 group-hover:scale-100 heading-text flip-flop">
                                 {word.value}
                             </span>
                         </div>

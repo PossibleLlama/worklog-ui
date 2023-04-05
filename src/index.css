@@ -5,7 +5,7 @@
 @layer components {
     .flip-flop {
         @apply
-        transition-all ease-linear duration-100
+        transition-all ease-linear duration-150
     }
 
     .sidebar-item {

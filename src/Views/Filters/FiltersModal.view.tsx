@@ -52,54 +52,66 @@ const Modal: React.FC<Props> = (props: Props) => {
             <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
                 <div className="flex w-5/6 mx-12" >
                     <form>
-                        <h2 className="heading-text font-semibold text-lg mt-4" >
+                        <h2 className="heading-text text-lg mt-4" >
                             Set filters
                         </h2>
 
                         <div className="flex justify-between my-2" >
                             <div>
-                                <label htmlFor="startDatePicker" className="heading-text font-semibold" >
+                                <label htmlFor="startDatePicker" className="heading-text" >
                                     Start date
                                 </label><br />
-                                <input id="startDatePicker" type="date" value={formatRFC3339Date(startDate)} onChange={(e) => {
-                                    updateDateSelection(true, e);
-                                }} />
+                                <input
+                                    id="startDatePicker"
+                                    type="date"
+                                    value={formatRFC3339Date(startDate)}
+                                    onChange={(e) => {
+                                        updateDateSelection(true, e);
+                                    }}
+                                    className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                />
                             </div>
 
                             <div>
-                                <label htmlFor="endDatePicker" className="heading-text font-semibold" >
+                                <label htmlFor="endDatePicker" className="heading-text" >
                                     End date
                                 </label><br />
-                                <input id="endDatePicker" type="date" value={formatRFC3339Date(endDate)} onChange={(e) => {
-                                    updateDateSelection(false, e);
-                                }} />
+                                <input
+                                    id="endDatePicker"
+                                    type="date"
+                                    value={formatRFC3339Date(endDate)}
+                                    onChange={(e) => {
+                                        updateDateSelection(false, e);
+                                    }}
+                                    className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
+                                />
                             </div>
                         </div>
 
                         <hr className="border-0 my-4" />
 
-                        <label htmlFor="title" className="heading-text font-semibold" >
+                        <label htmlFor="title" className="heading-text" >
                             Title
                         </label>
                         <input type="text" id="title" placeholder="Title" value={title}
                             onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                 setTitle(event.currentTarget.value);
                             }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                         />
 
-                        <label htmlFor="description" className="heading-text font-semibold" >
+                        <label htmlFor="description" className="heading-text" >
                             Description
                         </label>
                         <textarea id="description" placeholder="Description" value={description}
                             onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
                                 setDescription(event.currentTarget.value);
                             }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                             rows={2}
                         />
 
-                        <label htmlFor="tags" className="heading-text font-semibold" >
+                        <label htmlFor="tags" className="heading-text" >
                             Tags
                         </label>
                         <p className="subheading-text text-sm" >
@@ -109,7 +121,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                 setTags(event.currentTarget.value);
                             }}
-                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                            className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                         />
 
                         <hr className="border-0 my-4" />
