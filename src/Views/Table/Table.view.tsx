@@ -35,22 +35,22 @@ const Table: React.FC<Props> = (props: Props) => {
                     {props.Worklist.map((wl) => {
                         return (
                             <tr
-                                className="bg-white border-b ease-in-out hover:bg-stone-100 font-light flip-flop"
+                                className="bg-white border-b ease-in-out hover:bg-stone-100 subheading-text flip-flop"
                                 key={wl.ID}
                             >
-                                <td className="text-gray-900 px-6 py-4">
+                                <td className="px-6 py-4">
                                     {wl.Title}
                                 </td>
-                                <td className="text-gray-900 px-6 py-4 whitespace-nowrap">
+                                <td className="px-6 py-4 whitespace-nowrap">
                                     {formatRelativeDateTime(wl.When)}
                                 </td>
-                                <td className="text-gray-900 px-6 py-4 whitespace-nowrap">
+                                <td className="px-6 py-4 whitespace-nowrap">
                                     {wl.Duration}
                                 </td>
-                                <td className="text-gray-900 px-6 py-4">
+                                <td className="px-6 py-4">
                                     {wl.Tags?.join(", ")}
                                 </td>
-                                <td className="text-gray-900 px-6 py-4">
+                                <td className="px-6 py-4">
                                     {wl.Description}
                                 </td>
                             </tr>

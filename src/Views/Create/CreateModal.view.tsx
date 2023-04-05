@@ -46,13 +46,13 @@ const Modal: React.FC<Props> = (props: Props) => {
                 <div className="flex w-5/6 mx-12" >
                     <form onSubmit={(e) => e.preventDefault()} aria-label="form">
                         <div className="border-0 my-4">
-                            <h2 className="heading-text font-semibold text-xl" >
+                            <h2 className="heading-text text-xl" >
                                 Log new work
                             </h2>
                         </div>
 
                         <div>
-                            <label htmlFor="title" className="heading-text font-semibold" >
+                            <label htmlFor="title" className="heading-text" >
                                 Title
                             </label>
                             <input
@@ -63,12 +63,12 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTitle(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="description" className="heading-text font-semibold" >
+                            <label htmlFor="description" className="heading-text" >
                                 Description
                             </label>
                             <textarea
@@ -78,13 +78,13 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
                                     setDescription(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                                 rows={2}
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="tags" className="heading-text font-semibold" >
+                            <label htmlFor="tags" className="heading-text" >
                                 Tags
                             </label>
                             <p className="subheading-text text-sm" >
@@ -98,12 +98,12 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTags(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="author" className="heading-text font-semibold" >
+                            <label htmlFor="author" className="heading-text" >
                                 Author
                             </label>
                             <p className="subheading-text text-sm" >
@@ -117,12 +117,12 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setAuthor(event.currentTarget.value);
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="duration" className="heading-text font-semibold" >
+                            <label htmlFor="duration" className="heading-text" >
                                 Duration
                             </label>
                             <p className="subheading-text text-sm" >
@@ -143,12 +143,12 @@ const Modal: React.FC<Props> = (props: Props) => {
                                         console.log("oops");
                                     }
                                 }}
-                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 font-medium text-base w-full"
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="dateTimePicker" className="heading-text font-semibold" >
+                            <label htmlFor="dateTimePicker" className="heading-text" >
                                 When
                             </label><br />
                             <p className="subheading-text text-sm" >
@@ -174,6 +174,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                                         setWhen(new Date());
                                     }
                                 }}
+                                className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 text-gray-800 rounded-md my-2 px-2 w-full body-text"
                             />
                         </div>
 
