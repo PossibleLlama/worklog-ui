@@ -44,6 +44,7 @@ const Header: React.FC<Props> = (props: Props) => {
         }
     };
 
+    // This component uses "<button>" components because of the onclick
     return (
         <div>
             <div className="mb-16" />
