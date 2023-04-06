@@ -58,7 +58,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <input
                                 type="text"
                                 id="title"
-                                placeholder="Title"
+                                placeholder="Summary of work"
                                 value={title}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTitle(event.currentTarget.value);
@@ -73,7 +73,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             </label>
                             <textarea
                                 id="description"
-                                placeholder="Description"
+                                placeholder="Details of what has been done."
                                 value={description}
                                 onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
                                     setDescription(event.currentTarget.value);
@@ -93,7 +93,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <input
                                 type="text"
                                 id="tags"
-                                placeholder="Tags"
+                                placeholder="Categories that the work fits into."
                                 value={tags}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setTags(event.currentTarget.value);
@@ -112,7 +112,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                             <input
                                 type="text"
                                 id="author"
-                                placeholder="Author"
+                                placeholder="Who is writing this"
                                 value={author}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     setAuthor(event.currentTarget.value);
@@ -126,7 +126,8 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 Duration
                             </label>
                             <p className="subheading-text text-sm" >
-                                Will default to value in config file if not specified
+                                Number of minutes taken to complete the work.
+                                Will default to value in config file if not specified.
                             </p>
                             <input
                                 type="number"
@@ -138,9 +139,9 @@ const Modal: React.FC<Props> = (props: Props) => {
                                         if (event.currentTarget.value === "") {
                                             setDuration(-1);
                                         } else {
-                                        const dur = parseInt(event.currentTarget.value, 10);
-                                        if (dur > 0) {
-                                            setDuration(dur);
+                                            const dur = parseInt(event.currentTarget.value, 10);
+                                            if (dur > 0) {
+                                                setDuration(dur);
                                             }
                                         }
                                     } catch(error) {
