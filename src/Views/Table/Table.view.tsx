@@ -12,21 +12,21 @@ const Table: React.FC<Props> = (props: Props) => {
     return (
         <div className="max-w-full my-4">
             <table className="min-w-full shadow-lg text-sm text-left">
-                <thead className="border-b colour-bg-primary-lighter-no-hover">
+                <thead className="border-b colour-bg-primary-lighter-no-hover colour-text-primary-no-hover">
                     <tr>
-                        <th scope="col" className="text-gray-900 px-6 py-4">
+                        <th scope="col" className="px-6 py-4">
                             Title
                         </th>
-                        <th scope="col" className="text-gray-900 px-6 py-4">
+                        <th scope="col" className="px-6 py-4">
                             When
                         </th>
-                        <th scope="col" className="text-gray-900 px-6 py-4">
+                        <th scope="col" className="px-6 py-4">
                             Duration
                         </th>
-                        <th scope="col" className="text-gray-900 px-6 py-4">
+                        <th scope="col" className="px-6 py-4">
                             Tags
                         </th>
-                        <th scope="col" className="text-gray-900 px-6 py-4">
+                        <th scope="col" className="px-6 py-4">
                             Description
                         </th>
                     </tr>
