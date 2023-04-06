@@ -12,9 +12,9 @@ type Props = {
 const Modal: React.FC<Props> = (props: Props) => {
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+    const [tags, setTags] = useState<string>("");
     const [duration, setDuration] = useState<number>(-1);
     const [author, setAuthor] = useState<string>("");
-    const [tags, setTags] = useState<string>("");
     const [when, setWhen] = useState<Date | undefined>(undefined);
 
     const cancelModal = () => {
