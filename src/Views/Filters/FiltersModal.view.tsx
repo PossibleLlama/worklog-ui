@@ -49,9 +49,9 @@ const Modal: React.FC<Props> = (props: Props) => {
                 props.onClose(props.initialFilters);
             }
         }} >
-            <div className="opacity-100 rounded-lg p-10 colour-bg-primary-lighter-no-hover" >
-                <div className="flex w-5/6 mx-12" >
-                    <form>
+            <div className="opacity-100 rounded-lg p-10 w-1/2 colour-bg-primary-lighter-no-hover" >
+                <div className="flex mx-12" >
+                    <form aria-label="form" className="min-w-full">
                         <h2 className="heading-text text-lg mt-4" >
                             Set filters
                         </h2>

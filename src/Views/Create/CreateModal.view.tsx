@@ -42,9 +42,9 @@ const Modal: React.FC<Props> = (props: Props) => {
                 props.onClose(undefined);
             }
         }} >
-            <div className="opacity-100 rounded-lg p-10 colour-bg-primary-lighter-no-hover colour-text-primary-no-hover" >
-                <div className="flex w-5/6 mx-12" >
-                    <form onSubmit={(e) => e.preventDefault()} aria-label="form">
+            <div className="opacity-100 rounded-lg p-10 w-1/2 colour-bg-primary-lighter-no-hover colour-text-primary-no-hover" >
+                <div className="flex mx-12" >
+                    <form onSubmit={(e) => e.preventDefault()} aria-label="form" className="min-w-full">
                         <div className="border-0 my-4">
                             <h2 className="heading-text text-xl" >
                                 Log new work
