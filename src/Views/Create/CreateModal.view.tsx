@@ -135,12 +135,16 @@ const Modal: React.FC<Props> = (props: Props) => {
                                 value={duration > 0 ? duration : ""}
                                 onChange={(event: React.FormEvent<HTMLInputElement>) => {
                                     try {
+                                        if (event.currentTarget.value === "") {
+                                            setDuration(-1);
+                                        } else {
                                         const dur = parseInt(event.currentTarget.value, 10);
                                         if (dur > 0) {
                                             setDuration(dur);
+                                            }
                                         }
                                     } catch(error) {
-                                        console.log("oops");
+                                        setDuration(-1);
                                     }
                                 }}
                                 className="border-2 border-stone-200 focus:outline-none focus:border-stone-600 rounded-md my-2 px-2 w-full body-text"

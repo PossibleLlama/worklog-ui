@@ -226,6 +226,27 @@ describe("Create Modal", () => {
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Duration: newDur }));
         });
 
+        it("Fills in duration - Can remove", async () => {
+            const newDur = 20;
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Title"), "required");
+            expect(screen.getByText("Duration")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Duration"), `${newDur}`);
+            await userEvent.type(screen.getByLabelText("Duration"), "{backspace}{backspace}");
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
+            expect(mockClose).toHaveBeenCalled();
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ Duration: undefined }));
+        });
+
         // Figure out how to type in the when field correctly
         it.skip("Fills in when via text", async () => {
             render(
