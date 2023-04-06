@@ -60,4 +60,39 @@
         @apply
         text-gray-200
     }
+
+    .colour-bg-action {
+        @apply
+        bg-amber-300 hover:bg-orange-700
+    }
+
+    .colour-bg-primary-darker-no-hover {
+        @apply
+        bg-stone-800
+    }
+
+    .colour-bg-primary-dark-no-hover {
+        @apply
+        bg-stone-600
+    }
+
+    .colour-bg-primary-light {
+        @apply
+        bg-stone-200 hover:bg-stone-800
+    }
+
+    .colour-bg-primary-light-no-hover {
+        @apply
+        bg-stone-200
+    }
+
+    .colour-bg-primary-lighter-no-hover {
+        @apply
+        bg-stone-100
+    }
+
+    .colour-bg-primary-highlight {
+        @apply
+        bg-white hover:bg-stone-100
+    }
 }

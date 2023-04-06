@@ -10,9 +10,9 @@ type Props = {
 
 const Table: React.FC<Props> = (props: Props) => {
     return (
-        <div className="max-w-full">
+        <div className="max-w-full my-4">
             <table className="min-w-full shadow-lg text-sm text-left">
-                <thead className="bg-stone-100 border-b">
+                <thead className="border-b colour-bg-primary-lighter-no-hover">
                     <tr>
                         <th scope="col" className="text-gray-900 px-6 py-4">
                             Title
@@ -35,7 +35,7 @@ const Table: React.FC<Props> = (props: Props) => {
                     {props.Worklist.map((wl) => {
                         return (
                             <tr
-                                className="bg-white border-b ease-in-out hover:bg-stone-100 subheading-text flip-flop"
+                                className="border-b ease-in-out colour-bg-primary-highlight subheading-text flip-flop"
                                 key={wl.ID}
                             >
                                 <td className="px-6 py-4">
