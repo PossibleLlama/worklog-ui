@@ -50,14 +50,14 @@ const Wordcloud: React.FC<Props> = (props: Props) => {
     return (
         <Container className={`max-w-2xl mx-auto my-4 ${props.className}`} >
             <h2 className="heading-text mb-2" >Frequently used tags</h2>
-            <ul className="flex flex-wrap items-center justify-center text-base bg-stone-200 bg-opacity-40 rounded-lg shadow-lg" >
+            <ul className="flex flex-wrap items-center justify-center text-base" >
                 {wordCloudData.map((word) => {
                     return (
                         <div key={word.text} className="group" > 
-                            <li className={`p-1 rounded-xl group-hover:bg-stone-600 group-hover:text-gray-200 cursor-default block relative colour-text-primary flip-flop ${sizeRange.find((e) => e.value === word.value)?.style}`} >
+                            <li className={`p-1 rounded-xl group-hover:text-gray-200 cursor-default block relative group-hover:colour-bg-primary-dark-no-hover colour-text-primary flip-flop ${sizeRange.find((e) => e.value === word.value)?.style}`} >
                                 {word.text}
                             </li>
-                            <span className="absolute w-auto p-2 m-2 min-w-max top-4 bg-stone-600 text-gray-200 rounded-md shadow-md text-xs origin-top scale-0 group-hover:scale-100 heading-text flip-flop">
+                            <span className="absolute w-auto p-2 m-2 min-w-max top-4 text-gray-200 rounded-md shadow-md text-xs origin-top scale-0 group-hover:scale-100 colour-bg-primary-dark-no-hover heading-text flip-flop">
                                 {word.value}
                             </span>
                         </div>

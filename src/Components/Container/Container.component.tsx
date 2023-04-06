@@ -7,7 +7,7 @@ type Props = {
 
 const Container: React.FC<Props> = (props: Props) => {
     return (
-        <div className={`p-5 bg-stone-100 outline-1 outline-gray-200 drop-shadow-lg ${props.className}`} >
+        <div className={`p-5 outline-1 outline-gray-200 rounded-lg drop-shadow-lg colour-bg-primary-lighter-no-hover ${props.className}`} >
             {props.children}
         </div>
     );

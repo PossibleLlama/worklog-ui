@@ -9,10 +9,10 @@ import { Work } from "@model/work";
 import { isToday, subMonths } from "date-fns";
 import { isAfter } from "@helper/date";
 
-const innerContainerStyling = "mx-2 p-2 bg-stone-200 bg-opacity-40 rounded-lg shadow-lg";
-const infographicStyling = "mx-2 p-2 bg-stone-200 rounded-lg";
-const positiveArrowStyling = "h-5 w-5 mx-1 text-green-500 bg-stone-300 hover:text-green-300 hover:bg-gray-800 rounded-3xl flip-flop";
-const negativeArrowStyling = "h-5 w-5 mx-1 text-red-600 bg-stone-300 hover:text-red-300 hover:bg-gray-800 rounded-3xl flip-flop";
+const innerContainerStyling = "mx-2 p-2 bg-opacity-40 rounded-lg shadow-lg colour-bg-primary-light-no-hover";
+const infographicStyling = "mx-2 p-2 rounded-lg colour-bg-primary-light-no-hover";
+const positiveArrowStyling = "h-5 w-5 mx-1 text-green-500 hover:text-green-300 rounded-3xl flip-flop";
+const negativeArrowStyling = "h-5 w-5 mx-1 text-red-600 hover:text-red-300 rounded-3xl flip-flop";
 
 const averagePerDay = (wk: Work[]): number => {
     const uniqueDays = [... new Set(wk.map((e) => {

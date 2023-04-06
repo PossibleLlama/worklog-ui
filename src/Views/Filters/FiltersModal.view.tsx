@@ -44,12 +44,12 @@ const Modal: React.FC<Props> = (props: Props) => {
     };
 
     return (
-        <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 flex items-center justify-center bg-stone-800" role="none" tabIndex={-1} onClick={(event) => {
+        <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 flex items-center justify-center colour-bg-primary-darker-no-hover" role="none" tabIndex={-1} onClick={(event) => {
             if (event.currentTarget === event.target) {
                 props.onClose(props.initialFilters);
             }
         }} >
-            <div className="bg-stone-100 opacity-100 rounded-lg p-10" >
+            <div className="opacity-100 rounded-lg p-10 colour-bg-primary-lighter-no-hover" >
                 <div className="flex w-5/6 mx-12" >
                     <form>
                         <h2 className="heading-text text-lg mt-4" >

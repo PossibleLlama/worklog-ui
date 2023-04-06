@@ -22,15 +22,11 @@ const Button: React.FC<Props> = (props: Props) => {
     );
 };
 
-const styleDefault = "bg-stone-200 hover:bg-stone-800";
-
 // Note: Unable to unit test the styling, as jest doesn't know about tailwind
 const styleFromProps = (props: Props): string => {
     return props.isPrimary ?
-        "bg-amber-300 hover:bg-orange-700" :
-        props.isBasic ?
-            "bg-stone-200 hover:bg-stone-600" :
-            styleDefault;
+        "colour-bg-action" :
+        "colour-bg-primary-light";
 };
 
 export default Button;

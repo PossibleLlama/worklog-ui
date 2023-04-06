@@ -47,7 +47,7 @@ const Header: React.FC<Props> = (props: Props) => {
     return (
         <div>
             <div className="mb-16" />
-            <div className="fixed top-0 left-0 w-screen h-16 z-10 bg-stone-100 shadow-lg flex px-2 justify-between items-center">
+            <div className="fixed top-0 left-0 w-screen h-16 z-10 shadow-lg flex px-2 justify-between items-center colour-bg-primary-lighter-no-hover">
                 <Link to="/" className="sidebar-item ml-4 px-4 rounded-3xl hover:rounded-xl group">
                     <button className="cursor-default">
                         <div className="heading-text text-lg colour-text-primary">Worklog</div>
