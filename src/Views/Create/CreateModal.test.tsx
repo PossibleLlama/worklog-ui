@@ -20,23 +20,105 @@ describe("Create Modal", () => {
         mockClose.mockReset();
     });
 
-    it("Renders modal features", () => {
-        render(
-            <BrowserRouter>
-                <Comp onClose={mockClose} />
-                <ToastContainer />
-            </BrowserRouter>
-        );
+    describe("Renders modal features", () => {
+        it("Has heading", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByText("Log new work")).toBeInTheDocument();
+        });
 
-        expect(screen.getByText("Log new work")).toBeInTheDocument();
-        expect(screen.getByText("Title")).toBeInTheDocument();
-        expect(screen.getByText("Description")).toBeInTheDocument();
-        expect(screen.getByText("Author")).toBeInTheDocument();
-        expect(screen.getByText("Duration")).toBeInTheDocument();
-        expect(screen.getByText("When")).toBeInTheDocument();
-        expect(screen.getByText("Tags")).toBeInTheDocument();
-        expect(screen.getByRole("button", { name: /Cancel/ })).toBeInTheDocument();
-        expect(screen.getByRole("button", { name: /Confirm/ })).toBeInTheDocument();
+        it("Has title", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByText("Title")).toBeInTheDocument();
+        });
+
+        it("Has description", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByText("Description")).toBeInTheDocument();
+        });
+
+        it("Has tags", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByText("Tags")).toBeInTheDocument();
+        });
+
+        it("Has author", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByText("Author")).toBeInTheDocument();
+        });
+
+        it("Has duration", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByText("Duration")).toBeInTheDocument();
+        });
+
+        it("Has when", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByText("When")).toBeInTheDocument();
+        });
+
+        it("Has cancel button", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByRole("button", { name: /Cancel/ })).toBeInTheDocument();
+        });
+
+        it("Has confirm button", () => {
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+    
+            expect(screen.getByRole("button", { name: /Confirm/ })).toBeInTheDocument();
+        });
     });
 
     describe("Calls close", () => {
