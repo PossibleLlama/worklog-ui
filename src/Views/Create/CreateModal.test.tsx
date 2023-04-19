@@ -387,4 +387,76 @@ describe("Create Modal", () => {
             expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
         });
     });
+
+    describe("When uses local timezone", () => {
+        afterEach(() => {
+            jest.useRealTimers();
+        });
+
+        it("When keeps UTC", async () => {
+            const fakeNow = new Date("2019-10-23T19:38:00Z");
+            jest.useFakeTimers({doNotFake: ["setTimeout"]}).setSystemTime(fakeNow);
+
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Title"), "required");
+            expect(screen.getByText("When")).toBeInTheDocument();
+            await userEvent.click(screen.getByLabelText("When"));
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
+            expect(mockClose).toHaveBeenCalled();
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
+        });
+
+        it("When keeps +3", async () => {
+            const fakeNow = new Date("2019-10-23T19:38:00+0300");
+            jest.useFakeTimers({doNotFake: ["setTimeout"]}).setSystemTime(fakeNow);
+
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Title"), "required");
+            expect(screen.getByText("When")).toBeInTheDocument();
+            await userEvent.click(screen.getByLabelText("When"));
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
+            expect(mockClose).toHaveBeenCalled();
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
+        });
+
+        it("When keeps +11", async () => {
+            const fakeNow = new Date("2019-10-23T19:38:00+1100");
+            jest.useFakeTimers({doNotFake: ["setTimeout"]}).setSystemTime(fakeNow);
+
+            render(
+                <BrowserRouter>
+                    <Comp onClose={mockClose} />
+                    <ToastContainer />
+                </BrowserRouter>
+            );
+
+            expect(screen.getByText("Title")).toBeInTheDocument();
+            await userEvent.type(screen.getByLabelText("Title"), "required");
+            expect(screen.getByText("When")).toBeInTheDocument();
+            await userEvent.click(screen.getByLabelText("When"));
+            expect(mockClose).not.toHaveBeenCalled();
+            await userEvent.click(screen.getByRole("button", { name: /Confirm/ }));
+            expect(mockClose).toHaveBeenCalled();
+            expect(mockClose).toHaveBeenCalledTimes(1);
+            expect(mockClose).toHaveBeenCalledWith(expect.objectContaining({ When: fakeNow }));
+        });
+    });
 });
