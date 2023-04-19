@@ -37,12 +37,12 @@ const Modal: React.FC<Props> = (props: Props) => {
     };
 
     return (
-        <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 flex items-center justify-center colour-bg-primary-darker-no-hover" role="none" tabIndex={-1} onClick={(event) => {
+        <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 p-4 flex items-center justify-center colour-bg-primary-darker-no-hover" role="none" tabIndex={-1} onClick={(event) => {
             if (event.currentTarget === event.target) {
                 props.onClose(undefined);
             }
         }} >
-            <div className="opacity-100 rounded-lg p-10 w-1/2 colour-bg-primary-lighter-no-hover colour-text-primary-no-hover" >
+            <div className="opacity-100 rounded-lg p-10 w-1/2 max-h-full overflow-y-auto colour-bg-primary-lighter-no-hover colour-text-primary-no-hover" >
                 <div className="flex mx-12" >
                     <form onSubmit={(e) => e.preventDefault()} aria-label="form" className="min-w-full">
                         <div className="border-0 my-4">
