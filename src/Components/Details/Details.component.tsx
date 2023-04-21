@@ -38,9 +38,7 @@ const Details: React.FC<Props> = (props: Props) => {
                 <div className="flex justify-between my-1">
                     <div className="w-5/6">
                         {props.work.Tags && props.work.Tags.map((el, index) => {
-                            return (<Tag key={index} onClose={() => {
-                                alert("TODO, remove tag");
-                            }} >
+                            return (<Tag key={index} >
                                 <p className="text-sm" >{el}</p>
                             </Tag>);
                         })}

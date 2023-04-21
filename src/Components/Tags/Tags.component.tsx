@@ -2,7 +2,6 @@ import React from "react";
 
 type Props = {
     children: React.ReactNode,
-    onClose?: () => void,
 };
 
 const Tag: React.FC<Props> = (props: Props) => {
