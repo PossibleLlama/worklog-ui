@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "@component/Button/Button.component";
 
@@ -6,7 +6,26 @@ import { Work } from "@model/work";
 import { formatMinutes } from "@helper/date";
 
 type Props = {
+    usage: Usage,
     onClose: (w: Work | undefined) => void,
+    pastWork?: Work,
+};
+
+export enum Usage {
+    Create,
+    Edit,
+    Copy,
+}
+
+const usageToString = (use: Usage): string => {
+    switch(use) {
+    case Usage.Edit: {
+        return "Update work";
+    }
+    default: {
+        return "Log new work";
+    }
+    }
 };
 
 const Modal: React.FC<Props> = (props: Props) => {
@@ -36,6 +55,17 @@ const Modal: React.FC<Props> = (props: Props) => {
             }) : props.onClose(undefined);
     };
 
+    useEffect(() => {
+        if (props.pastWork !== undefined) {
+            setTitle(props.pastWork.Title);
+            props.pastWork.Description && setDescription(props.pastWork.Description);
+            props.pastWork.Tags && setTags(props.pastWork.Tags.join(", "));
+            props.pastWork.Duration && setDuration(props.pastWork.Duration);
+            props.pastWork.Author && setAuthor(props.pastWork.Author);
+            props.pastWork.When && setWhen(props.pastWork.When);
+        }
+    }, [props.pastWork]);
+
     return (
         <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 p-4 flex items-center justify-center colour-bg-primary-darker-no-hover" role="none" tabIndex={-1} onClick={(event) => {
             if (event.currentTarget === event.target) {
@@ -47,7 +77,7 @@ const Modal: React.FC<Props> = (props: Props) => {
                     <form onSubmit={(e) => e.preventDefault()} aria-label="form" className="min-w-full">
                         <div className="border-0 my-4">
                             <h2 className="heading-text text-xl" >
-                                Log new work
+                                {usageToString(props.usage)}
                             </h2>
                         </div>
 

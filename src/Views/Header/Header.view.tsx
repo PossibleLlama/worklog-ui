@@ -6,7 +6,7 @@ import { BookmarkIcon, FunnelIcon, GlobeAltIcon, PlusIcon } from "@heroicons/rea
 
 import SidebarIcon from "@component/SidebarIcon/SidebarIcon.component";
 import FilterModal from "@view/Filters/FiltersModal.view";
-import CreateModal from "@view/Create/CreateModal.view";
+import DraftWorklog, { Usage } from "@view/DraftWorklog/DraftWorklog.view";
 
 import { Filter, isEqual } from "@model/filter";
 import { Work } from "@model/work";
@@ -89,7 +89,8 @@ const Header: React.FC<Props> = (props: Props) => {
                         initialFilters={props.currentFilters}
                     />}
                 {createModal &&
-                    <CreateModal
+                    <DraftWorklog
+                        usage={Usage.Create}
                         onClose={closeCreateModal}
                     />
                 }

@@ -5,7 +5,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import Comp from "./CreateModal.view";
+import Comp, { Usage } from "./DraftWorklog.view";
 
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -24,7 +24,7 @@ describe("Create Modal", () => {
         it("Has heading", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -35,7 +35,7 @@ describe("Create Modal", () => {
         it("Has title", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -46,7 +46,7 @@ describe("Create Modal", () => {
         it("Has description", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -57,7 +57,7 @@ describe("Create Modal", () => {
         it("Has tags", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -68,7 +68,7 @@ describe("Create Modal", () => {
         it("Has author", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -79,7 +79,7 @@ describe("Create Modal", () => {
         it("Has duration", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -90,7 +90,7 @@ describe("Create Modal", () => {
         it("Has when", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -101,7 +101,7 @@ describe("Create Modal", () => {
         it("Has cancel button", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -112,7 +112,7 @@ describe("Create Modal", () => {
         it("Has confirm button", () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -135,7 +135,7 @@ describe("Create Modal", () => {
         it("On cancel", async () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -149,7 +149,7 @@ describe("Create Modal", () => {
         it("On confirm - without filling in fields", async () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -164,7 +164,7 @@ describe("Create Modal", () => {
             const newTitle = "abcd";
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -200,7 +200,7 @@ describe("Create Modal", () => {
             const newTitle = "abcd";
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -218,7 +218,7 @@ describe("Create Modal", () => {
             const newTitle = "abcd";
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -235,7 +235,7 @@ describe("Create Modal", () => {
             const newTitle = "abcd";
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -252,7 +252,7 @@ describe("Create Modal", () => {
             const newDesc = "abcd";
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -272,7 +272,7 @@ describe("Create Modal", () => {
             const newAuth = "abcd";
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -292,7 +292,7 @@ describe("Create Modal", () => {
             const newDur = 20;
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -312,7 +312,7 @@ describe("Create Modal", () => {
             const newDur = 20;
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -333,7 +333,7 @@ describe("Create Modal", () => {
         it.skip("Fills in when via text", async () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -352,7 +352,7 @@ describe("Create Modal", () => {
         it("Fills in when with now when clicked", async () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -371,7 +371,7 @@ describe("Create Modal", () => {
         it("Can clear when", async () => {
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -399,7 +399,7 @@ describe("Create Modal", () => {
 
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -421,7 +421,7 @@ describe("Create Modal", () => {
 
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
@@ -443,7 +443,7 @@ describe("Create Modal", () => {
 
             render(
                 <BrowserRouter>
-                    <Comp onClose={mockClose} />
+                    <Comp usage={Usage.Create} onClose={mockClose} />
                     <ToastContainer />
                 </BrowserRouter>
             );
