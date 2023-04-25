@@ -24,6 +24,7 @@ const sortedWork = (wk: Work[]): Work[] => {
 
 type Props = {
     Worklist: Work[],
+    openEdit: (w: Work) => void,
 };
 
 const Worklist: React.FC<Props> = (props: Props) => {
@@ -58,7 +59,12 @@ const Worklist: React.FC<Props> = (props: Props) => {
             }
 
             {detailedWork &&
-                <Details work={detailedWork} onClose={removeDetailed} className="m-4" />
+                <Details
+                    work={detailedWork}
+                    onClose={removeDetailed}
+                    openEdit={props.openEdit}
+                    className="m-4"
+                />
             }
         </div>
     );

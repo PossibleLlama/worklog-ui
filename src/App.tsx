@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { subDays } from "@helper/date";
 
+import DraftWorklog, { Usage } from "@view/DraftWorklog/DraftWorklog.view";
 import Header from "@view/Header/Header.view";
 import Worklist from "@page/Worklist/Worklist.page";
 import Discover from "@page/Discover/Discover.page";
@@ -31,6 +32,9 @@ const App: React.FC<Props> = (props: Props) => {
 
     const [allWork, setAllWork] = useState<Work[]>([]);
     const [filteredWork, setFilteredWork] = useState<Work[]>([]);
+
+    const [modal, setModal] = useState<Usage | undefined>(undefined);
+    const [modalWork, setModalWork] = useState<Work | undefined>(undefined);
 
     useEffect(() => {
         let mounted = true;
@@ -85,13 +89,13 @@ const App: React.FC<Props> = (props: Props) => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const editWork = (newWork: Work): Promise<Work | void> => {
-        if (isEqual(newWork, allWork.filter((e: Work) => e.ID === newWork.ID)[0])) {
+        if (allWork.filter((e: Work) => e.ID === newWork.ID).every((e: Work) => isEqual(newWork, e))) {
             return Promise.resolve(undefined);
         }
         return props.editWork(newWork).then((e: Work) => {
-            setAllWork(allWork.concat(e));
+            setAllWork(allWork.filter((e: Work) => e.ID === newWork.ID).map((e: Work) => e = newWork));
             if (filterFunc([e], filter).length > 0) {
-                setFilteredWork(filteredWork.concat(e));
+                setFilteredWork(filteredWork.filter((e: Work) => e.ID === newWork.ID).map((e: Work) => e = newWork));
             }
             toast.success("Edited work");
         }).catch(() => {
@@ -102,9 +106,26 @@ const App: React.FC<Props> = (props: Props) => {
     return (
         <Fragment>
             <Header updateFilters={updateFilters} currentFilters={filter} createWork={createWork} />
+            {modal === Usage.Edit && modalWork &&
+                <DraftWorklog
+                    usage={modal}
+                    onClose={(w: Work | undefined) => {
+                        if (w !== undefined) {
+                            editWork(w);
+                        }
+                        setModal(undefined);
+                    }}
+                    pastWork={modalWork}
+                />
+            }
             <Routes>
-                <Route path="/" element={<Worklist Worklist={filteredWork} />} />
-                <Route path="/timeline" element={<Worklist Worklist={filteredWork} />} />
+                <Route path="/" element={<Worklist
+                    Worklist={filteredWork}
+                    openEdit={async (w: Work) => {
+                        await setModalWork(w);
+                        await setModal(Usage.Edit);
+                    }} />} />
+                <Route path="/timeline" element={<Worklist Worklist={filteredWork} openEdit={() => {setModal(Usage.Edit)}} />} />
                 <Route path="/discover" element={<Discover TotalWork={allWork} FilteredWork={filteredWork} />} />
             </Routes>
         </Fragment>

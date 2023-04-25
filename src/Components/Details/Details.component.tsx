@@ -12,6 +12,7 @@ import { Work } from "@model/work";
 type Props = {
     work: Work,
     onClose: () => void,
+    openEdit: (w: Work) => void,
     className?: string,
 };
 
@@ -45,7 +46,8 @@ const Details: React.FC<Props> = (props: Props) => {
                     </div>
                     <div className="w-5 h-5" >
                         <Button onClick={() => {
-                            alert("TODO, edit work");
+                            props.openEdit(props.work);
+                            props.onClose();
                         }} label="Edit" >
                             <PencilIcon className="h-5 w-5" />
                         </Button>

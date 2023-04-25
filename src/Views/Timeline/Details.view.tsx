@@ -6,14 +6,17 @@ import { Work } from "@model/work";
 
 type Props = {
     onClose: () => void,
+    openEdit: (w: Work) => void,
     detail: Work,
 };
 
 const Detail: React.FC<Props> = (props: Props) => {
     return (
-        <div className="">
-            <Details work={props.detail} onClose={props.onClose} />
-        </div>
+        <Details
+            work={props.detail}
+            onClose={props.onClose}
+            openEdit={props.openEdit}
+        />
     );
 };
 

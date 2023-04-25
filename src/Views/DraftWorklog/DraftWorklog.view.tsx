@@ -43,15 +43,15 @@ const Modal: React.FC<Props> = (props: Props) => {
     const closeModal = () => {
         title.trim().length > 0 ?
             props.onClose({
-                ID: "",
-                Revision: -1,
+                ID: props.pastWork ? props.pastWork.ID : "",
+                Revision: props.pastWork ? props.pastWork.Revision : -1,
                 Title: title.trim(),
                 Description: description.trim() === "" ? undefined : description.trim(),
                 Author: author.trim() === "" ? undefined : author.trim(),
                 Duration: duration === -1 ? undefined : duration,
                 Tags: tags.split(",").map(e => e.trim()).filter(e => e.length > 0),
                 When: when === undefined ? new Date() : when,
-                CreatedAt: new Date(0),
+                CreatedAt: props.pastWork ? props.pastWork.CreatedAt : new Date(0),
             }) : props.onClose(undefined);
     };
 
@@ -67,7 +67,7 @@ const Modal: React.FC<Props> = (props: Props) => {
     }, [props.pastWork]);
 
     return (
-        <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 p-4 flex items-center justify-center colour-bg-primary-darker-no-hover" role="none" tabIndex={-1} onClick={(event) => {
+        <div className="bg-opacity-80 w-full h-full fixed top-0 left-0 p-4 flex items-center justify-center z-10 colour-bg-primary-darker-no-hover" role="none" tabIndex={-1} onClick={(event) => {
             if (event.currentTarget === event.target) {
                 props.onClose(undefined);
             }
