@@ -93,8 +93,10 @@ const App: React.FC<Props> = (props: Props) => {
             return Promise.resolve(undefined);
         }
         return props.editWork(newWork).then((e: Work) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             setAllWork(allWork.filter((e: Work) => e.ID === newWork.ID).map((e: Work) => e = newWork));
             if (filterFunc([e], filter).length > 0) {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 setFilteredWork(filteredWork.filter((e: Work) => e.ID === newWork.ID).map((e: Work) => e = newWork));
             }
             toast.success("Edited work");
@@ -125,7 +127,7 @@ const App: React.FC<Props> = (props: Props) => {
                         await setModalWork(w);
                         await setModal(Usage.Edit);
                     }} />} />
-                <Route path="/timeline" element={<Worklist Worklist={filteredWork} openEdit={() => {setModal(Usage.Edit)}} />} />
+                <Route path="/timeline" element={<Worklist Worklist={filteredWork} openEdit={() => { setModal(Usage.Edit); }} />} />
                 <Route path="/discover" element={<Discover TotalWork={allWork} FilteredWork={filteredWork} />} />
             </Routes>
         </Fragment>

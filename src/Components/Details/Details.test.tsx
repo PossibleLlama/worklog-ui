@@ -8,7 +8,7 @@ import Comp from "./Details.component";
 
 import { formatRelativeDateTimeDuration, formatRelativeDateTime } from "@helper/date";
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 const fakeNow = new Date("2019-10-23T19:38:28Z");
@@ -22,14 +22,13 @@ describe("App", () => {
         jest.useRealTimers();
     });
 
-    let onCloseCalled = 0;
-    const onCloseFn = () => {
-        onCloseCalled++;
-    };
-
     beforeEach(() => {
-        onCloseCalled = 0;
+        mockOnClose.mockReset();
+        mockOnEdit.mockReset();
     });
+
+    const mockOnClose = jest.fn();
+    const mockOnEdit = jest.fn();
 
     describe("Minimal fields - Absolute date", () => {
         const wk = {
@@ -44,17 +43,44 @@ describe("App", () => {
 
         it("Has buttons", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk} />
+                <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
             );
 
-            expect(screen.getByLabelText("Close", { selector: "button" })).toBeInTheDocument();
-            expect(screen.getByLabelText("Edit", { selector: "button" })).toBeInTheDocument();
-            expect(onCloseCalled).toEqual(0);
+            expect(screen.getByRole("button", { name: /Close/ })).toBeInTheDocument();
+            expect(screen.getByRole("button", { name: /Edit/ })).toBeInTheDocument();
+            expect(mockOnClose).toHaveBeenCalledTimes(0);
+            expect(mockOnEdit).toHaveBeenCalledTimes(0);
+        });
+
+        it("Close button is called", async () => {
+            render(
+                <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
+            );
+            
+            expect(mockOnClose).toHaveBeenCalledTimes(0);
+            expect(mockOnEdit).toHaveBeenCalledTimes(0);
+            expect(screen.getByRole("button", { name: /Close/ })).toBeInTheDocument();
+            fireEvent.click(screen.getByRole("button", { name: /Close/ }));
+            expect(mockOnClose).toHaveBeenCalledTimes(1);
+            expect(mockOnEdit).toHaveBeenCalledTimes(0);
+        });
+
+        it("Edit button is called", async () => {
+            render(
+                <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
+            );
+
+            expect(mockOnClose).toHaveBeenCalledTimes(0);
+            expect(mockOnEdit).toHaveBeenCalledTimes(0);
+            expect(screen.getByRole("button", { name: /Edit/ })).toBeInTheDocument();
+            fireEvent.click(screen.getByRole("button", { name: /Edit/ }));
+            expect(mockOnClose).toHaveBeenCalledTimes(1);
+            expect(mockOnEdit).toHaveBeenCalledTimes(1);
         });
 
         it("Has fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk} />
+                <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
             );
 
             expect(screen.getByText(wk.Title)).toBeInTheDocument();
@@ -63,7 +89,7 @@ describe("App", () => {
 
         it("Does not have fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk} />
+                <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
             );
 
             expect(screen.queryByText(wk.ID, { exact: false })).toBeNull();
@@ -87,7 +113,7 @@ describe("App", () => {
 
         it("Has fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk} />
+                <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
             );
 
             expect(screen.getByText(wk.Description)).toBeInTheDocument();
@@ -99,7 +125,7 @@ describe("App", () => {
 
         it("Does not have fields", () => {
             render(
-                <Comp onClose={onCloseFn} work={wk} />
+                <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
             );
 
             expect(screen.queryByText(wk.Author, { exact: false })).toBeNull();
@@ -122,7 +148,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -144,7 +170,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -166,7 +192,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -188,7 +214,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -210,7 +236,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -232,7 +258,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -254,7 +280,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -276,7 +302,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(formatRelativeDateTimeDuration(wk.When, wk.Duration))).toBeInTheDocument();
@@ -298,7 +324,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`)).toBeInTheDocument();
@@ -320,7 +346,7 @@ describe("App", () => {
 
             it("Relative time", () => {
                 render(
-                    <Comp onClose={onCloseFn} work={wk} />
+                    <Comp onClose={mockOnClose} openEdit={mockOnEdit} work={wk} />
                 );
 
                 expect(screen.getByText(`A few seconds ago for ${wk.Duration} minutes.`)).toBeInTheDocument();
