@@ -28,7 +28,7 @@
   "homepage": "https://github.com/PossibleLlama/worklog-ui",
   "dependencies": {
     "@headlessui/react": "^1.7.18",
-    "@heroicons/react": "^2.1.1",
+    "@heroicons/react": "^2.1.3",
     "axios": "^1.6.7",
     "date-fns": "^3.6.0",
     "react": "^18.2.0",
